@@ -14,7 +14,7 @@
 <body>
   <div class="page-wrapper user profile">
 
-    <header>
+    <header class="img" style="background-image: url('img/header-profile.jpg');">
       <?php require "nav-user.php"; ?>
 
       <div class="banner mini center">

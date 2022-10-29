@@ -3,7 +3,7 @@
 :root {
   --color1: #065535;
   --color1-light: #98baac;
-  --color1-dark: #082519;
+  --color1-dark: #0b3020;
   --white-font: #e6eeea;
 
   --font: 'Poppins', sans-serif;
@@ -90,7 +90,7 @@ table td {
 
 footer {
   height: 200px;
-  background-color: var(--color1-dark);
+  background-color: var(--color1);
   color: var(--white-font);
 }
 
@@ -102,7 +102,6 @@ nav {
   padding: 0 40px;
   height: 70px;
   box-sizing: border-box;
-  
 }
 
 nav .menu {
@@ -141,7 +140,6 @@ header a, header h1, header p {
 .user nav ul, 
 .admin nav ul {
   width: 35%;
-
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {
@@ -182,12 +180,12 @@ header a, header h1, header p {
   }
 
   nav.nav-active {
-    background-color: var(--color1-dark);
+    background-color: var(--color1);
     transition: 0.3s;
   }
   .menu.nav-active {
     height: fit-content;
-    background-color: var(--color1-dark);
+    background-color: var(--color1);
     transition: 0.3s;
 
   }
@@ -200,7 +198,7 @@ header a, header h1, header p {
 /* ============================================= */
 
 header {
-  box-shadow: inset 0 0 0 350px #00000082;
+  box-shadow: inset 0 0 0 350px #00000069;
 }
 
 .banner {
@@ -218,13 +216,6 @@ header {
 .banner.mini {
   flex-direction: column;
   height: 300px;
-}
-
-.home header {
-  background-image: url("../img/header-home.jpg");
-}
-.product header {
-  background-image: url("../img/header-product.jpg");
 }
 
 /* ============================================= */
@@ -300,11 +291,13 @@ header {
   box-shadow: 0 0 2px 2px #0655354e;
 }
 
-input[type="search"],
+input[type="search"] {
+  width: 100%;
+  margin-right: 10px;
+}
+
 .searching {
   width: 100%;
-}
-.searching {
   display: flex;
 }
 

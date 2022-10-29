@@ -14,13 +14,13 @@
             <li> <a href="index.php" class="link-hover"> HOME </a> </li>
             <li> <a href="about.php" class="link-hover"> ABOUT </a> </li>
             <li> <a href="contact.php" class="link-hover"> CONTACT </a> </li>
-            <li> <a href="" class="link-hover"> PRODUCT </a> </li>
+            <li> <a href="product.php" class="link-hover"> PRODUCT </a> </li>
           </ul>
 
           <ul>
-            <li> <a href="" class="link-hover"> ADD </a> </li>
-            <li> <a href="" class="link-hover"> EDIT </a> </li>
-            <li> <a href="" class="link-hover"> ORDERS </a> </li>
+            <li> <a href="add.php" class="link-hover"> ADD </a> </li>
+            <li> <a href="edit.php" class="link-hover"> EDIT </a> </li>
+            <li> <a href="order.php" class="link-hover"> ORDER </a> </li>
             <li> <a href="sign-in.php" class="link-hover"> LOG OUT </a> </li>
           </ul>
 

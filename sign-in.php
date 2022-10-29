@@ -24,7 +24,7 @@ if (isset($_POST["login"])) {
 <body>
   <div class="page-wrapper sign-in">
 
-    <header>
+    <header class="img" style="background-image: url('img/header-sign-in.jpg');">
       <?php require "nav.php"; ?>
 
       <div class="banner mini center">
@@ -44,12 +44,16 @@ if (isset($_POST["login"])) {
             <table cellspacing="20">
               <tr>
                 <td> <label for="username"> Username </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input"> </td>
               </tr>
               <tr>
                 <td> <label for="password"> Password </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input"> </td>
               </tr>
               <tr>
@@ -57,9 +61,11 @@ if (isset($_POST["login"])) {
               </tr>
               <tr>
                 <td colspan="3">
-                  <a href="sign-up.php" class="link"> <center>
-                  Don't have an account yet? <br> Register now
-                  </center> </a>
+                  <a href="sign-up.php" class="link">
+                    <center>
+                      Don't have an account yet? <br> Register now
+                    </center>
+                  </a>
                 </td>
               </tr>
             </table>

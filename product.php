@@ -12,12 +12,10 @@
 </head>
 
 <body>
-  <div class="page-wrapper user product">
+  <div class="page-wrapper user admin product">
 
-    <header class="img">
-
+    <header class="img" style="background-image: url('img/header-products.jpg');">
       <?php require "nav-user.php"; ?>
-
       <div class="banner mini center">
         <h1> PRODUCT </h1>
 
@@ -29,7 +27,7 @@
 
       <section class="wrapper">
 
-        <div class="searching"> 
+        <div class="searching">
           <input type="search" name="search" placeholder="Search" class="form-input">
           <input type="submit" value="Cari" class="btn-block">
         </div>

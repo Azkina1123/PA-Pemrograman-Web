@@ -15,7 +15,7 @@
 <body>
   <div class="page-wrapper sign-up">
 
-    <header>
+    <header class="img" style="background-image: url('img/header-sign-up.jpg'); ">
       <?php require "nav.php"; ?>
 
       <div class="banner mini center">

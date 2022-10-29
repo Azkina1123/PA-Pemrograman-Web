@@ -14,7 +14,7 @@
 <body>
   <div class="page-wrapper contact">
 
-    <header>
+    <header class="img" style="background-image: url('img/header-contact.jpg');">
       <?php require "nav.php"; ?>
       
       <div class="banner mini center">

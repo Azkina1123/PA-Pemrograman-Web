@@ -9,26 +9,26 @@
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/index.css?v=<?= time(); ?>">
 
-  <title> Home | Nama Toko </title>
+  <title> Home | Green Florist </title>
 </head>
 
 <body>
   <div class="page-wrapper home">
 
-    <header class="img">
+    <header class="img" style="background-image: url('img/header-index.jpg');">
 
       <?php require "nav.php"; ?>
 
       <div class="banner large center">
 
         <div class="object">
-          <p> Plants Shop </p>
-          <h1> SHOP'S NAME </h1>
+          <p> Toko Tanaman </p>
+          <h1> GREEN FLORIST </h1>
         </div>
 
         <p class="object">
-          Toko tanaman yang sudah berdiri selama puluhan tahun dan menghasilkan <br>
-          bibit berkualitas tinggi yang tidak dapat diragukan.
+          Toko tanaman yang telah berdiri selama puluhan tahun dan menghasilkan <br>
+          bibit berkualitas tinggi dengan hasil yang memuaskan.
         </p>
 
         <a href="" class="object">
@@ -44,8 +44,8 @@
       <section class="wrapper center">
 
         <div class="object">
-          <h2> KATEGORI YANG TERSEDIA </h2>
-          <p> Ini penjelasan mengenai kategori-kategori yang ada. </p>
+          <h2> JENIS TANAMAN </h2>
+          <p> Tersedia 3 jenis produk di toko kami dengan kualitas terjamin. </p>
         </div>
 
         <div class="box-container object">
@@ -74,7 +74,7 @@
         </div>
 
         <div class="object">
-          <a href="#" class="link-hover"> SHOW MORE PRODUCTS </a>
+          <a href="product.php" class="link-hover"> SHOW MORE PRODUCTS </a>
         </div>
 
       </section>

@@ -14,7 +14,7 @@
 <body>
   <div class="page-wrapper about">
 
-    <header>
+    <header class="img" style="background-image: url(img/header-about.jpg);">
       <?php require "nav.php"; ?>
 
       <div class="banner mini center">

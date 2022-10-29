@@ -14,7 +14,7 @@
 <body>
   <div class="page-wrapper home-page user">
 
-    <header class="img">
+    <header class="img" style="background-image: url('img/header-add.jpg');">
 
       <?php require "nav-admin.php"; ?>
 

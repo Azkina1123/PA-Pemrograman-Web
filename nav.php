@@ -2,7 +2,7 @@
 
         <!-- judul -->
         <div class="shop-name">
-          <h1> NAMA TOKO </h1>
+          <h1> GREEN FLORIST </h1>
         </div>
 
         <div class="menu-logo center" onclick="navActive()"></div>
@@ -18,7 +18,7 @@
 
           <ul>
             <li> <a href="product.php" class="link-hover"> PRODUCT </a> </li>
-            <li> <a href="" class="link-hover"> CART </a> </li>
+            <li> <a href="cart.php" class="link-hover"> CART </a> </li>
             <li> <a href="sign-in.php" class="link-hover"> SIGN IN </a> </li>
           </ul>
 
