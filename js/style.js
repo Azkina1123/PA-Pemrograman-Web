@@ -9,6 +9,12 @@ function navActive() {
   });
 }
 
-
+function numOnly(event) {
+  var ascii = (event.which) ? event.which : event.keyCode
+  if (ascii >= 48 && ascii <= 57) {
+    return true;
+  }
+  return false;
+}
 
 

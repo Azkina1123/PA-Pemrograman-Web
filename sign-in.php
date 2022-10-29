@@ -2,7 +2,29 @@
 
 session_start();
 
-if (isset($_POST["login"])) {
+require "config.php";
+
+// login default
+$login = "User";
+
+// switch mode login
+if (isset($_GET["login"])) {
+  $login = $_GET["login"];
+}
+
+if (isset($_POST["sign_in"])) {
+
+  $username = $_POST["username"];
+
+  // jika berhasil login
+  if (signing_in()) {
+    $_SESSION["login"] = "user";
+    $_SESSION["username"] = $username;
+
+    echo "<script>
+            document.location.href = 'index.php';
+          </script>";
+  }
 }
 
 ?>
@@ -38,34 +60,47 @@ if (isset($_POST["login"])) {
       <section class="wrapper center">
 
         <div class="sign-in-box center">
-          <h1> Sign In as User </h1>
-          <p> <a href="" class="link"> Sign In as Admin </a> </p>
-          <form action="">
+          <h1> Sign In as <?= $login; ?> </h1>
+
+          <!-- jika dalam mode login user -->
+          <?php if ($login == "User") { ?>
+          <p> <a href="sign-in.php?login=Admin" class="link"> Sign In as Admin </a> </p>
+          
+          <!-- jika dalam mode login admin -->
+          <?php } else if ($login == "Admin") { ?>
+          <p> <a href="sign-in.php?login=User" class="link"> Sign In as User </a> </p>
+          <?php } ?>
+
+          <form action="" method="POST">
             <table cellspacing="20">
+
+              <!-- username -->
               <tr>
                 <td> <label for="username"> Username </label> </td>
-                <td>
-                  <center> : </center>
-                </td>
-                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input"> </td>
+                <td><center> : </center></td>
+                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" required> </td>
               </tr>
+
+              <!-- password -->
               <tr>
                 <td> <label for="password"> Password </label> </td>
-                <td>
-                  <center> : </center>
-                </td>
-                <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input"> </td>
+                <td><center> : </center></td>
+                <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" required> </td>
               </tr>
+
+              <!-- submit -->
               <tr>
-                <td colspan="3"> <input type="submit" value="Sign In" name="login" class="btn-block"> </td>
+                <td colspan="3"> 
+                  <input type="submit" value="Sign In" name="sign_in" class="btn-block"> 
+                </td>
               </tr>
+
+              <!-- sign up -->
               <tr>
                 <td colspan="3">
-                  <a href="sign-up.php" class="link">
-                    <center>
-                      Don't have an account yet? <br> Register now
-                    </center>
-                  </a>
+                  <a href="sign-up.php" class="link"> <center>
+                  Don't have an account yet? <br> Register now
+                  </center> </a>
                 </td>
               </tr>
             </table>

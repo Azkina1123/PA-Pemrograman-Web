@@ -137,8 +137,8 @@ header a, header h1, header p {
   color: var(--white-font);
 }
 
-.user nav ul, 
-.admin nav ul {
+.menu.user ul, 
+.menu.admin ul {
   width: 35%;
 }
 

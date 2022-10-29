@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+
+require "config.php";
+
+
+
+// jika sudah melakukan login
+if (isset($_SESSION["login"])) {
+
+  // jika mode admin
+
+  // jika mode user
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
