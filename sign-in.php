@@ -68,7 +68,7 @@ if (isset($_POST["sign_in"])) {
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/sign-in.css?v=<?= time(); ?>">
 
-  <title> Sign In | Nama Toko </title>
+  <title> Masuk sebagai <?= $login; ?> | Nama Toko </title>
 </head>
 
 <body>
@@ -119,7 +119,7 @@ if (isset($_POST["sign_in"])) {
               <!-- submit -->
               <tr>
                 <td colspan="3"> 
-                  <input type="submit" value="Sign In" name="sign_in" class="btn-block"> 
+                  <input type="submit" value="Masuk" name="sign_in" class="btn-block"> 
                 </td>
               </tr>
 
@@ -127,7 +127,7 @@ if (isset($_POST["sign_in"])) {
               <tr>
                 <td colspan="3">
                   <a href="sign-up.php" class="link"> <center>
-                  Belum punya akun? <br> Daftar sekarang!
+                  Belum punya akun? <br> Daftar sebagai user sekarang!
                   </center> </a>
                 </td>
               </tr>

@@ -31,12 +31,32 @@ a {
   box-sizing: border-box;
 }
 
+@media screen and (min-width: 240px) and (max-width:1024px) {
+  .wrapper {
+    padding: 40px 20px;
+  }
+}
+
 .center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+.right {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .img {
@@ -146,6 +166,11 @@ header a, header h1, header p {
 
   nav {
     justify-content: space-between;
+    padding: 20px;
+  }
+
+  nav .shop-name {
+    font-size: 10pt;
   }
 
   nav .menu {
@@ -163,6 +188,11 @@ header a, header h1, header p {
     background-image: url("../img/plugins/menu.png");
     width: 32px;
     height: 32px;
+  }
+
+  .menu.user ul,
+  .menu.admin ul {
+    width: 100%;
   }
 
   .menu ul {
@@ -218,6 +248,12 @@ header {
   height: 300px;
 }
 
+@media screen and (min-width: 240px) and (max-width:1024px) {
+  .banner h1 {
+    font-size: 30pt;
+  }
+}
+
 /* ============================================= */
 /* -------------------- BOX -------------------- */
 /* ============================================= */
@@ -235,16 +271,24 @@ header {
   height: 200px;
 }
 .box-square {
-  background-color: #082519;
-
-  width: 250px;
-  height: 250px;
+  width: 270px;
+  height: 270px;
   margin: 10px;
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {
   .box-container {
     flex-direction: column;
+  }
+
+  .box-rectangle {
+    width: 250px;
+    height: 150px;
+  }
+
+  .box-square {
+    width: 220px;
+    height: 220px;
   }
 }
 
@@ -301,24 +345,12 @@ input[type="search"] {
   display: flex;
 }
 
-.products ul {
-  width: 100%;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.products li {
-  margin: 20px;
-  text-align: center;
-}
-.products .box-container {
-  justify-content: space-around;
+.jumlah {
+  width: 50px;
 }
 
-@media screen and (min-width: 240px) and (max-width:1024px) {
-  .products li {
-    margin: 10px;
-    font-size: 9pt;
-  }
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
 }
+

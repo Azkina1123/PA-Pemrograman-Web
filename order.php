@@ -28,7 +28,7 @@ if (!isset($_SESSION["login"])) {
   <div class="page-wrapper user order">
 
     <header class="img" style="background-image: url('img/header-order.jpg');">
-      <?php require "nav-user.php"; ?>
+      <?php require "nav.php"; ?>
 
       <div class="banner mini center">
         <h1> ORDER </h1>

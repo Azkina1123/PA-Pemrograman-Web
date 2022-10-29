@@ -25,7 +25,7 @@ if (!isset($_SESSION["login"])) {
 </head>
 
 <body>
-  <div class="page-wrapper home-page user">
+  <div class="page-wrapper home-page admin">
 
     <header class="img" style="background-image: url('img/header-add.jpg');">
 

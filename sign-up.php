@@ -28,7 +28,7 @@ if (isset($_POST["sign_up"])) {
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/sign-in.css?v=<?= time(); ?>">
 
-  <title> Sign In | Nama Toko </title>
+  <title> Daftar Akun | Nama Toko </title>
 </head>
 
 <body>
@@ -47,7 +47,7 @@ if (isset($_POST["sign_up"])) {
       <section class="wrapper center">
 
         <div class="sign-in-box">
-          <h1> Sign Up as User </h1>
+          <h1> Daftar Akun sebagai User </h1>
 
           <form action="" method="POST" enctype="multipart/form-data">
             <table cellspacing="20">
@@ -90,12 +90,12 @@ if (isset($_POST["sign_up"])) {
               <tr>
                 <td> <label for="gambar"> Foto Profil </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input" value="img/plugins/user.png"> </td>
+                <td> <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input" value="img/plugins/user.png"> <br> Max size: 200 KB</td>
               </tr>
 
               <!-- submit -->
               <tr>
-                <td colspan="3"> <input type="submit" value="Sign Up Now" name="sign_up" class="btn-block"> </td>
+                <td colspan="3"> <input type="submit" value="Daftarkan Akun" name="sign_up" class="btn-block"> </td>
               </tr>
 
               <!-- sign in -->

@@ -28,7 +28,7 @@ if (!isset($_SESSION["login"])) {
   <div class="page-wrapper user profile">
 
     <header class="img" style="background-image: url('img/header-profile.jpg');">
-      <?php require "nav-user.php"; ?>
+      <?php require "nav.php"; ?>
 
       <div class="banner mini center">
         <h1> PROFILE </h1>

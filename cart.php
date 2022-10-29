@@ -20,16 +20,17 @@ if (!isset($_SESSION["login"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
+  <link rel="stylesheet" href="css/cart.css?v=<?= time(); ?>">
 
   <title> Cart | Nama Toko </title>
 </head>
 
 <body>
-  <div class="page-wrapper home-page user">
+  <div class="page-wrapper user cart">
 
     <header class="img" style="background-image: url('img/header-cart.jpg');">
 
-      <?php require "nav-user.php"; ?>
+      <?php require "nav.php"; ?>
 
       <div class="banner mini center">
         <h1> CART </h1>
@@ -48,8 +49,153 @@ if (!isset($_SESSION["login"])) {
         </div>
 
         <p> Hasil pencarian: tanaman. </p>
+        <br>
 
 
+        <div class="list-products">
+
+          <table border="0" cellspacing="0">
+            <tr>
+              <th colspan="2"> Produk </th>
+              <th width="20%"> Jumlah </th>
+            </tr>
+
+            <tr>
+              <td width="5%">
+                <center> 
+                  <input type="checkbox" name="" id="produk"> 
+                </center>
+              </td>
+
+              <td>
+                <a href="" class="link left product">
+                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+
+                  <div class="deskripsi">
+                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                    <p> Rp 12500 </p>
+                  </div>
+                </a>
+              </td>
+
+              <td>
+                <center>
+                  <input type="number" name="" id="" value="12" class="form-input jumlah">
+                </center>
+              </td>
+
+            </tr>
+
+            <tr>
+              <td width="5%">
+                <center> 
+                  <input type="checkbox" name="" id="produk"> 
+                  <span class="checkmark"></span>
+                </center>
+
+              </td>
+
+              <td>
+                <a href="" class="link left product">
+                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+
+                  <div class="deskripsi">
+                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                    <p> Rp 12500 </p>
+                  </div>
+                </a>
+              </td>
+
+              <td>
+                <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
+              </td>
+
+            </tr>
+            <tr>
+              <td width="5%">
+                <center> 
+                  <input type="checkbox" name="" id="produk"> 
+                  <span class="checkmark"></span>
+                </center>
+
+              </td>
+
+              <td>
+                <a href="" class="link left product">
+                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+
+                  <div class="deskripsi">
+                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                    <p> Rp 12500 </p>
+                  </div>
+                </a>
+              </td>
+
+              <td>
+                <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
+              </td>
+
+            </tr>
+            <tr>
+              <td width="5%">
+                <center> 
+                  <input type="checkbox" name="" id="produk"> 
+                  <span class="checkmark"></span>
+                </center>
+
+              </td>
+
+              <td>
+                <a href="" class="link left product">
+                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+
+                  <div class="deskripsi">
+                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                    <p> Rp 12500 </p>
+                  </div>
+                </a>
+              </td>
+
+              <td>
+                <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
+              </td>
+
+            </tr>
+
+            <tr>
+              <td width="5%">
+                <center> <input type="checkbox" name="" id="produk"> </center>
+              </td>
+
+              <td>
+                <a href="" class="link left product">
+                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+
+                  <div class="deskripsi">
+                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                    <p> Rp 12500 </p>
+                  </div>
+                </a>
+              </td>
+
+              <td>
+                <center>
+                  <input type="number" name="" id="" value="12" class="form-input jumlah">
+                </center>
+
+              </td>
+
+            </tr>
+          </table>
+
+        </div>
+
+      </section>
+
+      <section class="wrapper total_harga">
+        <div>
+          <button class="btn-block"> Beli Sekarang </button>
+        </div>
       </section>
 
     </div>
@@ -58,6 +204,7 @@ if (!isset($_SESSION["login"])) {
 
   </div>
 
+  <script src="js/jquery.js?v=<?= time(); ?>"></script>
   <script src="js/style.js?v=<?= time(); ?>"></script>
 
 </body>

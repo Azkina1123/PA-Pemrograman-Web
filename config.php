@@ -84,7 +84,7 @@ function signing_up() {
   return true;
 }
 
-// masuk akun 
+// masuk akun user
 function signing_in() {
   global $db;
 
@@ -128,8 +128,8 @@ function image_uploaded($value) {
   $nama = $_FILES["gambar"]["name"];
   $size = $_FILES["gambar"]["size"];
 
-  // jika ukuran file > 500 kb
-  if ($size > 500000) {
+  // jika ukuran file > 200 kb
+  if ($size > 200000) {
     echo "<script>
             alert('Ukuran gambar maksimal 500 KB!');
          </script>";
@@ -145,5 +145,7 @@ function image_uploaded($value) {
 
   return $nama;
 }
+
+
 
 ?>

@@ -29,7 +29,7 @@ if (!isset($_SESSION["login"])) {
 
     <header class="img">
 
-      <?php require "nav-admin.php"; ?>
+      <?php require "nav.php"; ?>
 
       <div class="banner mini center">
         <h1> CART </h1>
