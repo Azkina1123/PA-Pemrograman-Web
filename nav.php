@@ -19,7 +19,7 @@
           </ul>
 
           <ul>
-            <li> <a href="product.php" class="link-hover"> PRODUCT </a> </li>
+            <li> <a href="product.php" class="link-hover"> PRODUCTS </a> </li>
             <li> <a href="cart.php" class="link-hover"> CART </a> </li>
             <li> <a href="sign-in.php" class="link-hover"> SIGN IN </a> </li>
           </ul>
@@ -35,7 +35,7 @@
             <li> <a href="index.php" class="link-hover"> HOME </a> </li>
             <li> <a href="about.php" class="link-hover"> ABOUT </a> </li>
             <li> <a href="contact.php" class="link-hover"> CONTACT </a> </li>
-            <li> <a href="product.php" class="link-hover"> PRODUCT </a> </li>
+            <li> <a href="product.php" class="link-hover"> PRODUCTS </a> </li>
           </ul>
 
           <ul>
@@ -56,7 +56,7 @@
             <li> <a href="index.php" class="link-hover"> HOME </a> </li>
             <li> <a href="about.php" class="link-hover"> ABOUT </a> </li>
             <li> <a href="contact.php" class="link-hover"> CONTACT </a> </li>
-            <li> <a href="product.php" class="link-hover"> PRODUCT </a> </li>
+            <li> <a href="product.php" class="link-hover"> PRODUCTS </a> </li>
           </ul>
 
           <ul>

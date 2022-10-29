@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+          alert('Harap masuk sebagai admin terlebih dahulu!');
+          document.location.href = 'sign-in.php?login=Admin';
+        </script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

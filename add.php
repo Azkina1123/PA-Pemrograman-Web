@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+          alert('Harap masuk sebagai admin terlebih dahulu!');
+          document.location.href = 'sign-in.php?login=Admin';
+        </script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +29,7 @@
 
     <header class="img" style="background-image: url('img/header-add.jpg');">
 
-      <?php require "nav-admin.php"; ?>
+      <?php require "nav.php"; ?>
 
       <div class="banner mini center">
         <h1> ADD PRODUCT </h1>

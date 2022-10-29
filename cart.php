@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+          alert('Harap masuk sebagai user terlebih dahulu!');
+          document.location.href = 'sign-in.php?login=User';
+        </script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
