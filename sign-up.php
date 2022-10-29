@@ -10,8 +10,9 @@ if (isset($_POST["sign_up"])) {
             document.location.href = 'sign-in.php';
           </script>";
   }
-  
-  // gagal registrasi
+
+  // jika gagal registrasi
+  header("Refresh:0");
 }
 
 ?>
@@ -50,11 +51,12 @@ if (isset($_POST["sign_up"])) {
 
           <form action="" method="POST" enctype="multipart/form-data">
             <table cellspacing="20">
+
               <!-- username -->
               <tr>
                 <td> <label for="username"> Username* </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off"> </td>
+                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off" required> </td>
               </tr>
 
               <!-- password -->
@@ -100,13 +102,15 @@ if (isset($_POST["sign_up"])) {
               <tr>
                 <td colspan="3">
                   <a href="sign-in.php" class="link"> 
-                    <center> Already have an account? <br> Sign In now </center>
+                    <center> Sudah punya akun? <br> Masuk sekarang! </center>
                   </a>
                 </td>
               </tr>
+
             </table>
 
           </form>
+
         </div>
 
       </section>

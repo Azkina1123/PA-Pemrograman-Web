@@ -42,7 +42,7 @@
             <li> <a href="add.php" class="link-hover"> ADD </a> </li>
             <li> <a href="edit.php" class="link-hover"> EDIT </a> </li>
             <li> <a href="order.php" class="link-hover"> ORDER </a> </li>
-            <li> <a href="sign-in.php" class="link-hover"> LOG OUT </a> </li>
+            <li> <a href="logout.php" class="link-hover"> LOG OUT </a> </li>
           </ul>
 
         </div>
@@ -63,7 +63,7 @@
             <li> <a href="order.php" class="link-hover"> ORDER </a> </li>
             <li> <a href="cart.php" class="link-hover"> CART </a> </li>
             <li> <a href="profile.php" class="link-hover"> PROFILE </a> </li>
-            <li> <a href="sign-in.php" class="link-hover"> LOG OUT </a> </li>
+            <li> <a href="logout.php" class="link-hover"> LOG OUT </a> </li>
           </ul>
 
         </div>

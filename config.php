@@ -17,6 +17,7 @@ function signing_up() {
   $konfirmasi = $_POST["konfirmasi"];
   $telepon = $_POST["telepon"];
   $alamat = $_POST["alamat"];
+  $gambar = "$username.png";
   
   // cek apakah username sudah digunakan
   $result = $db->query(
@@ -45,7 +46,9 @@ function signing_up() {
 
   // jika tidak ada upload gambar
   if ($_FILES["gambar"]["error"] === 4) {
-    copy("img/plugins/user.png", "img/users/$username.png");
+
+    // pakai gambar default
+    copy("img/plugins/user.png", "img/users/$gambar");
   
   // jika upload gambar
   } else {
@@ -56,7 +59,7 @@ function signing_up() {
       return false;
     }
   
-    // pindahkan ke direktori baru
+    // pindahkan gambar ke direktori baru
     move_uploaded_file($_FILES["gambar"]["tmp_name"], "img/users/$gambar");
   }
 

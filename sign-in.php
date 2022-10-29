@@ -15,16 +15,44 @@ if (isset($_GET["login"])) {
 if (isset($_POST["sign_in"])) {
 
   $username = $_POST["username"];
+  $password = $_POST["password"];
 
-  // jika berhasil login
-  if (signing_in()) {
-    $_SESSION["login"] = "user";
-    $_SESSION["username"] = $username;
+  // login sebagai admin
+  if ($login == "Admin") {
 
-    echo "<script>
-            document.location.href = 'index.php';
-          </script>";
+    if ($username == "aac" && $password == "123") {
+      $_SESSION["login"] = "admin";
+      $_SESSION["username"] = $username;
+
+      echo "<script>
+              alert('Proses masuk sebagai admin berhasil!');
+             document.location.href = 'index.php';
+            </script>";
+
+    } else {
+      echo "<script>
+              alert('Username atau password salah!');
+            </script>";
+
+    }
+
+  // login sebagai user
+  } else {
+    // jika berhasil login
+    if (signing_in()) {
+      $_SESSION["login"] = "user";
+      $_SESSION["username"] = $username;
+  
+      echo "<script>
+              document.location.href = 'index.php';
+            </script>";
+    }
+
   }
+
+
+  // jika gagal login
+  header("Refresh:0");
 }
 
 ?>
@@ -60,15 +88,15 @@ if (isset($_POST["sign_in"])) {
       <section class="wrapper center">
 
         <div class="sign-in-box center">
-          <h1> Sign In as <?= $login; ?> </h1>
+          <h1> Masuk sebagai <?= $login; ?> </h1>
 
           <!-- jika dalam mode login user -->
           <?php if ($login == "User") { ?>
-          <p> <a href="sign-in.php?login=Admin" class="link"> Sign In as Admin </a> </p>
+          <p> <a href="sign-in.php?login=Admin" class="link"> Masuk sebagai Admin </a> </p>
           
           <!-- jika dalam mode login admin -->
           <?php } else if ($login == "Admin") { ?>
-          <p> <a href="sign-in.php?login=User" class="link"> Sign In as User </a> </p>
+          <p> <a href="sign-in.php?login=User" class="link"> Masuk sebagai User </a> </p>
           <?php } ?>
 
           <form action="" method="POST">
@@ -99,7 +127,7 @@ if (isset($_POST["sign_in"])) {
               <tr>
                 <td colspan="3">
                   <a href="sign-up.php" class="link"> <center>
-                  Don't have an account yet? <br> Register now
+                  Belum punya akun? <br> Daftar sekarang!
                   </center> </a>
                 </td>
               </tr>
