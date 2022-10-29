@@ -1,0 +1,27 @@
+/* ---------------- HOME PAGE ---------------- */
+
+.home .box-rectangle h3 {
+  height: 100%;
+  width: 100%;
+
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.home .box-rectangle:hover h3 {
+  opacity: 1;
+  background-color: #0000006c;
+}
+
+.home .box-rectangle {
+  background-image: var(--header-bg);
+  color: white;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px 0px var(--color1-dark);
+}
+
+.home .object {
+  margin: 10px 0;
+}
+
+
