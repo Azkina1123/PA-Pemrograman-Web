@@ -41,11 +41,15 @@ if (!isset($_SESSION["login"])) {
 
     <div class="main-content">
 
+    <form action="">
+
       <section class="wrapper">
 
         <div class="searching">
-          <input type="search" name="search" placeholder="Search" class="form-input">
-          <input type="submit" value="Cari" class="btn-block">
+          <form action="">
+            <input type="search" name="search" placeholder="Search" class="form-input">
+            <input type="submit" value="Cari" class="btn-block">
+          </form>
         </div>
 
         <p> Hasil pencarian: tanaman. </p>
@@ -68,14 +72,16 @@ if (!isset($_SESSION["login"])) {
               </td>
 
               <td>
-                <a href="" class="link left product">
+                <label for="produk">
+                  <a href="" class="link left product">
                   <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-
-                  <div class="deskripsi">
-                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                    <p> Rp 12500 </p>
-                  </div>
-                </a>
+                  
+                    <div class="deskripsi">
+                      <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                      <p> Rp 12500 </p>
+                    </div>
+                  </a>
+                </label>
               </td>
 
               <td>
@@ -197,6 +203,8 @@ if (!isset($_SESSION["login"])) {
           <button class="btn-block"> Beli Sekarang </button>
         </div>
       </section>
+
+    </form>
 
     </div>
 

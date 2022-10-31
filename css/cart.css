@@ -7,14 +7,13 @@
 .cart table {
   width: 100%;
 }
-
 .cart table a {
   color: black;
 }
 
 .cart table th {
-  padding: 5px;
-  background-color: var(--color1-dark);
+  padding: 15px;
+  background-color: var(--color2);
   color: var(--white-font);
 }
 
@@ -22,13 +21,17 @@
   padding: 5px;
 }
 .cart table tr:nth-child(even) {
-  background-color: #e6f3f597;
+  background-color: #cddbdd5f;
 }
 .cart table tr:nth-child(even):hover {
-  background-color: #aabdc082;
+  background-color: #cddbdda8;
 }
 .cart table tr:nth-child(odd):hover {
-  background-color: #c6c5c57c;
+  background-color: #a1a1a142;
+}
+
+.cart table tr td label {
+    display: flex;
 }
 
 .cart table .img {
