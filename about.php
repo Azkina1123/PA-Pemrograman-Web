@@ -27,8 +27,9 @@
       <section class="wrapper">
         <!-- ISI DI SINI -->
         <h2>Green Feel Florist</h2><br>
-        <p>Website ini dibuat untuk memenuhi kebutuhan toko kami agar para pelanggan dapat mengakses toko kami dari jarak jauh.</p>
-        <p></p>
+        <p>Website ini dibuat untuk memenuhi kebutuhan para pelanggan sehingga dapat mengakses toko kami dari jarak jauh.</p>
+        <p>Kami menawarkan </p>
+        <p>Pelanggan dapat melihat semua produk yang tersedia dan membeli tanaman meski dari rumah.</p>
       </section>
 
     </div>
