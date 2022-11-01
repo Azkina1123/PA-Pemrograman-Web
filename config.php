@@ -66,7 +66,7 @@ function signing_up() {
   // tambahkan akun baru ke database
   $result = $db->query(
     "INSERT INTO users
-     VALUES ('', '$username', '$password', '$telepon', '$alamat', '$gambar')"
+     VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar')"
   );
 
   // jika gagal masuk ke database
@@ -145,6 +145,7 @@ function image_uploaded($value) {
 
   return $nama;
 }
+
 
 
 

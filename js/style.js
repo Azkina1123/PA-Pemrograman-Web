@@ -17,5 +17,10 @@ function numOnly(event) {
   return false;
 }
 
+function totalHarga() {
+  var harga = document.getElementsByClassName("harga");
+  
+}
+
 
 

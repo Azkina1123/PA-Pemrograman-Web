@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require "config.php";
 
 if (!isset($_SESSION["login"])) {
   echo "<script>
@@ -8,6 +9,15 @@ if (!isset($_SESSION["login"])) {
           document.location.href = 'sign-in.php?login=User';
         </script>";
 }
+
+$username = $_SESSION["username"];
+  
+$products = $db->query(
+  "SELECT *
+   FROM keranjang_user LEFT JOIN produk
+   ON (keranjang_user.id_produk = produk.id)"
+);
+
 
 ?>
 
@@ -44,10 +54,11 @@ if (!isset($_SESSION["login"])) {
       <section class="wrapper">
 
         <div class="searching">
-          <form action="">
-            <input type="search" name="search" placeholder="Search" class="form-input">
-            <input type="submit" value="Cari" class="btn-block">
-          </form>
+        <form action="" class="searching">
+          <input type="search" name="search" placeholder="Search" class="form-input">
+          <input type="submit" value="Cari" class="btn-block">
+        </form>
+
         </div>
 
         <p> Hasil pencarian: tanaman. </p>
@@ -57,74 +68,50 @@ if (!isset($_SESSION["login"])) {
         <form action="">
         <div class="list-products">
 
-
-            <table border="0" cellspacing="0">
-              <tr>
-                <th colspan="2"> Produk </th>
-                <th width="20%"> Jumlah </th>
-              </tr>
+          <table border="0" cellspacing="0">
+            <tr>
+              <th colspan="2"> Produk </th>
+              <th width="20%"> Jumlah </th>
+            </tr>
   
-              <tr>
-                <td width="5%">
-                  <center> <input type="checkbox" name="" id="produk"> </center>
-                </td>
+            <?php while($product = mysqli_fetch_array($products)) { ?>
+            <tr>
+              <td width="5%">
+                <center> <input type="checkbox" name="" id="<?= $product["id_produk"]; ?>"> </center>
+              </td>
   
-                <td>
-                  <label for="produk">
-                    <a href="" class="link left product">
-                    <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-                    
-                      <div class="deskripsi">
-                        <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                        <p> Rp 12500 </p>
-                      </div>
+              <td>
+                <label for="<?= $product["id_produk"]; ?>" class="left product">
+                  <div class="img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
+                  
+                  <div class="deskripsi">
+                    <a href="" class="link">
+                      <p> <b><?= $product["nama"]; ?> </b> </p>
+                      <p class="harga"> Rp <?= $product["harga"] ?> </p>
                     </a>
-                  </label>
-                </td>
+                  </div>
+                </label>
+              </td>
   
-                <td>
-                  <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
-                </td>
+              <td>
+                <center> <input type="number" name="" id="" value="<?= $product["jumlah"]; ?>" class="form-input jumlah"> </center>
+              </td>
   
-              </tr>
+            </tr>
+            <?php } ?>
   
-              <tr>
-                <td width="5%">
-                  <center> 
-                    <input type="checkbox" name="" id="produk"> 
-                    <span class="checkmark"></span>
-                  </center>
-  
-                </td>
-  
-                <td>
-                  <a href="" class="link left product">
-                    <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-  
-                    <div class="deskripsi">
-                      <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                      <p> Rp 12500 </p>
-                    </div>
-                  </a>
-                </td>
-  
-                <td>
-                  <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
-                </td>
-  
-              </tr>
-            </table>
+          </table>
             
         </div>
 
         
       </section>
       
-      <section>
+      <section class="pembayaran">
         
-        <div class="wrapper total_harga">
-          <button class="btn-block"> Beli Sekarang </button>
-          <p>Rp 12500</p>
+        <div class="wrapper">
+          <p class="object"> Total pembayaran: <span class="total-harga"> Rp 12500 </span> </p>
+          <button class="btn-block object"> Beli Sekarang </button>
         </div>
 
       </section>

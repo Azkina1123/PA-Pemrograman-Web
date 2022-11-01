@@ -47,9 +47,22 @@
   box-sizing: border-box;
 }
 
-.cart .total_harga {
-  background-color: #80808040;
-  height: 100px;
+.cart .pembayaran {
+  background-color: var(--color2-light);
+}
+.cart .pembayaran .wrapper {
+  justify-content: flex-end;
+}
+.cart .pembayaran .object {
+  margin: 10px;
+  align-self: center;
+}
+.cart .pembayaran p {
+  font-size: 16pt;
+  font-weight: 600;
+}
+.cart .pembayaran .btn-block {
+  width: 150px;
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {
