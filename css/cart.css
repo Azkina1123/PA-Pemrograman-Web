@@ -26,8 +26,11 @@
 .cart table tr:nth-child(even):hover {
   background-color: #cddbdda8;
 }
+.cart table tr:nth-child(odd) {
+  background-color: #edededde;
+}
 .cart table tr:nth-child(odd):hover {
-  background-color: #a1a1a142;
+  background-color: #a1a1a13b
 }
 
 .cart table tr td label {
