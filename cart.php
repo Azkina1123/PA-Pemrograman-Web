@@ -41,8 +41,6 @@ if (!isset($_SESSION["login"])) {
 
     <div class="main-content">
 
-    <form action="">
-
       <section class="wrapper">
 
         <div class="searching">
@@ -56,155 +54,80 @@ if (!isset($_SESSION["login"])) {
         <br>
 
 
+        <form action="">
         <div class="list-products">
 
-          <table border="0" cellspacing="0">
-            <tr>
-              <th colspan="2"> Produk </th>
-              <th width="20%"> Jumlah </th>
-            </tr>
 
-            <tr>
-              <td width="5%">
-                <center> 
-                  <input type="checkbox" name="" id="produk"> 
-                </center>
-              </td>
-
-              <td>
-                <label for="produk">
+            <table border="0" cellspacing="0">
+              <tr>
+                <th colspan="2"> Produk </th>
+                <th width="20%"> Jumlah </th>
+              </tr>
+  
+              <tr>
+                <td width="5%">
+                  <center> <input type="checkbox" name="" id="produk"> </center>
+                </td>
+  
+                <td>
+                  <label for="produk">
+                    <a href="" class="link left product">
+                    <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+                    
+                      <div class="deskripsi">
+                        <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
+                        <p> Rp 12500 </p>
+                      </div>
+                    </a>
+                  </label>
+                </td>
+  
+                <td>
+                  <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
+                </td>
+  
+              </tr>
+  
+              <tr>
+                <td width="5%">
+                  <center> 
+                    <input type="checkbox" name="" id="produk"> 
+                    <span class="checkmark"></span>
+                  </center>
+  
+                </td>
+  
+                <td>
                   <a href="" class="link left product">
-                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-                  
+                    <div class="img" style="background-image: url('img/products/1.jpg');"></div>
+  
                     <div class="deskripsi">
                       <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
                       <p> Rp 12500 </p>
                     </div>
                   </a>
-                </label>
-              </td>
-
-              <td>
-                <center>
-                  <input type="number" name="" id="" value="12" class="form-input jumlah">
-                </center>
-              </td>
-
-            </tr>
-
-            <tr>
-              <td width="5%">
-                <center> 
-                  <input type="checkbox" name="" id="produk"> 
-                  <span class="checkmark"></span>
-                </center>
-
-              </td>
-
-              <td>
-                <a href="" class="link left product">
-                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-
-                  <div class="deskripsi">
-                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                    <p> Rp 12500 </p>
-                  </div>
-                </a>
-              </td>
-
-              <td>
-                <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
-              </td>
-
-            </tr>
-            <tr>
-              <td width="5%">
-                <center> 
-                  <input type="checkbox" name="" id="produk"> 
-                  <span class="checkmark"></span>
-                </center>
-
-              </td>
-
-              <td>
-                <a href="" class="link left product">
-                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-
-                  <div class="deskripsi">
-                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                    <p> Rp 12500 </p>
-                  </div>
-                </a>
-              </td>
-
-              <td>
-                <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
-              </td>
-
-            </tr>
-            <tr>
-              <td width="5%">
-                <center> 
-                  <input type="checkbox" name="" id="produk"> 
-                  <span class="checkmark"></span>
-                </center>
-
-              </td>
-
-              <td>
-                <a href="" class="link left product">
-                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-
-                  <div class="deskripsi">
-                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                    <p> Rp 12500 </p>
-                  </div>
-                </a>
-              </td>
-
-              <td>
-                <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
-              </td>
-
-            </tr>
-
-            <tr>
-              <td width="5%">
-                <center> <input type="checkbox" name="" id="produk"> </center>
-              </td>
-
-              <td>
-                <a href="" class="link left product">
-                  <div class="img" style="background-image: url('img/products/1.jpg');"></div>
-
-                  <div class="deskripsi">
-                    <p> <b>Judul Tanaman Panjang Kali Lebar </b> </p>
-                    <p> Rp 12500 </p>
-                  </div>
-                </a>
-              </td>
-
-              <td>
-                <center>
-                  <input type="number" name="" id="" value="12" class="form-input jumlah">
-                </center>
-
-              </td>
-
-            </tr>
-          </table>
-
+                </td>
+  
+                <td>
+                  <center> <input type="number" name="" id="" value="12" class="form-input jumlah"> </center>
+                </td>
+  
+              </tr>
+            </table>
+            
         </div>
 
+        
       </section>
-
-      <section class="wrapper total_harga">
-        <div>
+      
+      <section>
+        
+        <div class="wrapper total_harga">
           <button class="btn-block"> Beli Sekarang </button>
+          <p>Rp 12500</p>
         </div>
-      </section>
 
-    </form>
+      </section>
 
     </div>
 
