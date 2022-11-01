@@ -25,8 +25,10 @@
     <div class="main-content">
 
       <section class="wrapper">
-
-        ISI DI SINI
+        <!-- ISI DI SINI -->
+        <h2>Green Feel Florist</h2><br>
+        <p>Website ini dibuat untuk memenuhi kebutuhan toko kami agar para pelanggan dapat mengakses toko kami dari jarak jauh.</p>
+        <p></p>
       </section>
 
     </div>

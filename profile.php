@@ -9,6 +9,10 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
+if(isset($_GET['id'])){
+  $id = $_GET['id'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,8 +42,13 @@ if (!isset($_SESSION["login"])) {
     <div class="main-content">
 
       <section class="wrapper">
+<<<<<<< Updated upstream
         <!-- ISI DI SINI -->
         <form action="" method="POST" enctype="multipart/form-data">
+=======
+      <!-- ISI DI SINI -->
+      <form action="" method="POST" enctype="multipart/form-data">
+>>>>>>> Stashed changes
             <table cellspacing="20">
 
               <!-- username -->
@@ -89,8 +98,14 @@ if (!isset($_SESSION["login"])) {
               </tr>
 
             </table>
+<<<<<<< Updated upstream
           </form>
         </section>
+=======
+
+          </form>
+      </section>
+>>>>>>> Stashed changes
 
     </div>
 

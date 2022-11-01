@@ -25,8 +25,14 @@
     <div class="main-content">
 
       <section class="wrapper">
+        <!-- ISI DI SINI -->
+        <h2>Alamat</h2>
+        <p>Jalan. Mawar no. 12</p><br>
 
-        ISI DI SINI
+        <h2>Media Sosial</h2>
+        <h3>Instagram</h3> <p>@Green_Feel_Florist</p>
+        <h3>Whatsapp</h3> <p>0812-3456-7890</p>
+        <h3>Email</h3> <p>Greenfeelflorist@gmail.com</p>
       </section>
 
     </div>
