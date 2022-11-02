@@ -17,10 +17,29 @@ function numOnly(event) {
   return false;
 }
 
-function totalHarga() {
-  var harga = document.getElementsByClassName("harga");
-  
+function selectProductCart(id) {
+  var totalHargaBarang = document.getElementsByClassName(id)[0];
+  totalHargaBarang.classList.toggle("selected");
+ 
+  updateTotalHarga();
+} 
+
+function updateJumlahBarang(elemen, id, stok, harga) {
+  elemen.value = (elemen.value == "") ? 1 : elemen.value;
+  elemen.value = (elemen.value > stok) ? stok : elemen.value;
+
+  document.getElementsByClassName(id)[0].value = elemen.value*harga;
+  updateTotalHarga();
 }
 
+function updateTotalHarga() {
+  var totalHargaBarang = document.getElementsByClassName("selected");
+  
+  var total = 0;
+  for (var i=0; i<totalHargaBarang.length; i++) {
+    total += parseInt(totalHargaBarang[i].value);
+  }
+  document.getElementsByClassName("total-harga")[0].innerHTML = total;
+}
 
 

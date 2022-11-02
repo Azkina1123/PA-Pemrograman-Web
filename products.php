@@ -4,31 +4,33 @@ session_start();
 
 require "config.php";
 
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+  alert('Harap masuk sebagai user/admin terlebih dahulu!');
+  document.location.href = 'sign-in.php?login=User';
+  </script>";
+}
+
 $search = "all";
 if (isset($_GET["search"])) {
   $search = $_GET["search"];
 }
 
-if (!isset($_SESSION["login"])) {
-  echo "<script>
-          alert('Harap masuk sebagai user/admin terlebih dahulu!');
-          document.location.href = 'sign-in.php?login=User';
-        </script>";
-}
+$jenis_tanaman = ["Tanaman Hias", "Tanaman Buah", "Benih Tanaman"];
 
-$jenis_tanaman = ["tanaman hias", "tanaman buah", "benih tanaman"];
-$search = strtolower($search);
-
+// pilih semua jenis tanaman
 if ($search == "all") {
   $products = $db->query("SELECT * FROM produk");
   
-} else if (in_array($search, $jenis_tanaman)) {
-  $search = ucwords(($search));
+// pilih jenis tanaman tertentu
+} else if (in_array(ucwords($search), $jenis_tanaman)) {
   $products = $db->query(
     "SELECT * FROM produk
      WHERE jenis='$search'"
   );
 
+// cari keyword tertentu
 } else {
   $products = $db->query(
     "SELECT * FROM produk
@@ -84,21 +86,12 @@ if ($search == "all") {
                 <?= $search == "all" ? "<b> All </b>" : "All"; ?> </a> 
               </li>
               
-            <?php foreach ($jenis_tanaman as $tanaman):?>
+            <?php foreach ($jenis_tanaman as $tanaman): ?>
             <li> 
               <a href="?search=<?= $tanaman; ?>" class="link">
-              <?= $search == $tanaman ? "<b> </b>" : "Tanaman Hias"; ?> </a> 
+              <?= $search == $tanaman ? "<b> $tanaman </b>" : "$tanaman"; ?> </a> 
             </li>
-
-            <li> 
-              <a href="?search=tanaman buah" class="link">
-              <?= $search == "tanaman buah" ? "<b> Tanaman Buah </b>" : "Tanaman Buah"; ?> </a> 
-            </li>
-
-            <li> 
-              <a href="?search=benih tanaman" class="link">
-              <?= $search == "benih tanaman" ? "<b> Benih Tanaman </b>" : "Benih Tanaman"; ?> </a> 
-            </li>
+            <?php endforeach; ?>
 
           </ul>
 

@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,9 +61,9 @@
     </section> -->
 
         <h2>Media Sosial</h2>
-        <img src ="img/icon web/instagram.png" width = 100px><p>@Green_Feel_Florist</p>
-        <img src ="img/icon web/whatsapp.png" width = 100px> <p>0812-3456-7890</p>
-        <img src ="img/icon web/email.png" width = 110px> <p>Greenfeelflorist@gmail.com</p>
+        <img src ="img/icons/instagram.png" width = 100px><p>@Green_Feel_Florist</p>
+        <img src ="img/icons/whatsapp.png" width = 100px> <p>0812-3456-7890</p>
+        <img src ="img/icons/email.png" width = 110px> <p>Greenfeelflorist@gmail.com</p>
       </section>
 
     </div>

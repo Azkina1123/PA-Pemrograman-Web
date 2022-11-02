@@ -47,6 +47,10 @@ a {
   }
 }
 
+.flex {
+  display: flex;
+}
+
 .center {
   display: flex;
   flex-direction: column;
@@ -195,7 +199,7 @@ header a, header h1, header p {
   }
 
   .menu-logo {
-    background-image: url("../img/plugins/menu.png");
+    background-image: url("../img/icons/menu.png");
     width: 32px;
     height: 32px;
   }
