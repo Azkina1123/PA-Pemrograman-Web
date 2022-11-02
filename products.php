@@ -16,33 +16,25 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
+$jenis_tanaman = ["tanaman hias", "tanaman buah", "benih tanaman"];
+$search = strtolower($search);
+
 if ($search == "all") {
   $products = $db->query("SELECT * FROM produk");
   
-} else if ($search == "tanaman hias") {
+} else if (in_array($search, $jenis_tanaman)) {
+  $search = ucwords(($search));
   $products = $db->query(
     "SELECT * FROM produk
-     WHERE jenis='Tanaman Hias'"
-  );
-} else if ($search == "tanaman buah") {
-  $products = $db->query(
-    "SELECT * FROM produk
-     WHERE jenis='Tanaman Buah'"
-  );
-} else if ($search == "benih tanaman") {
-  $products = $db->query(
-    "SELECT * FROM produk
-     WHERE jenis='Benih Tanaman'"
+     WHERE jenis='$search'"
   );
 
 } else {
   $products = $db->query(
     "SELECT * FROM produk
-     WHERE nama LIKE '%$search%'"
+     WHERE LOWER(nama) LIKE '%$search%'"
   );
 }
-
-
 
 ?>
 
@@ -89,12 +81,13 @@ if ($search == "all") {
 
             <li> 
               <a href="?search=all" class="link">
-              <?= $search == "all" ? "<b> All </b>" : "All"; ?> </a> 
-            </li>
-
+                <?= $search == "all" ? "<b> All </b>" : "All"; ?> </a> 
+              </li>
+              
+            <?php foreach ($jenis_tanaman as $tanaman):?>
             <li> 
-              <a href="?search=tanaman hias" class="link">
-              <?= $search == "tanaman hias" ? "<b> Tanaman Hias </b>" : "Tanaman Hias"; ?> </a> 
+              <a href="?search=<?= $tanaman; ?>" class="link">
+              <?= $search == $tanaman ? "<b> </b>" : "Tanaman Hias"; ?> </a> 
             </li>
 
             <li> 
