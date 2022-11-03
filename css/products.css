@@ -31,7 +31,7 @@
   transform: translateY(-2px);
 }
 
-.products .box-square .img {
+.products .box-square .product.img {
   width: 100%;
   flex: 3;
 
@@ -53,6 +53,23 @@
 .products-container p:nth-child(2) {
   flex: 1;
   font-size: 10pt;
+}
+
+.products .mode {
+  position: absolute;
+  align-self: flex-end;
+}
+.products .mode button {
+  height: 30px;
+  width: 30px;
+  margin: 5px;
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+  opacity: 0.7;
+}
+.products .mode button:hover {
+  opacity: 1;
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {

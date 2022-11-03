@@ -22,20 +22,31 @@ $jenis_tanaman = ["Tanaman Hias", "Tanaman Buah", "Benih Tanaman"];
 // pilih semua jenis tanaman
 if ($search == "all") {
   $products = $db->query("SELECT * FROM produk");
-  
-// pilih jenis tanaman tertentu
+
+  // pilih jenis tanaman tertentu
 } else if (in_array(ucwords($search), $jenis_tanaman)) {
   $products = $db->query(
     "SELECT * FROM produk
      WHERE jenis='$search'"
   );
 
-// cari keyword tertentu
+  // cari keyword tertentu
 } else {
   $products = $db->query(
     "SELECT * FROM produk
      WHERE LOWER(nama) LIKE '%$search%'"
   );
+}
+
+// mode edit / read
+$sampul = "header-products.jpg";
+$judul = "PRODUCTS";
+$mode = "read";
+if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
+  $sampul = "header-edit.jpg";
+  $judul = "EDIT PRODUCT";
+  $mode = "edit";
+} else {
 }
 
 ?>
@@ -51,18 +62,18 @@ if ($search == "all") {
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/products.css?v=<?= time(); ?>">
 
-  <title> Product | Nama Toko </title>
+  <title> Product | Green Florist </title>
 </head>
 
 <body>
   <div class="page-wrapper user admin products">
 
-    <header class="img" style="background-image: url('img/header-products.jpg');">
+    <header class="img" style="background-image: url('img/<?= $sampul; ?>');">
 
-      <?php require "nav.php"; ?>
+      <?php include "nav.php"; ?>
 
       <div class="banner mini center">
-        <h1> PRODUCTS </h1>
+        <h1> <?= $judul; ?> </h1>
       </div>
 
     </header>
@@ -71,7 +82,8 @@ if ($search == "all") {
 
       <section class="wrapper">
 
-        <form action="" class="searching">
+        <form action="" method="GET" class="searching">
+          <input type="text" name="mode" value="<?= $mode; ?>" hidden>
           <input type="search" name="search" placeholder="Search" class="form-input">
           <input type="submit" value="Cari" class="btn-block">
         </form>
@@ -81,35 +93,52 @@ if ($search == "all") {
         <div class="products-container">
           <ul>
 
-            <li> 
-              <a href="?search=all" class="link">
-                <?= $search == "all" ? "<b> All </b>" : "All"; ?> </a> 
-              </li>
-              
-            <?php foreach ($jenis_tanaman as $tanaman): ?>
-            <li> 
-              <a href="?search=<?= $tanaman; ?>" class="link">
-              <?= $search == $tanaman ? "<b> $tanaman </b>" : "$tanaman"; ?> </a> 
+            <li>
+              <a href="?mode=<?= $mode; ?>&search=all" class="link">
+                <?= $search == "all" ? "<b> All </b>" : "All"; ?> </a>
             </li>
+
+            <!-- menu jenis tanaman -->
+            <?php foreach ($jenis_tanaman as $tanaman) : ?>
+              <li>
+                <a href="?mode=<?= $mode; ?>&search=<?= $tanaman; ?>" class="link">
+                  <?= $search == $tanaman ? "<b> $tanaman </b>" : "$tanaman"; ?> </a>
+              </li>
             <?php endforeach; ?>
 
           </ul>
 
+          <!-- list produk -->
           <div class="box-container">
 
-            <?php while ($product = mysqli_fetch_array($products)): ?>
-            <a href="#">
-            <div class="box-square object">
+            <!-- 1 kotak produk -->
+            <?php while ($product = mysqli_fetch_array($products)) : ?>
+              <a href="product.php?id=<?= $product["id"]; ?>">
+                <div class="box-square object">
 
-              <div class="img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
-  
-              <div class="deskripsi">
-                <p> <b> <?= $product["nama"]; ?> </b> </p>
-                <p> Rp <?= $product["harga"]; ?> </p>
-              </div>
-                
-            </div>
-            </a>
+                  <!-- ================= mode edit ================= -->
+                  <?php if ($mode == "edit" && $_SESSION["login"] == "admin") { ?>
+
+                    <div class="mode flex">
+                      <a href="edit.php?id=<?= $product['id']; ?>">
+                        <button class="edit-product-logo img"></button>
+                      </a>
+                      <a href="" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?>?')">
+                        <button class="delete-product-logo img"></button>
+                      </a>
+                    </div>
+
+                  <?php } ?>
+
+                  <div class="product img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
+
+                  <div class="deskripsi">
+                    <p> <b> <?= $product["nama"]; ?> </b> </p>
+                    <p> Rp <?= $product["harga"]; ?> </p>
+                  </div>
+
+                </div>
+              </a>
             <?php endwhile; ?>
 
           </div>
@@ -120,7 +149,7 @@ if ($search == "all") {
 
     </div>
 
-    <?php require "footer.php"; ?>
+    <?php include "footer.php"; ?>
 
   </div>
 

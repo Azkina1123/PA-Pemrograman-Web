@@ -43,7 +43,7 @@ if (isset($_GET["delete"])) {
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/cart.css?v=<?= time(); ?>">
 
-  <title> Cart | Nama Toko </title>
+  <title> Cart | Green Florist </title>
 </head>
 
 <body>
@@ -105,7 +105,7 @@ if (isset($_GET["delete"])) {
 
                 <td width="5%">
                   <center>
-                    <a href="?delete=1&id=<?= $product["id"]; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" class="delete-logo img" name="delete"></a>
+                    <a href="?delete=1&id=<?= $product["id"]; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" class="delete-cart-logo img" name="delete"></a>
                   </center>
                 </td>
 

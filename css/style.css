@@ -368,3 +368,17 @@ input[type="checkbox"] {
   height: 20px;
 }
 
+/* ============================================= */
+/* -------------------- LOGO ------------------- */
+/* ============================================= */
+
+.delete-cart-logo.img {
+  background-image: url("../img/icons/delete-cart.png");
+}
+.edit-product-logo.img {
+  background-image: url("../img/icons/edit-product.png");
+}
+.delete-product-logo.img {
+  background-image: url("../img/icons/delete-product.png");
+}
+

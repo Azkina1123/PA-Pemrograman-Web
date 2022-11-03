@@ -43,12 +43,8 @@ if (!isset($_SESSION["login"])) {
 
       <section class="wrapper">
 
-        <div class="searching">
-          <input type="search" name="search" placeholder="Search" class="form-input">
-          <input type="submit" value="Cari" class="btn-block">
-        </div>
 
-        <p> Hasil pencarian: tanaman. </p>
+        ISI DI SINI FORMNYA
 
 
       </section>
