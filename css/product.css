@@ -1,7 +1,11 @@
+.product section {
+  padding: 50px 10px;
+}
+
 .product .product-container {
-  padding: 10px;
   width: 90%;
   height: 450px;
+  padding: 40px 0 0 0;
 
   justify-content: center;
   align-items: center;
@@ -15,11 +19,11 @@
 .product .main-content .img {
   width: 300px;
   height: 100%;
-  flex: 1.5;
-  margin: 10px 20px 10px 10px;
+  flex: 1.3;
+  margin: 10px;
 }
 
-.product table {
+.product .description {
   flex: 2;
   height: 100%;
 }
@@ -28,8 +32,28 @@
   padding: 10px;
 }
 
+.product table {
+  flex: 4;
+  width: 80%;
+}
+
 .product .btn-container {
-  background-color: blueviolet;
+  flex: 1;
+  width: 100%;
+  margin-left: 100px;
+}
+
+.product .jumlah {
+  width: 60px;
+}
+
+.product .btn-container button {
+  margin: 10px 10px 0 0 ;
+  flex: 1;
+}
+
+.product .btn-container a {
+  justify-self: flex-end;
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {
@@ -39,4 +63,23 @@
     height: 700px;
   }
 
+  .product .main-content h1 {
+  font-size: 20pt;
+  }
+
+  .product .btn-container {
+    margin: 0;
+    justify-content: center;
+  }
+
+  .product form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .product form .object {
+    margin: 5px;
+  }
 }

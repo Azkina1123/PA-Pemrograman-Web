@@ -66,16 +66,16 @@
   width: 150px;
 }
 
-.cart .delete-logo {
+.cart .delete-cart-logo {
   width: 32px;
   height: 32px;
   display: flex;
   border: none;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("../img/icons/delete-logo.png");
+  background-image: url("../img/icons/delete-cart.png");
   opacity: 0.7;
 }
-.cart .delete-logo:hover {
+.cart .delete-cart-logo:hover {
   opacity: 1;
 }
 

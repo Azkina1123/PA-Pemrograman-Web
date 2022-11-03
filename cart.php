@@ -76,17 +76,19 @@ if (isset($_GET["delete"])) {
             <!-- tampilkan tabel keranjang -->
             <?php while ($product = mysqli_fetch_array($products)) { ?>
 
+              <!-- checkbox -->
               <tr>
                 <td width="5%">
                   <center> <input type="checkbox" name="" id="<?= $product["id"]; ?>" class="check-input" onchange="selectProductCart(<?= $product['id'] ?>)"> </center>
                 </td>
 
+                <!-- pilih produk -->
                 <td>
                   <label for="<?= $product["id"]; ?>" class="left">
                     <div class="product img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
 
                     <div class="deskripsi">
-                      <a href="" class="link">
+                      <a href="product.php?id=<?= $product["id"]; ?>" class="link">
                         <p> <b><?= $product["nama"]; ?> </b> </p>
                         <p class="harga"> Rp <?= $product["harga"] ?> </p>
                       </a>
@@ -94,18 +96,24 @@ if (isset($_GET["delete"])) {
                   </label>
                 </td>
 
+                <!-- ubah jumlah barang -->
                 <td class="barang">
                   <center>
-                    <input type="number" name="" id="" value="<?= $product["jumlah"]; ?>" class="form-input jumlah" onkeyup="updateJumlahBarang(this, <?= $product['id']; ?>, <?= $product['stok']; ?>, <?= $product['harga']; ?>)" min="1">
+                    <input type="number" name="" class="form-input jumlah" value="<?= $product["jumlah"]; ?>"
+                    onkeyup="updateJumlahBarang(this, <?= $product['id']; ?>, <?= $product['stok']; ?>, <?= $product['harga']; ?>); 
+                            updateTotalHarga();" min="1" max="<?= $product['stok']; ?>">
 
-                    <input type="number" name="" id="" class="<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden>
+                    <input type="number" name="" id="<?= $product['id']; ?>"  
+                    class="<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden>
                   </center>
 
                 </td>
 
+                <!-- hapus dari keranjang -->
                 <td width="5%">
                   <center>
-                    <a href="?delete=1&id=<?= $product["id"]; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" class="delete-cart-logo img" name="delete"></a>
+                    <a href="?delete=1&id=<?= $product["id"]; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" 
+                    class="delete-cart-logo img" name="delete"></a>
                   </center>
                 </td>
 
@@ -119,15 +127,14 @@ if (isset($_GET["delete"])) {
 
       </section>
 
+      <!-- total pembayaran -->
       <section class="pembayaran">
 
-        <script>
-        </script>
         <div class="wrapper">
           <p class="object"> Total pembayaran: Rp <span class="total-harga"> 0 </span> </p>
 
           <input type="number" class="total-harga" name="total_pembayaran" hidden>
-          <button class="btn-block object"> Beli Sekarang </button>
+          <a href="pembayaran.php" class="link-pembayaran"><button class="btn-block object"> Beli Sekarang </button></a>
         </div>
 
       </section>

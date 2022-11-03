@@ -122,6 +122,69 @@ function signing_in() {
 
 }
 
+function delete_product() {
+  global $db;
+
+  $id = $_GET["id"];
+  $result = $db->query(
+    "DELETE FROM produk WHERE id='$id'"
+  );
+
+  if (!$result) {
+    echo "<script>
+            alert('Produk gagal dihapus!');
+          </script>";
+    return false;
+  }
+
+  echo "<script>
+            alert('Produk berhasil dihapus.');
+          </script>";
+  return true;
+}
+
+function add_to_cart() {
+  global $db;
+
+  $username = $_SESSION["username"];
+  $id_produk = $_GET["id"];
+  $jumlah = $_GET["jumlah"];
+  $tanggal = date("Y-m-d h:i:s");
+
+  $keranjang = $db->query(
+    "SELECT * FROM keranjang_user
+    WHERE username='$username' AND id_produk=$id_produk"
+  );
+
+  if (mysqli_num_rows($keranjang) == 0) {
+    $result = $db->query(
+      "INSERT INTO keranjang_user
+      VALUES ('$tanggal', '$username', '$id_produk', $jumlah)"
+    );
+
+  } else {
+    $result = $db->query(
+      "UPDATE keranjang_user
+      SET waktu='$tanggal',
+          jumlah=$jumlah
+      WHERE username='$username' AND id_produk=$id_produk"
+    );
+  }
+
+  if (!$result) {
+    echo "<script>
+          alert('Gagal memasukkan produk ke keranjang!');
+        </script>";
+        return false;
+      }
+      
+  echo "<script>
+          alert('Produk berhasil dimasukkan ke keranjang!');
+        </script>";
+  return true;
+
+}
+
 /* =================== FUNGSI TAMBAHAN ==================== */
 
 function image_uploaded($value) {

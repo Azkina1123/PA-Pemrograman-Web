@@ -12,11 +12,23 @@ if (!isset($_SESSION["login"])) {
 }
 
 $id = $_GET["id"];
+$username = $_SESSION["username"];
+
+// produk yang ditampilkan
 $result = $db->query(
-  "SELECT * FROM produk
+  "SELECT * 
+  FROM produk LEFT JOIN keranjang_user
+  ON (produk.id = keranjang_user.id_produk)
   WHERE id=$id"
 );
 $product = mysqli_fetch_array($result);
+
+// masukkan produk ke keranjang
+if (isset($_GET["keranjang"]) && add_to_cart()) {
+  echo "<script>
+          document.location.href = 'cart.php';
+        </script>";
+}
 
 
 ?>
@@ -53,47 +65,63 @@ $product = mysqli_fetch_array($result);
         <div class="product-container flex">
           <div style="background-image: url('img/products/<?= $product["gambar"]; ?>');" class="img"></div>
   
-          <table cellspacing="0" border="1">
-            <tr>
-              <td> Nama </td>
-              <td> <center>:</center> </td>
-              <td> <?= $product["nama"] ?> </td>
-            </tr>
-            <tr>
-              <td> Harga </td>
-              <td> <center>:</center> </td>
-              <td> <?= $product["harga"] ?> </td>
-            </tr>
-            <tr>
-              <td> Tinggi </td>
-              <td> <center>:</center> </td>
-              <td> <?= $product["tinggi"] ?> </td>
-            </tr>
-            <tr>
-              <td> Berat </td>
-              <td> <center>:</center> </td>
-              <td> <?= $product["berat"] ?> </td>
-            </tr>
-            <tr>
-              <td> Deskripsi </td>
-              <td> <center>:</center> </td>
-              <td> <?= $product["deskripsi"] ?> </td>
-            </tr>
-            <tr>
-              <td> Stok </td>
-              <td> <center>:</center> </td>
-              <td> <?= $product["stok"] ?> </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <div>
-                  <button class="btn-block"> Keranjang</button>
-                  <button class="btn-block"> Beli Sekarang</button>
-                </div>
-              </td>
-            </tr>
+          <div class="description center">
+
+            <table cellspacing="0">
+              <tr>
+                <td> Nama </td>
+                <td> <center>:</center> </td>
+                <td> <?= $product["nama"] ?> </td>
+              </tr>
+              <tr>
+                <td> Harga </td>
+                <td> <center>:</center> </td>
+                <td> <?= $product["harga"] ?> </td>
+              </tr>
+              <tr>
+                <td> Tinggi </td>
+                <td> <center>:</center> </td>
+                <td> <?= $product["tinggi"] ?> </td>
+              </tr>
+              <tr>
+                <td> Berat </td>
+                <td> <center>:</center> </td>
+                <td> <?= $product["berat"] ?> </td>
+              </tr>
+              <tr>
+                <td> Deskripsi </td>
+                <td> <center>:</center> </td>
+                <td> <?= $product["deskripsi"] ?> </td>
+              </tr>
+              <tr>
+                <td> Stok </td>
+                <td> <center>:</center> </td>
+                <td> <?= $product["stok"] ?> </td>
+              </tr>              
+            </table>
   
-          </table>
+            <div class="btn-container flex">
+              <form action="" method="GET">
+                <button class="btn-block object" name="beli_sekarang"> Beli Sekarang </button>
+                <button type="submit" class="btn-block object" name="keranjang"> Keranjang </button>
+
+                <input type="text" name="id" value="<?= $id; ?>" hidden>
+                <script>
+                  function jumlahBarang(elemen) {
+                    if (elemen.value == "" || elemen.value == 0) {
+                      elemen.value = 1;
+                    }
+                    elemen.value = (elemen.value > <?= $product["stok"]; ?>) ? <?= $product["stok"]; ?> : elemen.value;
+                  }
+                </script>
+                <input type="number" name="jumlah" class="form-input jumlah object"
+                value="<?= isset($product["jumlah"]) ? $product["jumlah"] : 1 ?>" 
+                onkeyup="jumlahBarang(this)" min="1" max="<?= $product["stok"]; ?>">
+              </form>
+            </div>
+            
+          </div>
+
         </div>
       </section>
     </div>

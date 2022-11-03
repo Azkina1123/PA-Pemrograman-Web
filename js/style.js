@@ -25,7 +25,9 @@ function selectProductCart(id) {
 } 
 
 function updateJumlahBarang(elemen, id, stok, harga) {
-  elemen.value = (elemen.value == "") ? 1 : elemen.value;
+  if (elemen.value == "" || elemen.value == 0) {
+    elemen.value = 1;
+  }
   elemen.value = (elemen.value > stok) ? stok : elemen.value;
 
   document.getElementsByClassName(id)[0].value = elemen.value*harga;
@@ -34,12 +36,15 @@ function updateJumlahBarang(elemen, id, stok, harga) {
 
 function updateTotalHarga() {
   var totalHargaBarang = document.getElementsByClassName("selected");
-  
+  var link = "pembayaran.php?";
   var total = 0;
   for (var i=0; i<totalHargaBarang.length; i++) {
     total += parseInt(totalHargaBarang[i].value);
+    link += "id" + i + totalHargaBarang[i].id + "&";
   }
   document.getElementsByClassName("total-harga")[0].innerHTML = total;
+  document.getElementsByClassName("link-pembayaran")[0].href = link;
 }
+
 
 

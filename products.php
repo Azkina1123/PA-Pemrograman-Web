@@ -123,7 +123,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
                       <a href="edit.php?id=<?= $product['id']; ?>">
                         <button class="edit-product-logo img"></button>
                       </a>
-                      <a href="" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?>?')">
+                      <a href="delete.php?id=<?= $product['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?>?')">
                         <button class="delete-product-logo img"></button>
                       </a>
                     </div>
