@@ -17,34 +17,38 @@ function numOnly(event) {
   return false;
 }
 
-function selectProductCart(id) {
-  var totalHargaBarang = document.getElementsByClassName(id)[0];
-  totalHargaBarang.classList.toggle("selected");
- 
-  updateTotalHarga();
-} 
-
-function updateJumlahBarang(elemen, id, stok, harga) {
-  if (elemen.value == "" || elemen.value == 0) {
-    elemen.value = 1;
+function updateJumlahBarang(input,  stok) {
+  if (input.value == "" || input.value == 0) {
+    input.value = 1;
   }
-  elemen.value = (elemen.value > stok) ? stok : elemen.value;
-
-  document.getElementsByClassName(id)[0].value = elemen.value*harga;
-  updateTotalHarga();
+  input.value = (input.value > stok) ? stok : input.value;
 }
 
-function updateTotalHarga() {
-  var totalHargaBarang = document.getElementsByClassName("selected");
-  var link = "pembayaran.php?";
-  var total = 0;
-  for (var i=0; i<totalHargaBarang.length; i++) {
-    total += parseInt(totalHargaBarang[i].value);
-    link += "id" + i + totalHargaBarang[i].id + "&";
+function pilihProdukDibayar(checkInput, id, harga) {  
+  // jika checkbox di-checked
+  if (checkInput.checked) {
+    checkInput.classList.add("selected");
+    checkInput.value = document.querySelector("input#jumlah"+id).value * harga
+    
+  // jika checkbox tidak di-checked
+  } else {
+    checkInput.classList.remove("selected");
+    checkInput.value = 0;
   }
-  document.getElementsByClassName("total-harga")[0].innerHTML = total;
-  document.getElementsByClassName("link-pembayaran")[0].href = link;
 }
 
+function updateTotalHargaBarang(elemen, id, harga) {
+  var selector = "input#produk" + id;
+  document.querySelector(selector).value = elemen.value * harga;
+}
 
+function updatePembayaran() {
+  var totalHargaBarangAll = document.getElementsByClassName("selected");
+  var pembayaran = 0;
 
+  for (var i = 0; i < totalHargaBarangAll.length; i++) {
+    pembayaran += parseInt(totalHargaBarangAll[i].value);
+  }
+
+  document.getElementsByClassName("total-pembayaran")[0].innerHTML = pembayaran;
+}
