@@ -25,21 +25,24 @@ function updateJumlahBarang(input,  stok) {
 }
 
 function pilihProdukDibayar(checkInput, id, harga) {  
+  var totalHargaBarang = document.querySelector("input#total-harga-barang" + id);
+  var jumlahBarang = document.querySelector("input#jumlah" + id);
+  
   // jika checkbox di-checked
   if (checkInput.checked) {
-    checkInput.classList.add("selected");
-    checkInput.value = document.querySelector("input#jumlah"+id).value * harga
+    totalHargaBarang.classList.add("selected");
+    totalHargaBarang.value = jumlahBarang.value * harga;
     
-  // jika checkbox tidak di-checked
+    // jika checkbox tidak di-checked
   } else {
-    checkInput.classList.remove("selected");
-    checkInput.value = 0;
+    totalHargaBarang.classList.remove("selected");
+    totalHargaBarang.value = 0;
   }
 }
 
 function updateTotalHargaBarang(elemen, id, harga) {
-  var selector = "input#produk" + id;
-  document.querySelector(selector).value = elemen.value * harga;
+  var totalHargaBarang = document.querySelector("input#total-harga-barang" + id);
+  totalHargaBarang.value = elemen.value * harga;
 }
 
 function updatePembayaran() {
@@ -51,4 +54,21 @@ function updatePembayaran() {
   }
 
   document.getElementsByClassName("total-pembayaran")[0].innerHTML = pembayaran;
+}
+
+function goToPembayaran() {
+  var selected = document.querySelectorAll("input[type='checkbox']:checked");
+  
+  if (selected.length == 0) {
+    return false;
+  }
+  
+  var link = "pembayaran.php?";
+
+  for (var i=1; i<=selected.length; i++) {
+    link += "id" + i + "=" + selected[i-1].value + "&"
+  }
+
+  document.location.href = link;
+
 }

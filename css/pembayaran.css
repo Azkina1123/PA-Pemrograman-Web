@@ -1,0 +1,9 @@
+.pembayaran nav {
+  background-color: var(--color1);
+}
+
+.pembayaran .main-content section {
+  flex: 1;
+  background-color: blueviolet;
+  
+}

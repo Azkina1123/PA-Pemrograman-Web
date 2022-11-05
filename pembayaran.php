@@ -2,6 +2,8 @@
 
 session_start();
 
+require "config.php";
+
 if (!isset($_SESSION["login"])) {
   echo "<script>
           alert('Harap masuk sebagai user terlebih dahulu!');
@@ -9,11 +11,18 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
+$ids = [];
+
+$products = $db->query(
+  "SELECT * FROM keranjang_user"
+);
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +32,7 @@ if (!isset($_SESSION["login"])) {
 
   <title> Formulir Pembayaran | Green Florist </title>
 </head>
+
 <body>
 
   <div class="page-wrapper user pembayaran">
@@ -30,43 +40,50 @@ if (!isset($_SESSION["login"])) {
       <?php include "nav.php"; ?>
     </header>
 
-    <div class="main-content">
+    <div class="main-content flex">
       <section class="wrapper">
 
-        <form action="" method="POST">
-          <table border="1" cellspacing="0">
-            <tr>
-              <td> Penerima </td>
-              <td> <center>:</center> </td>
-              <td> Nama </td>
-            </tr>
-            <tr>
-              <td> Alamat Penerima </td>
-              <td> <center>:</center> </td>
-              <td> alamat panjang kali lebar </td>
-            </tr>
-            <tr>
-              <td> Produk </td>
-              <td> <center>:</center> </td>
-              <td>
-                <ol>
-                  <li> Ayam Geprek </li>
-                  <li> AHAHAH </li>
-                </ol>
-              </td>
-            </tr>
-          </table>
+        <table border="1" cellspacing="0">
+          <!-- nama pembeli -->
+          <tr>
+            <td> Penerima </td>
+            <td> <center>:</center> </td>
+            <td> Nama </td>
+          </tr>
 
-        </form>
+          <!-- alamat pembeli -->
+          <tr>
+            <td> Alamat Penerima </td>
+            <td> <center>:</center> </td>
+            <td> alamat panjang kali lebar </td>
+          </tr>
+
+          <!-- list produk -->
+          <tr>
+            <td> Produk Dibeli </td>
+            <td> <center>:</center> </td>
+            <td>
+              <?php ?>
+
+            </td>
+          </tr>
+
+        </table>
+
+      </section>
+
+      <section class="wrapper">
+        <h1> Total Pembayaran </h1>
 
       </section>
 
     </div>
 
 
-    
+
     <?php include "footer.php"; ?>
   </div>
-  
+
 </body>
+
 </html>

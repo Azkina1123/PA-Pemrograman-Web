@@ -18,7 +18,8 @@ $products = $db->query(
   "SELECT *
    FROM keranjang_user LEFT JOIN produk
    ON (keranjang_user.id_produk = produk.id)
-   WHERE username='$username'"
+   WHERE username='$username'
+   ORDER BY keranjang_user.waktu DESC"
 );
 
 // hapus produk dari keranjang
@@ -64,14 +65,13 @@ if (isset($_GET["delete"])) {
     <div class="main-content">
 
       <section class="wrapper">
-
         <div class="list-products">
 
           <table border="0" cellspacing="0">
             <tr>
               <th colspan="2"> Produk </th>
               <th width="10%"> Jumlah </th>
-              <th> Delete </th>
+              <th> Hapus </th>
             </tr>
 
             <!-- tampilkan tabel keranjang -->
@@ -85,10 +85,12 @@ if (isset($_GET["delete"])) {
               <tr>
                 <!-- checkbox -->
                 <td>
+
                   <center>
-                    <input type="checkbox" name="selected" id="produk<?= $product["id"]; ?>" class="check-input" onchange="pilihProdukDibayar(this, <?= $id; ?>, <?= $harga; ?>);
+                    <input type="checkbox" id="produk<?= $product["id"]; ?>" class="check-input" value="<?= $id; ?>" onchange="pilihProdukDibayar(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();">
                   </center>
+
                 </td>
 
                 <!-- pilih produk -->
@@ -109,21 +111,15 @@ if (isset($_GET["delete"])) {
                 <td class="barang">
                   <center>
 
-                    <form action="" method="POST">
                     <!-- jumlah produk -->
-                    <input type="number" name="jumlah" id="jumlah<?= $id; ?>" class="form-input jumlah" 
-                    value="<?= $product["jumlah"]; ?>" onwheel="return false;" max="<?= $stok; ?>" min="1"
-                    onkeyup="updateJumlahBarang(this, <?= $stok; ?>);
+                    <input type="number" id="jumlah<?= $id; ?>" class="form-input jumlah" value="<?= $product["jumlah"]; ?>" max="<?= $stok; ?>" min="1" onkeyup="updateJumlahBarang(this, <?= $stok; ?>);
                               updateTotalHargaBarang(this, <?= $id; ?>, <?= $harga; ?>);
-                              updatePembayaran();"
-                    onchange="updateTotalHargaBarang(this, <?= $id; ?>, <?= $harga; ?>);
+                              updatePembayaran();" onchange="updateTotalHargaBarang(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();">
 
                     <!-- total harga produk -->
-                    <input type="number" name="" class="total-harga-barang<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden>
-                    
-                    <input type="submit" value="save" name="simpan_perubahan" hidden>
-                    </form>
+                    <input type="number" id="total-harga-barang<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden>
+
                   </center>
 
                 </td>
@@ -143,7 +139,6 @@ if (isset($_GET["delete"])) {
 
         </div>
 
-
       </section>
 
       <!-- total pembayaran -->
@@ -151,7 +146,9 @@ if (isset($_GET["delete"])) {
 
         <div class="wrapper">
           <p class="object"> Total pembayaran: <br> Rp <span class="total-pembayaran"> 0 </span> </p>
-          <a href="pembayaran.php" class="link-pembayaran"><button class="btn-block object"> Beli Sekarang </button></a>
+          <a href="#" class="link-pembayaran" onclick="goToPembayaran()">
+            <button class="btn-block object" onclick="return false"> Beli Sekarang </button>
+          </a>
         </div>
 
       </section>
@@ -163,6 +160,7 @@ if (isset($_GET["delete"])) {
   </div>
   <script src="js/jquery.js?v=<?= time(); ?>"></script>
   <script src="js/style.js?v=<?= time(); ?>"></script>
+
 
 </body>
 

@@ -368,8 +368,7 @@ input[type="checkbox"] {
   height: 20px;
 }
 
-.btn-block.tambah,
-.btn-block.kurang {
+.btn-block.ok {
   padding: 5px;
 }
 
