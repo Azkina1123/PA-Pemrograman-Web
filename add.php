@@ -43,7 +43,7 @@ if (!isset($_SESSION["login"])) {
                 echo "
                     <script>
                         alert('Data Berhasil Diinput');
-                        document.location.href = 'admin.php';
+                        document.location.href = 'index.php';
                     </script>
                 ";
             }else {
