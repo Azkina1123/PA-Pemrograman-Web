@@ -88,32 +88,35 @@ if (!isset($_SESSION["login"])) {
 
       <section class="wrapper">
 
-        <form action = "" method = "post" enctype = "multipart/form-data">
-          <h1>Input Menu</h1>
-            <hr>
-              <br>
+        <div class="add">
 
-                <label for = "">NAMA TANAMAN</label><br>
-                <input type = "text" name = "nama"><br>
-                <label for = "">JENIS TANAMAN</label><br>
-                <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias
-                <input type = "radio" name = "jenis" value = "Tanaman Buah"> Tanaman Buah
-                <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman <br>
-                <label for = "">HARGA</label><br>
-                <input type = "number" name = "harga"><br>
-                <label for = "">STOK</label><br>
-                <input type = "number" name = "stok"><br>
-                <label for = "">TINGGI</label><br>
-                <input type = "number" name = "tinggi"><br>
-                <label for = "">BERAT</label><br>
-                <input type = "number" name = "berat"><br>
-                <label for = "">DESKRIPSI TANAMAN</label><br>
-                <input type = "text" name = "tinggi"><br>
-                <label for="">GAMBAR MENU</label><br>
-                <input type="file" name = "gambar"><br><br>
+          <form action = "" method = "post" enctype = "multipart/form-data">
+            <h1>Input Menu</h1>
+              <hr>
+                <br>
 
-               <br><input type="submit" name="kirim">
-        </form>
+                  <label for = "">NAMA TANAMAN</label><br>
+                  <input type = "text" name = "nama"><br>
+                  <label for = "">JENIS TANAMAN</label><br>
+                  <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias
+                  <input type = "radio" name = "jenis" value = "Tanaman Buah"> Tanaman Buah
+                  <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman <br>
+                  <label for = "">HARGA</label><br>
+                  <input type = "number" name = "harga"><br>
+                  <label for = "">STOK</label><br>
+                  <input type = "number" name = "stok"><br>
+                  <label for = "">TINGGI</label><br>
+                  <input type = "number" name = "tinggi"><br>
+                  <label for = "">BERAT</label><br>
+                  <input type = "number" name = "berat"><br>
+                  <label for = "">DESKRIPSI TANAMAN</label><br>
+                  <input type = "text" name = "tinggi"><br>
+                  <label for="">GAMBAR MENU</label><br>
+                  <input type="file" name = "gambar"><br><br>
+
+                <br><input type="submit" name="kirim">
+          </form>
+        </div>
 
       </section>
 
