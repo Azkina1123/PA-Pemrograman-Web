@@ -91,7 +91,7 @@ if (!isset($_SESSION["login"])) {
         <div class="add">
 
           <form action = "" method = "post" enctype = "multipart/form-data">
-            <h1>Add Florist</h1>
+            <h1><center>Add Florist</center></h1>
               <hr>
                 <br>
 
