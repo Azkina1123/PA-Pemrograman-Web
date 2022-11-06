@@ -41,15 +41,6 @@ a {
   box-sizing: border-box;
 }
 
-.add {
-    width: 100%;
-}
-
-form {
-    width: 250px;
-    margin: 60px auto;
-}
-
 @media screen and (min-width: 240px) and (max-width:1024px) {
   .wrapper {
     padding: 40px 20px;
@@ -318,11 +309,6 @@ header {
 /* ============================================= */
 /* ----------------- FORM INPUT ---------------- */
 /* ============================================= */
-
-button:hover {
-    text-decoration: none;
-    background: #ff9494;
-}
 
 .btn-transparent {
   padding: 10px 20px;
