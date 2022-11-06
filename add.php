@@ -21,7 +21,7 @@ if (!isset($_SESSION["login"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
 
-  <title> Add Product | Nama Toko </title>
+  <title> Add Product | Green Florist </title>
 </head>
 
 <body>
