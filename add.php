@@ -42,14 +42,14 @@ if (!isset($_SESSION["login"])) {
             if($result){
                 echo "
                     <script>
-                        alert('Data Berhasil Diinput');
+                        alert('Produk Berhasil Ditambahkan');
                         document.location.href = 'index.php';
                     </script>
                 ";
             }else {
                 echo "
                     <script>
-                        alert('Data Gagal Diinput');
+                        alert('Produk Gagal Ditambahkan');
                     </script>
                 ";
             }
