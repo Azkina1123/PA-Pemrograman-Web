@@ -47,7 +47,6 @@ a {
 
 form {
     width: 250px;
-    margin: 60px auto;
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {
