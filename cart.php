@@ -48,34 +48,32 @@ if (isset($_GET["beli"])) {
 
   // ekstrak id dan jumlah dari link
   foreach ($_GET as $nilai) {
-    if ($i==0) {
+    if ($i == 0) {
       $i++;
       continue;
     }
-    
-    if ($i%2 != 0) {
+
+    if ($i % 2 != 0) {
       $ids[] = $nilai;
     }
-    
-    if ($i%2 == 0) {
+
+    if ($i % 2 == 0) {
       $jumlahs[] = $nilai;
     }
-    
-    $i++;
 
+    $i++;
   }
-  
+
   // select produk yg dipilih
-  for ($i=0; $i<count($ids); $i++) {
+  for ($i = 0; $i < count($ids); $i++) {
     $id = $ids[$i];
     $jumlah = $jumlahs[$i];
-  
+
     $result = $db->query(
       "UPDATE keranjang_user
       SET selected=1, jumlah=$jumlah
       WHERE id_produk=$id AND username='$username'"
     );
-  
   }
 
   // pergi ke pembayaran
@@ -115,81 +113,76 @@ if (isset($_GET["beli"])) {
     <div class="main-content">
 
       <section class="wrapper">
-        <div class="list-products">
+        <table border="0" cellspacing="0">
+          <tr>
+            <th colspan="2"> Produk </th>
+            <th width="10%"> Jumlah </th>
+            <th> Hapus </th>
+          </tr>
 
-          <table border="0" cellspacing="0">
+          <!-- tampilkan tabel keranjang -->
+          <?php while ($product = mysqli_fetch_array($products)) {
+            $id = $product["id"];
+            $harga = $product["harga"];
+            $jumlah = $product["jumlah"];
+            $stok = $product["stok"];
+          ?>
+
             <tr>
-              <th colspan="2"> Produk </th>
-              <th width="10%"> Jumlah </th>
-              <th> Hapus </th>
-            </tr>
+              <!-- checkbox -->
+              <td>
 
-            <!-- tampilkan tabel keranjang -->
-            <?php while ($product = mysqli_fetch_array($products)) {
-              $id = $product["id"];
-              $harga = $product["harga"];
-              $jumlah = $product["jumlah"];
-              $stok = $product["stok"];
-            ?>
-
-              <tr>
-                <!-- checkbox -->
-                <td>
-
-                  <center>
-                    <input type="checkbox" id="produk<?= $product["id"]; ?>" class="check-input" value="<?= $id; ?>" onchange="pilihProdukDibayar(this, <?= $id; ?>, <?= $harga; ?>);
+                <center>
+                  <input type="checkbox" id="produk<?= $product["id"]; ?>" class="check-input" value="<?= $id; ?>" onchange="pilihProdukDibayar(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();">
 
-                    <!-- total harga produk -->
-                    <input type="number" id="total-harga-barang<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden class="<?= $product["selected"] == 1 ? "selected" : ""; ?>">
-                  </center>
+                  <!-- total harga produk -->
+                  <input type="number" id="total-harga-barang<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden class="<?= $product["selected"] == 1 ? "selected" : ""; ?>">
+                </center>
 
-                </td>
+              </td>
 
-                <!-- pilih produk -->
-                <td>
-                  <label for="produk<?= $product["id"]; ?>" class="left">
-                    <div class="product img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
+              <!-- pilih produk -->
+              <td>
+                <label for="produk<?= $product["id"]; ?>" class="left">
+                  <div class="product img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
 
-                    <div class="deskripsi">
-                      <a href="product.php?id=<?= $product["id"]; ?>" class="link">
-                        <h3> <?= $product["nama"]; ?> </h3>
-                        <p class="harga"> Rp <?= $product["harga"] ?> </p>
-                      </a>
-                    </div>
-                  </label>
-                </td>
+                  <div class="deskripsi">
+                    <a href="product.php?id=<?= $product["id"]; ?>" class="link">
+                      <h3> <?= $product["nama"]; ?> </h3>
+                      <p class="harga"> Rp <?= $product["harga"] ?> </p>
+                    </a>
+                  </div>
+                </label>
+              </td>
 
-                <!-- ubah jumlah barang -->
-                <td class="barang">
-                  <center>
+              <!-- ubah jumlah barang -->
+              <td class="barang">
+                <center>
 
-                    <!-- jumlah produk -->
-                    <input type="number" id="jumlah<?= $id; ?>" class="form-input jumlah" value="<?= $product["jumlah"]; ?>" max="<?= $stok; ?>" min="1" onkeyup="updateJumlahBarang(this, <?= $stok; ?>);
+                  <!-- jumlah produk -->
+                  <input type="number" id="jumlah<?= $id; ?>" class="form-input jumlah" value="<?= $product["jumlah"]; ?>" max="<?= $stok; ?>" min="1" onkeyup="updateJumlahBarang(this, <?= $stok; ?>);
                               updateTotalHargaBarang(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();" onchange="updateTotalHargaBarang(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();">
 
 
-                  </center>
+                </center>
 
-                </td>
+              </td>
 
-                <!-- hapus dari keranjang -->
-                <td>
-                  <center>
-                    <a href="?delete=1&id=<?= $product["id"]; ?>" class="delete-cart-logo img" name="delete"
-                    onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" ></a>
-                  </center>
-                </td>
+              <!-- hapus dari keranjang -->
+              <td>
+                <center>
+                  <a href="?delete=1&id=<?= $product["id"]; ?>" class="delete-cart-logo img" name="delete" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')"></a>
+                </center>
+              </td>
 
-              </tr>
+            </tr>
 
-            <?php } ?>
+          <?php } ?>
 
-          </table>
-
-        </div>
+        </table>
 
       </section>
 

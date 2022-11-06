@@ -51,15 +51,12 @@ $orders = $db->query(
 
         <table cellspacing="0" border="1">
           <tr>
-            <th> No. </th>
             <th> Tanggal </th>
             <th> Detail Pesanan </th>
             <th> Status </th>
           </tr>
 
-          <?php
-          $no = 1;
-          while ($order = mysqli_fetch_array($orders)) { ?>
+          <?php while ($order = mysqli_fetch_array($orders)) { ?>
 
             <?php
             $id_pesanan = $order["id"];
@@ -75,9 +72,8 @@ $orders = $db->query(
             ?>
 
             <tr>
-              <td> <?= $no++; ?>. </td>
               <td> <?= date("d-m-Y h:i", strtotime($order["tanggal"])) ?> </td>
-              <td>
+              <td class="detail-pesanan flex">
                 <div class="img" style="background-image: url('img/products/<?= $products["gambar"]; ?>');"></div>
                 <div class="deskripsi">
                   <a href="" class="link">

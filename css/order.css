@@ -1,8 +1,7 @@
-
-
 .order table td {
   padding: 5px;
   font-size: 11pt;
+  text-align: left;
 }
 
 .order table a{
@@ -16,25 +15,37 @@
 .order table td:nth-child(1) {
   width: 30px;
 }
-.order table td:nth-child(2) {
+.order table td:nth-child(3) {
   width: 150px;
-}
-.order table td:nth-child(4) {
-  width: 150px;
-  text-align: center;
 }
 
 .order table .img {
   width: 70px;
-  height: 70px;
   margin-right: 10px;
-  float: left;
 }
 
-
 @media screen and (min-width: 240px) and (max-width:1024px) {
+  .order table td {
+    font-size: 10pt;
+  }
+
+  .order table td:nth-child(1) {
+    flex: 0.5;
+    width: 10px;
+  }
+  .order table td:nth-child(3) {
+    width: 80px;
+
+  }
+
+  .order table .img {
+    width: 70px;
+    margin-right: 10px;
+    flex: 1;
+  }
 
   .order table .deskripsi {
+    flex: 2;
     font-size: 10pt;
   }
 
