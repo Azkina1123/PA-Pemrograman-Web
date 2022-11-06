@@ -110,7 +110,7 @@ if (!isset($_SESSION["login"])) {
                   <label for = "">BERAT</label><br>
                   <input type = "number" name = "berat"><br>
                   <label for = "">DESKRIPSI TANAMAN</label><br>
-                  <input type = "text" name = "tinggi"><br>
+                  <input type = "text" name = "deskripsi"><br>
                   <label for="">GAMBAR MENU</label><br>
                   <input type="file" name = "gambar"><br><br>
 
