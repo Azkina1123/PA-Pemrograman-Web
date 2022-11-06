@@ -128,7 +128,7 @@ if (!isset($_SESSION["login"])) {
                   <label for = "">BERAT</label><br>
                   <input type = "float" name = "berat" value=<?=$row['berat']?>><br>
                   <label for = "">DESKRIPSI TANAMAN</label><br>
-                  <input type = "text" name = "deskripsi" value=<?=$row['deskripsi']?>><br>
+                  <textarea name = "deskripsi" value=<?=$row['deskripsi']?>></textarea><br>
                   <label for="">GAMBAR MENU</label><br>
                   <input type = "file" name = "gambar" value=<?=$row['gambar']?>><br>
 
