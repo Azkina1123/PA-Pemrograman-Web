@@ -98,7 +98,7 @@ if (!isset($_SESSION["login"])) {
                 <label for = "">JENIS TANAMAN</label><br>
                 <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias
                 <input type = "radio" name = "jenis" value = "Tanaman Buah"> Tanaman Buah
-                <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman
+                <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman <br>
                 <label for = "">HARGA</label><br>
                 <input type = "number" name = "harga"><br>
                 <label for = "">STOK</label><br>
