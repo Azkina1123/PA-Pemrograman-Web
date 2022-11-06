@@ -4,13 +4,12 @@ session_start();
 
 require "config.php";
 
-
-if (!isset($_SESSION["login"])) {
-  echo "<script>
-  alert('Harap masuk sebagai user/admin terlebih dahulu!');
-  document.location.href = 'sign-in.php?login=User';
-  </script>";
-}
+// if (!isset($_SESSION["login"])) {
+//   echo "<script>
+//   alert('Harap masuk sebagai user/admin terlebih dahulu!');
+//   document.location.href = 'sign-in.php?login=User';
+//   </script>";
+// }
 
 $search = "all";
 if (isset($_GET["search"])) {

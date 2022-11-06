@@ -33,10 +33,10 @@
   background-color: var(--color2-light);
 }
 .cart table tr:nth-child(odd) {
-  background-color: #edededde;
+  background-color: #98baac1f;
 }
 .cart table tr:nth-child(odd):hover {
-  background-color: #a1a1a171
+  background-color: #98baac6f;
 }
 
 .cart table tr td label {
@@ -51,10 +51,12 @@
 .cart .deskripsi {
   padding: 5px 10px;
   box-sizing: border-box;
-  font-size: 10pt;
+  font-size: 11pt;
 }
 
+
 .cart .pembayaran > .wrapper {
+  padding-top: 0;
   justify-content: flex-end;
   align-items: center;
 }
@@ -69,7 +71,6 @@
 .cart .pembayaran .btn-block {
   width: 150px;
 }
-
 
 .cart .delete-cart-logo {
   width: 32px;
@@ -106,6 +107,11 @@
 
   .cart .pembayaran > .wrapper{
     flex-direction: column;
+    align-items: flex-end;
+
+  }
+  .cart .pembayaran > .wrapper > .object{
+    align-self: flex-end;
   }
 
 }

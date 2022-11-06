@@ -138,6 +138,11 @@ nav {
   box-sizing: border-box;
 }
 
+.pembayaran nav,
+.pemberitahuan nav {
+  background-color: var(--color1);
+}
+
 nav .menu {
   
   display: flex;

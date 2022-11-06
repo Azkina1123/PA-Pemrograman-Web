@@ -32,6 +32,56 @@ if (isset($_GET["delete"])) {
   );
 }
 
+// unselect semua produk keranjang
+$result = $db->query(
+  "UPDATE keranjang_user
+  SET selected=0
+  WHERE username='$username'"
+);
+
+
+// jika tekan beli sekarang
+if (isset($_GET["beli"])) {
+  $i = 0;
+  $ids = [];
+  $jumlahs = [];
+
+  // ekstrak id dan jumlah dari link
+  foreach ($_GET as $nilai) {
+    if ($i==0) {
+      $i++;
+      continue;
+    }
+    
+    if ($i%2 != 0) {
+      $ids[] = $nilai;
+    }
+    
+    if ($i%2 == 0) {
+      $jumlahs[] = $nilai;
+    }
+    
+    $i++;
+
+  }
+  
+  // select produk yg dipilih
+  for ($i=0; $i<count($ids); $i++) {
+    $id = $ids[$i];
+    $jumlah = $jumlahs[$i];
+  
+    $result = $db->query(
+      "UPDATE keranjang_user
+      SET selected=1, jumlah=$jumlah
+      WHERE id_produk=$id AND username='$username'"
+    );
+  
+  }
+
+  // pergi ke pembayaran
+  header("Location: pembayaran.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -89,6 +139,9 @@ if (isset($_GET["delete"])) {
                   <center>
                     <input type="checkbox" id="produk<?= $product["id"]; ?>" class="check-input" value="<?= $id; ?>" onchange="pilihProdukDibayar(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();">
+
+                    <!-- total harga produk -->
+                    <input type="number" id="total-harga-barang<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden class="<?= $product["selected"] == 1 ? "selected" : ""; ?>">
                   </center>
 
                 </td>
@@ -100,7 +153,7 @@ if (isset($_GET["delete"])) {
 
                     <div class="deskripsi">
                       <a href="product.php?id=<?= $product["id"]; ?>" class="link">
-                        <p> <b><?= $product["nama"]; ?> </b> </p>
+                        <h3> <?= $product["nama"]; ?> </h3>
                         <p class="harga"> Rp <?= $product["harga"] ?> </p>
                       </a>
                     </div>
@@ -117,8 +170,6 @@ if (isset($_GET["delete"])) {
                               updatePembayaran();" onchange="updateTotalHargaBarang(this, <?= $id; ?>, <?= $harga; ?>);
                               updatePembayaran();">
 
-                    <!-- total harga produk -->
-                    <input type="number" id="total-harga-barang<?= $product["id"]; ?>" value="<?= $product["jumlah"] * $product["harga"]; ?>" hidden>
 
                   </center>
 
@@ -127,7 +178,8 @@ if (isset($_GET["delete"])) {
                 <!-- hapus dari keranjang -->
                 <td>
                   <center>
-                    <a href="?delete=1&id=<?= $product["id"]; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" class="delete-cart-logo img" name="delete"></a>
+                    <a href="?delete=1&id=<?= $product["id"]; ?>" class="delete-cart-logo img" name="delete"
+                    onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?> dari keranjang?')" ></a>
                   </center>
                 </td>
 
@@ -145,7 +197,11 @@ if (isset($_GET["delete"])) {
       <section class="pembayaran">
 
         <div class="wrapper">
-          <p class="object"> Total pembayaran: <br> Rp <span class="total-pembayaran"> 0 </span> </p>
+          <p class="object">
+            Total pembayaran: <br> Rp
+
+            <span class="total-pembayaran"> 0 </span>
+          </p>
           <a href="#" class="link-pembayaran" onclick="goToPembayaran()">
             <button class="btn-block object" onclick="return false"> Beli Sekarang </button>
           </a>
@@ -161,6 +217,10 @@ if (isset($_GET["delete"])) {
   <script src="js/jquery.js?v=<?= time(); ?>"></script>
   <script src="js/style.js?v=<?= time(); ?>"></script>
 
+  <script>
+    $("input:checked + input").addClass("selected");
+    updatePembayaran();
+  </script>
 
 </body>
 

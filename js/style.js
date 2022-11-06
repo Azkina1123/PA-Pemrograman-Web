@@ -46,7 +46,7 @@ function updateTotalHargaBarang(elemen, id, harga) {
 }
 
 function updatePembayaran() {
-  var totalHargaBarangAll = document.getElementsByClassName("selected");
+  var totalHargaBarangAll = document.querySelectorAll(".selected");
   var pembayaran = 0;
 
   for (var i = 0; i < totalHargaBarangAll.length; i++) {
@@ -58,15 +58,17 @@ function updatePembayaran() {
 
 function goToPembayaran() {
   var selected = document.querySelectorAll("input[type='checkbox']:checked");
-  
+
   if (selected.length == 0) {
     return false;
   }
   
-  var link = "pembayaran.php?";
+  var link = "?beli=true";
 
   for (var i=1; i<=selected.length; i++) {
-    link += "id" + i + "=" + selected[i-1].value + "&"
+    var id = selected[i-1].value;
+    var jumlahBarang = document.querySelector("input#jumlah" + id);
+    link += "&id" + i + "=" + id + "&jumlah" + id + "=" + jumlahBarang.value
   }
 
   document.location.href = link;

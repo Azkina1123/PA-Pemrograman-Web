@@ -19,8 +19,8 @@
           </ul>
 
           <ul>
-            <li> <a href="sign-in.php" class="link-hover"> PRODUCTS </a> </li>
-            <li> <a href="sign-in.php" class="link-hover"> CART </a> </li>
+            <li> <a href="products.php" class="link-hover"> PRODUCTS </a> </li>
+            <li> <a href="cart.php" class="link-hover"> CART </a> </li>
             <li> <a href="sign-in.php" class="link-hover"> SIGN IN </a> </li>
           </ul>
 

@@ -1,0 +1,41 @@
+
+
+.order table td {
+  padding: 5px;
+  font-size: 11pt;
+}
+
+.order table a{
+  color: black;
+}
+
+.order table th {
+  padding: 15px;
+}
+
+.order table td:nth-child(1) {
+  width: 30px;
+}
+.order table td:nth-child(2) {
+  width: 150px;
+}
+.order table td:nth-child(4) {
+  width: 150px;
+  text-align: center;
+}
+
+.order table .img {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  float: left;
+}
+
+
+@media screen and (min-width: 240px) and (max-width:1024px) {
+
+  .order table .deskripsi {
+    font-size: 10pt;
+  }
+
+}

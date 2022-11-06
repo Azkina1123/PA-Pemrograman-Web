@@ -6,6 +6,8 @@ if (!$db) {
   die ("Gagal terhubung! ". $db->connect_error);
 }
 
+date_default_timezone_set("Asia/Singapore");
+
 /* ==================== PROSES HALAMAN ==================== */
 
 // daftar akun user baru
@@ -147,8 +149,8 @@ function add_to_cart() {
   global $db;
 
   $username = $_SESSION["username"];
-  $id_produk = $_GET["id"];
-  $jumlah = $_GET["jumlah"];
+  $id_produk = $_POST["id"];
+  $jumlah = $_POST["jumlah"];
   $tanggal = date("Y-m-d h:i:s");
 
   $keranjang = $db->query(
@@ -176,13 +178,51 @@ function add_to_cart() {
           alert('Gagal memasukkan produk ke keranjang!');
         </script>";
         return false;
-      }
+  }
       
   echo "<script>
           alert('Produk berhasil dimasukkan ke keranjang!');
         </script>";
   return true;
 
+}
+
+function order_product($products) {
+  global $db;
+
+  $id_pesanan = get_id_pesanan();
+  $username = $_SESSION["username"];
+  $tanggal = $_POST["tanggal"];
+  $total_pembayaran = $_POST["total_pembayaran"];
+  $status = "Sedang Dikemas";
+
+  // tambah pesanan
+  $result = $db->query(
+    "INSERT INTO pesanan
+     VALUES ('$id_pesanan', '$tanggal', '$username', $total_pembayaran, '$status')"
+  );
+
+  if (!$result) {
+    echo "<script>
+          alert('Transaksi gagal!');
+        </script>";
+    return false;
+  }
+
+  // masukkan ke tabel list produk terbeli utk 1 pesanan
+  foreach ($products as $product) {
+    $id = $product["id_produk"];
+    $jumlah = $product["jumlah"];
+    $harga = $product["harga"];
+
+    $result = $db->query(
+      "INSERT INTO produk_terbeli
+       VALUES ('$id_pesanan', '$id', $jumlah, $harga)"
+    );
+
+  }
+
+  return true;
 }
 
 /* =================== FUNGSI TAMBAHAN ==================== */
@@ -209,7 +249,23 @@ function image_uploaded($value) {
   return $nama;
 }
 
+function get_id_pesanan() {
+  global $db;
 
+  $pesanan = $db->query(
+    "SELECT id FROM pesanan"
+  );
+
+  $banyak_pesanan = mysqli_num_rows($pesanan);
+  $nomor_pesanan = "$banyak_pesanan";
+
+  $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  $sub = 10 - strlen($nomor_pesanan) + 1;
+  $random = substr(str_shuffle($chars), 0, $sub);
+
+  $kode_pesanan = $random . $nomor_pesanan;
+  return $kode_pesanan;
+}
 
 
 ?>

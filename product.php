@@ -19,14 +19,37 @@ $result = $db->query(
   "SELECT * 
   FROM produk LEFT JOIN keranjang_user
   ON (produk.id = keranjang_user.id_produk)
-  WHERE id=$id"
+  WHERE id=$id && username='$username'"
 );
 $product = mysqli_fetch_array($result);
 
 // masukkan produk ke keranjang
-if (isset($_GET["keranjang"]) && add_to_cart()) {
+if (isset($_POST["keranjang"]) && add_to_cart()) {
   echo "<script>
           document.location.href = 'cart.php';
+        </script>";
+}
+
+// unselect semua produk keranjang
+$result = $db->query(
+  "UPDATE keranjang_user
+  SET selected=0
+  WHERE username='$username'"
+);
+
+// beli produk
+if (isset($_POST["beli"])) {
+  $jumlah = $_POST["jumlah"];
+
+  // select produk yg dipilih
+  $result = $db->query(
+    "UPDATE keranjang_user
+    SET selected=1, jumlah=$jumlah
+    WHERE id_produk=$id AND username='$username'"
+  );
+
+  echo "<script>
+          document.location.href = 'pembayaran.php';
         </script>";
 }
 
@@ -101,22 +124,16 @@ if (isset($_GET["keranjang"]) && add_to_cart()) {
             </table>
   
             <div class="btn-container flex">
-              <form action="" method="GET">
-                <button class="btn-block object" name="beli_sekarang"> Beli Sekarang </button>
+              <form action="" method="POST">
+                <button class="btn-block object" name="beli"> Beli Sekarang </button>
                 <button type="submit" class="btn-block object" name="keranjang"> Keranjang </button>
 
-                <input type="text" name="id" value="<?= $id; ?>" hidden>
-                <script>
-                  function jumlahBarang(elemen) {
-                    if (elemen.value == "" || elemen.value == 0) {
-                      elemen.value = 1;
-                    }
-                    elemen.value = (elemen.value > <?= $product["stok"]; ?>) ? <?= $product["stok"]; ?> : elemen.value;
-                  }
-                </script>
                 <input type="number" name="jumlah" class="form-input jumlah object"
                 value="<?= isset($product["jumlah"]) ? $product["jumlah"] : 1 ?>" 
-                onkeyup="jumlahBarang(this)" min="1" max="<?= $product["stok"]; ?>">
+                onkeyup="updateJumlahBarang(this)" min="1" max="<?= $product["stok"]; ?>">
+                
+                <!-- hidden -->
+                <input type="text" name="id" value="<?= $id; ?>" hidden>
               </form>
             </div>
             
