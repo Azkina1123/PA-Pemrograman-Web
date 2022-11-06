@@ -88,36 +88,32 @@ if (!isset($_SESSION["login"])) {
 
       <section class="wrapper">
 
-        <div class="add">
+        <form action = "" method = "post" enctype = "multipart/form-data">
+          <h1><center>Add Product</center></h1>
+            <hr>
+              <br>
 
-          <form action = "" method = "post" enctype = "multipart/form-data">
-            <h1><center>Add Product</center></h1>
-              <hr>
-                <br>
+                <label for = "">NAMA TANAMAN</label><br>
+                <input type = "text" name = "nama"><br>
+                <label for = "">JENIS TANAMAN</label><br>
+                <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias
+                <input type = "radio" name = "jenis" value = "Tanaman Buah"> Tanaman Buah
+                <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman <br>
+                <label for = "">HARGA</label><br>
+                <input type = "number" name = "harga"><br>
+                <label for = "">STOK</label><br>
+                <input type = "number" name = "stok"><br>
+                <label for = "">TINGGI</label><br>
+                <input type = "float" name = "tinggi"><br>
+                <label for = "">BERAT</label><br>
+                <input type = "float" name = "berat"><br>
+                <label for = "">DESKRIPSI TANAMAN</label><br>
+                <input type = "text" name = "deskripsi"><br>
+                <label for="">GAMBAR MENU</label><br>
+                <input type="file" name = "gambar"><br><br>
 
-                  <label for = "">NAMA TANAMAN</label><br>
-                  <input type = "text" name = "nama"><br>
-                  <label for = "">JENIS TANAMAN</label><br>
-                  <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias
-                  <input type = "radio" name = "jenis" value = "Tanaman Buah"> Tanaman Buah
-                  <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman <br>
-                  <label for = "">HARGA</label><br>
-                  <input type = "number" name = "harga"><br>
-                  <label for = "">STOK</label><br>
-                  <input type = "number" name = "stok"><br>
-                  <label for = "">TINGGI</label><br>
-                  <input type = "float" name = "tinggi"><br>
-                  <label for = "">BERAT</label><br>
-                  <input type = "float" name = "berat"><br>
-                  <label for = "">DESKRIPSI TANAMAN</label><br>
-                  <input type = "text" name = "deskripsi"><br>
-                  <label for="">GAMBAR MENU</label><br>
-                  <input type="file" name = "gambar"><br><br>
-
-                <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
-          </form>
-        </div>
-
+              <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
+        </form>
       </section>
 
     </div>
