@@ -114,7 +114,7 @@ if (!isset($_SESSION["login"])) {
                   <label for="">GAMBAR MENU</label><br>
                   <input type="file" name = "gambar"><br><br>
 
-                <br><button a class = "links" name = "kirim" href = "">Submit<br></button>
+                <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
           </form>
         </div>
 
