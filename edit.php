@@ -47,7 +47,7 @@ if (!isset($_SESSION["login"])) {
 
         if(move_uploaded_file($tmp, "gambar/".$gambar_baru))
         {
-            $query =    "UPDATE menu_cupcakes SET 
+            $query =    "UPDATE produk SET 
                             nama='$nama',
                             jenis='$jenis',
                             harga='$harga', 
@@ -120,9 +120,9 @@ if (!isset($_SESSION["login"])) {
                   <label for = "">NAMA TANAMAN</label><br>
                   <input type = "text" name = "nama" value=<?=$row['nama']?>><br>
                   <label for = "">JENIS TANAMAN</label><br>
-                  <input type = "radio" name = "jenis" value=<?=$row['Tanaman Hias']?>>Tanaman Hias<br>
-                  <input type = "radio" name = "jenis" value=<?=$row['Tanaman Buah']?>>Tanaman Buah<br>
-                  <input type = "radio" name = "jenis" value=<?=$row['Benih Tanaman']?>>Benih Tanaman<br>
+                  <input type = "radio" name = "jenis" value="Tanaman Hias"<?=$row['jenis']?>> Tanaman Hias
+                  <input type = "radio" name = "jenis" value="Tanaman Buah"<?=$row['jenis']?>> Tanaman Buah
+                  <input type = "radio" name = "jenis" value="Benih Tanaman"<?=$row['jenis']?>> Benih Tanaman<br>
                   <label for = "">HARGA</label><br>
                   <input type = "number" name = "harga" value=<?=$row['harga']?>><br>
                   <label for = "">STOK</label><br>
