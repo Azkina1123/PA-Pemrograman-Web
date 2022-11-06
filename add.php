@@ -95,21 +95,21 @@ if (!isset($_SESSION["login"])) {
 
                 <label for = "">NAMA TANAMAN</label><br>
                 <input type = "text" name = "nama"><br>
-                <label for = "">JENIS TANAMAN</label>
+                <label for = "">JENIS TANAMAN</label><br>
                 <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias <br>
                 <input type = "radio" name = "jenis" value = "Tanaman Buah"> Tanaman Buah <br>
                 <input type = "radio" name = "jenis" value = "Benih Tanaman"> Benih Tanaman <br>
-                <label for = "">HARGA</label>
+                <label for = "">HARGA</label><br>
                 <input type = "number" name = "harga"><br>
-                <label for = "">STOK</label>
+                <label for = "">STOK</label><br>
                 <input type = "number" name = "stok"><br>
-                <label for = "">TINGGI</label>
+                <label for = "">TINGGI</label><br>
                 <input type = "number" name = "tinggi"><br>
-                <label for = "">BERAT</label>
+                <label for = "">BERAT</label><br>
                 <input type = "number" name = "berat"><br>
-                <label for = "">DESKRIPSI TANAMAN</label>
+                <label for = "">DESKRIPSI TANAMAN</label><br>
                 <input type = "text" name = "tinggi"><br>
-                <label for="">GAMBAR MENU</label>
+                <label for="">GAMBAR MENU</label><br>
                 <input type="file" name = "gambar"><br><br>
 
                <br><input type="submit" name="kirim">
