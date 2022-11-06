@@ -89,7 +89,7 @@ if (!isset($_SESSION["login"])) {
       <section class="wrapper">
 
         <form action = "" method = "post" enctype = "multipart/form-data">
-          
+
           <h1><center>Add Product</center></h1>
             <hr>
               <br>
@@ -109,7 +109,7 @@ if (!isset($_SESSION["login"])) {
                 <label for = "">BERAT</label><br>
                 <input type = "float" name = "berat"><br>
                 <label for = "">DESKRIPSI TANAMAN</label><br>
-                <input type = "text" name = "deskripsi"><br>
+                <textarea name = "deskripsi"></textarea><br>
                 <label for="">GAMBAR MENU</label><br>
                 <input type="file" name = "gambar"><br><br>
 
