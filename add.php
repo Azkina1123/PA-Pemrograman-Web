@@ -106,9 +106,9 @@ if (!isset($_SESSION["login"])) {
                   <label for = "">STOK</label><br>
                   <input type = "number" name = "stok"><br>
                   <label for = "">TINGGI</label><br>
-                  <input type = "number" name = "tinggi"><br>
+                  <input type = "float" name = "tinggi"><br>
                   <label for = "">BERAT</label><br>
-                  <input type = "number" name = "berat"><br>
+                  <input type = "float" name = "berat"><br>
                   <label for = "">DESKRIPSI TANAMAN</label><br>
                   <input type = "text" name = "deskripsi"><br>
                   <label for="">GAMBAR MENU</label><br>
