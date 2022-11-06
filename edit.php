@@ -11,6 +11,73 @@ if (!isset($_SESSION["login"])) {
 
 ?>
 
+<?php
+
+    date_default_timezone_set("Asia/Singapore");
+
+    require 'config.php';
+
+    // Menangkap id dari url yang dikirimkan
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+    }
+
+    // Tampilkan value inputan dari id
+    $result = mysqli_query($db, 
+        "SELECT * FROM produk WHERE id='$id'");
+    $row = mysqli_fetch_array($result);
+
+    if(isset($_POST['kirim']))
+    {
+        $nama = $_POST['nama'];
+        $jenis = $_POST['jenis'];
+        $harga = $_POST['harga'];
+        $stok = $_POST['stok'];
+        $tinggi = $_POST['tinggi'];
+        $berat = $_POST['berat'];
+        $deskripsi = $_POST['deskripsi'];
+        
+        $gambar = $_FILES['gambar']['name'];
+        $x = explode('.', $gambar);
+        
+        $ekstensi = strtolower(end($x));
+        $gambar_baru = "$nama.$ekstensi";
+
+        $tmp = $_FILES['gambar']['tmp_name'];
+
+        if(move_uploaded_file($tmp, "gambar/".$gambar_baru))
+        {
+            $query =    "UPDATE menu_cupcakes SET 
+                            nama='$nama',
+                            jenis='$jenis',
+                            harga='$harga', 
+                            stok='$stok', 
+                            tinggi='$tinggi',
+                            berat='$berat',
+                            deskripsi='$deskripsi',
+                            gambar='$gambar_baru'
+                        WHERE id='$id'";
+            $result = $db->query($query);
+    
+            if($result)
+            {
+                echo "
+                    <script>
+                        alert('Data Berhasil Diperbarui');
+                        document.location.href = 'index.php';
+                    </script>
+                ";
+            }else
+            {
+                echo "
+                    <script>
+                        alert('Data Gagal Diperbarui');
+                    </script>
+                ";
+            }
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +89,7 @@ if (!isset($_SESSION["login"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
 
-  <title> Edit Product | Nama Toko </title>
+  <title> Edit Product | Green Florist </title>
 </head>
 
 <body>
@@ -43,9 +110,39 @@ if (!isset($_SESSION["login"])) {
 
       <section class="wrapper">
 
+        <div class="add">
 
-        ISI DI SINI FORMNYA
+          <form action = "" method = "post" enctype = "multipart/form-data">
+            <h1><center>Edit Product</center></h1>
+              <hr>
+                <br>
 
+                  <label for = "">NAMA TANAMAN</label><br>
+                  <input type = "text" name = "nama" value=<?=$row['nama']?>><br>
+                  <label for = "">JENIS TANAMAN</label><br>
+                  <input type = "radio" name = "jenis" value=<?=$row['Tanaman Hias']?>>Tanaman Hias<br>
+                  <input type = "radio" name = "jenis" value=<?=$row['Tanaman Buah']?>>Tanaman Buah<br>
+                  <input type = "radio" name = "jenis" value=<?=$row['Benih Tanaman']?>>Benih Tanaman<br>
+                  <label for = "">HARGA</label><br>
+                  <input type = "number" name = "harga" value=<?=$row['harga']?>><br>
+                  <label for = "">STOK</label><br>
+                  <input type = "number" name = "stok" value=<?=$row['stok']?>><br>
+                  <label for = "">TINGGI</label><br>
+                  <input type = "float" name = "tinggi" value=<?=$row['tinggi']?>><br>
+                  <label for = "">BERAT</label><br>
+                  <input type = "float" name = "berat" value=<?=$row['berat']?>><br>
+                  <label for = "">DESKRIPSI TANAMAN</label><br>
+                  <input type = "text" name = "deskripsi" value=<?=$row['deskripsi']?>><br>
+                  <label for="">GAMBAR MENU</label><br>
+                  <input type = "file" name = "gambar" value=<?=$row['gambar']?>><br>
+
+                <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
+          </form>
+        </div>
+
+      </section>
+
+    </div>
 
       </section>
 
