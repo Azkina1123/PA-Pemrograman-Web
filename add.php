@@ -89,6 +89,7 @@ if (!isset($_SESSION["login"])) {
       <section class="wrapper">
 
         <form action = "" method = "post" enctype = "multipart/form-data">
+          
           <h1><center>Add Product</center></h1>
             <hr>
               <br>
@@ -113,7 +114,9 @@ if (!isset($_SESSION["login"])) {
                 <input type="file" name = "gambar"><br><br>
 
               <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
+
         </form>
+
       </section>
 
     </div>
