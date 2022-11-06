@@ -91,7 +91,7 @@ if (!isset($_SESSION["login"])) {
         <div class="add">
 
           <form action = "" method = "post" enctype = "multipart/form-data">
-            <h1>Input Menu</h1>
+            <h1>Add Florist</h1>
               <hr>
                 <br>
 
@@ -114,7 +114,7 @@ if (!isset($_SESSION["login"])) {
                   <label for="">GAMBAR MENU</label><br>
                   <input type="file" name = "gambar"><br><br>
 
-                <br><input type="submit" name="kirim">
+                <br><button a class = "links" name = "kirim" href = "">Submit<br></button>
           </form>
         </div>
 
