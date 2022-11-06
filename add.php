@@ -93,7 +93,7 @@ if (!isset($_SESSION["login"])) {
             <hr>
               <br>
 
-                <label for = "">NAMA TANAMAN</label>
+                <label for = "">NAMA TANAMAN</label><br>
                 <input type = "text" name = "nama"><br>
                 <label for = "">JENIS TANAMAN</label>
                 <input type = "radio" name = "jenis" value = "Tanaman Hias"> Tanaman Hias <br>
