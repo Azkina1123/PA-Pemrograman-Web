@@ -319,6 +319,54 @@ header {
 /* ----------------- FORM INPUT ---------------- */
 /* ============================================= */
 
+.add {
+    width: 100%;
+}
+
+form label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px;
+    color: #333333;
+}
+
+input {
+    width: 100%;
+    margin: 2px;
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+button {
+    text-decoration: none;
+    font-family: 'Releway', sans-serif;
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 252px;
+    color: #ffff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    background: #333333;
+}
+
+.links{
+    transition: all .3s ease;
+    text-decoration: none;
+    color:#ffff;
+}
+
+button:hover {
+    text-decoration: none;
+    background: #ff9494;
+}
+
 .btn-transparent {
   padding: 10px 20px;
   border: 3px solid white;
