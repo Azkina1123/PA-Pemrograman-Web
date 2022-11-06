@@ -13,16 +13,12 @@ if (!isset($_SESSION["login"])) {
 
 <?php
 
-    date_default_timezone_set("Asia/Singapore");
-
     require 'config.php';
 
-    // Menangkap id dari url yang dikirimkan
     if(isset($_GET['id'])){
         $id = $_GET['id'];
     }
 
-    // Tampilkan value inputan dari id
     $result = mysqli_query($db, 
         "SELECT * FROM produk WHERE id='$id'");
     $row = mysqli_fetch_array($result);
@@ -63,7 +59,7 @@ if (!isset($_SESSION["login"])) {
             {
                 echo "
                     <script>
-                        alert('Data Berhasil Diperbarui');
+                        alert('Produk Berhasil Diperbarui');
                         document.location.href = 'index.php';
                     </script>
                 ";
@@ -71,7 +67,7 @@ if (!isset($_SESSION["login"])) {
             {
                 echo "
                     <script>
-                        alert('Data Gagal Diperbarui');
+                        alert('Produk Gagal Diperbarui');
                     </script>
                 ";
             }
