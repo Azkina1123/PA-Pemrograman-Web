@@ -9,10 +9,59 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
-if(isset($_GET['id'])){
-  $id = $_GET['id'];
-}
+?>
 
+<?php
+
+    require 'config.php';
+
+    if(isset($_GET['id'])){
+      $id = $_GET['id'];
+    }
+
+    $result = mysqli_query($db, 
+        "SELECT * FROM users WHERE id='$id'");
+    $row = mysqli_fetch_array($result);
+
+    if(isset($_POST['submit']))
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $telepon = $_POST['telepon'];
+        $alamat = $_POST['alamat'];
+        
+        $gambar = $_FILES['gambar']['name'];
+        $x = explode('.', $gambar);
+        
+        $ekstensi = strtolower(end($x));
+        $gambar_baru = "$username.$ekstensi";
+
+        $tmp = $_FILES['gambar']['tmp_name'];
+
+        if(move_uploaded_file($tmp, "gambar/".$gambar_baru))
+        {
+          $query = "INSERT INTO users(username, password, telepon, alamat, gambar) 
+                    VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar_baru')";
+          $result = $db->query($query);
+
+          if($result)
+          {
+              echo "
+                  <script>
+                      alert('Profile Berhasil Diperbarui');
+                      document.location.href = 'index.php';
+                  </script>
+              ";
+          }else
+          {
+              echo "
+                  <script>
+                      alert('Profile Gagal Diperbarui');
+                  </script>
+              ";
+          }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +74,7 @@ if(isset($_GET['id'])){
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
 
-  <title> Profile | Nama Toko </title>
+  <title> Profile | Green Florist </title>
 </head>
 
 <body>
@@ -90,6 +139,7 @@ if(isset($_GET['id'])){
               <!-- submit -->
               <tr>
                 <td colspan="3"> <input type="submit" value="Update Profile" name="sign_up" class="btn-block"> </td>
+                <td colspan="3"> <input type="submit" value="Hapus Profile" name="sign_up" class="btn-block"> </td>
               </tr>
 
             </table>

@@ -14,7 +14,7 @@ session_start();
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
 
-  <title> About | Nama Toko </title>
+  <title> About | Green Florist </title>
 </head>
 
 <body>
