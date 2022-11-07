@@ -17,11 +17,11 @@ if (!isset($_SESSION["login"])) {
 
     if(isset($_GET['id'])){
       $id = $_GET['id'];
-    }
 
     $result = mysqli_query($db, 
         "SELECT * FROM users WHERE id='$id'");
     $row = mysqli_fetch_array($result);
+    }
 
     if(isset($_POST['submit']))
     {
