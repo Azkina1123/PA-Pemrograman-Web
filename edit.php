@@ -2,6 +2,8 @@
 
 session_start();
 
+require "config.php";
+
 if (!isset($_SESSION["login"])) {
   echo "<script>
           alert('Harap masuk sebagai admin terlebih dahulu!');
@@ -9,15 +11,7 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
-?>
-
-<?php
-
-require 'config.php';
-
-if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-}
+$id = $_GET['id'];
 
 $result = mysqli_query(
   $db,
@@ -25,6 +19,7 @@ $result = mysqli_query(
 );
 $row = mysqli_fetch_array($result);
 
+// jika sudah mengedit
 if (isset($_POST['kirim'])) {
   $nama = $_POST['nama'];
   $jenis = $_POST['jenis'];
@@ -33,43 +28,54 @@ if (isset($_POST['kirim'])) {
   $tinggi = $_POST['tinggi'];
   $berat = $_POST['berat'];
   $deskripsi = $_POST['deskripsi'];
+  $gambar = $_POST["gambar_lama"];
 
-  $gambar = $_FILES['gambar']['name'];
-  $x = explode('.', $gambar);
+  // jika mengupload gambar baru
+  if ($_FILES["gambar"]["error"] !== 4) {
 
-  $ekstensi = strtolower(end($x));
-  $gambar_baru = "$nama.$ekstensi";
+    // hapus gambar lama
+    unlink("img/products/$gambar");
 
-  $tmp = $_FILES['gambar']['tmp_name'];
+    // ambil ekstensi
+    $gambar = $_FILES["gambar"]["name"];
+    $x = explode('.', $gambar);
+    $ekstensi = strtolower(end($x));
 
-  if (move_uploaded_file($tmp, "gambar/" . $gambar_baru)) {
-    $query =    "UPDATE produk SET 
-                            nama='$nama',
-                            jenis='$jenis',
-                            harga='$harga', 
-                            stok='$stok', 
-                            tinggi='$tinggi',
-                            berat='$berat',
-                            deskripsi='$deskripsi',
-                            gambar='$gambar_baru'
-                        WHERE id='$id'";
-    $result = $db->query($query);
-
-    if ($result) {
-      echo "
-                    <script>
-                        alert('Produk Berhasil Diperbarui');
-                        document.location.href = 'index.php';
-                    </script>
-                ";
-    } else {
-      echo "
-                    <script>
-                        alert('Produk Gagal Diperbarui');
-                    </script>
-                ";
-    }
+    // buat nama file
+    $gambar = "product-$id.$ekstensi";
+    
+    // pindahkan ke direktori img/products
+    $tmp = $_FILES['gambar']['tmp_name'];
+    move_uploaded_file($tmp, "img/products/" . $gambar);
   }
+
+  // update database
+  $query =    "UPDATE produk SET 
+                      nama='$nama',
+                      jenis='$jenis',
+                      harga='$harga', 
+                      stok='$stok', 
+                      tinggi='$tinggi',
+                      berat='$berat',
+                      deskripsi='$deskripsi',
+                      gambar='$gambar_baru'
+                WHERE id='$id'";
+  $result = $db->query($query);
+
+  // jika berhasil update
+  if ($result) {
+    echo "<script>
+              alert('Produk Berhasil Diperbarui');
+              document.location.href = 'products.php?mode=edit';
+          </script>";
+  
+  // jika gagal update
+  } else {
+      echo "<script>
+                alert('Produk Gagal Diperbarui');
+            </script>";
+  }
+
 }
 ?>
 
@@ -141,9 +147,10 @@ if (isset($_POST['kirim'])) {
 
             <label for="">DESKRIPSI TANAMAN</label><br>
             <textarea name="deskripsi" ><?= $row['deskripsi'] ?></textarea><br>
-            <label for="">GAMBAR MENU</label><br>
-            <input type="file" name="gambar" value=<?= $row['gambar'] ?>><br>
 
+            <label for="">GAMBAR MENU</label><br>
+            <input type="file" name="gambar"><br>
+            <input type="text" name="gambar_lama" value="<?= $row["gambar"]; ?>" hidden>
             <br>
             <center><button a class="links" name="kirim" href="">Submit<br></button></center>
           </form>

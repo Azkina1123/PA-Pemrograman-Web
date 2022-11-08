@@ -37,7 +37,7 @@ if (isset($_POST['kirim'])) {
     // buat nama file
     $gambar = "product-$id_baru.$ekstensi"; // agar tidak ada nama file yang sama
     
-    // pindahkan ke direktori img
+    // pindahkan ke direktori img/products
     $tmp = $_FILES['gambar']['tmp_name'];
     move_uploaded_file($tmp, "img/products/".$gambar);
   

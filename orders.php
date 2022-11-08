@@ -74,7 +74,7 @@ if (isset($_POST["submit"])) {
       <?php require "nav.php"; ?>
 
       <div class="banner mini center">
-        <h1> ORDER </h1>
+        <h1> ORDERS </h1>
       </div>
     </header>
 
