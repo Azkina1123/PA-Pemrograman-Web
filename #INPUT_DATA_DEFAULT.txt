@@ -1,6 +1,45 @@
-INSERT INTO keranjang_user VALUES ('2022-11-01 14:58', 8, 1, 12);
-INSERT INTO keranjang_user VALUES ('2022-11-01 15:58', 8, 3, 2);
-INSERT INTO keranjang_user VALUES ('2022-11-01 15:18', 8, 4, 1);
-INSERT INTO keranjang_user VALUES ('2022-11-01 15:20', 8, 2, 9);
-INSERT INTO keranjang_user VALUES ('2022-11-01 15:32', 8, 5, 3);
-INSERT INTO keranjang_user VALUES ('2022-11-01 16:00', 8, 16, 2);
+============= RESET DATABASE =============
+DELETE FROM keranjang_user;
+DELETE FROM pesanan;
+DELETE FROM produk;
+DELETE FROM produk_terbeli;
+DELETE FROM users;
+
+============= INPUT PRODUK =============
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (1, "2022-11-06", "Bibit Mangga Manalagi", "tanaman buah", 15000, 32, 1, 8.4, "Bibit mangga jenis manalagi berkualitas tinggi. Sudah terjamin akan menghasilkan buah mangga manis.", "1.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (2, "2022-11-06", "Benih Cabe Rawit", "benih tanaman", 5500, 51, 0, 0.3, "Benih cabe rawit yang menghasilkan cabe pedas. Memerlukan perawatan yang teratur agar dapat tumbuh dengan baik.", "2.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (3, "2022-11-06", "Benih Bayam Unggul Benua", "benih tanaman", 36000, 22, 0, 0.5, "Bentuk daun bulat dengan warna hijau muda. Tidak mudah keluar bunga. Dapat dipanen pada umur 25 hari setelah tanam.", "3.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (4, "2022-11-07", "Bibit Tanaman Anggrek", "tanaman hias", 13500, 12, 0.7, 0.2, "Bibit anggrek asli dendrobium yang berkualitas. Perawatan cukup mudah.", "4.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (5, "2022-11-07", "Bibit Tanaman Alpukat", "tanaman buah", 30000, 28, 1.2, 0.5, "Bibit merupakan hasil okulasi. Dijamin bibit super unggul.", "5.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (6, "2022-11-07", "Bibit Tanaman Pisang", "tanaman buah", 32000, 24, 0.5, 1.5, "Bibit tanaman pisang raja asli. Cepat tumbuh bila dirawat dengan teratur. Perawatan tidak sulit. Pastikan terkena sinar matahari.", "6.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (7, "2022-11-07", "Lumut Ambon", "tanaman hias", 20000, 30, 0.4, 0.2, "Tanaman hias lumut ambon. Cocok sebagai tanaman indoor maupun outdoor. Tidak perlu perawatan yang ketat.", "7.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (8, "2022-11-07", "Flumosa Cluster", "tanaman hias", 200000, 54, 0.12, 0.8, "Tanaman cocok di media pot dan memiliki bentuk unik berwarna putih. Sangat cocok di tempat panas.", "8.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (9, "2022-11-08", "Benih Buah Naga", "benih tanaman", 15000, 45, 0.4, 0.2, "Benih tanaman buah naga yang dijamin menghasilkan buah naga berkualitas tinggi.", "9.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (10, "2022-11-08", "Bibit Jambu Kristal", "tanaman buah", 73900, 31, 0.5, 3, "Bibit hasil cangkok dan sebagian okulasi. Produksi buah dalam sekali berbuah dapat menghasilkan 15-30 buah.", "10.png");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (11, "2022-11-08", "Benih Jagung BISI 18 Hibrida", "benih tanaman", 115000, 29, 0, 1, "Benih jagung kemasan BISI 18 Hibrida Cap Kapal Terbang asli. Lebih murah dari toko lainnya.", "11.jpg");
+
+INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
+VALUES (12, "2022-11-08", "Lili Varighata", "tanaman hias", 2500, 36, 0.2, 0.2, "Tanaman hias ini bisa untuk hiasan di aquarium karena bisa di tanam di air. Cocok untuk tanaman indoor.", "12.jpg");
+
+============= INPUT USER =============

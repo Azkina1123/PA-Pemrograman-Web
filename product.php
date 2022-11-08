@@ -101,17 +101,17 @@ if (isset($_POST["beli"])) {
               <tr>
                 <td> Harga </td>
                 <td> <center>:</center> </td>
-                <td> <?= $product["harga"] ?> </td>
+                <td> Rp <?= $product["harga"] ?> </td>
               </tr>
               <tr>
                 <td> Tinggi </td>
                 <td> <center>:</center> </td>
-                <td> <?= $product["tinggi"] ?> </td>
+                <td> <?= $product["tinggi"] ?> m </td>
               </tr>
               <tr>
                 <td> Berat </td>
                 <td> <center>:</center> </td>
-                <td> <?= $product["berat"] ?> </td>
+                <td> <?= $product["berat"] ?> kg </td>
               </tr>
               <tr>
                 <td> Deskripsi </td>
