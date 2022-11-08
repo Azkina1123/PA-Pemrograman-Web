@@ -13,37 +13,37 @@ if (!isset($_SESSION["login"])) {
 
 <?php
 
-    require 'config.php';
+require 'config.php';
 
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-    }
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+}
 
-    $result = mysqli_query($db, 
-        "SELECT * FROM produk WHERE id='$id'");
-    $row = mysqli_fetch_array($result);
+$result = mysqli_query(
+  $db,
+  "SELECT * FROM produk WHERE id='$id'"
+);
+$row = mysqli_fetch_array($result);
 
-    if(isset($_POST['kirim']))
-    {
-        $nama = $_POST['nama'];
-        $jenis = $_POST['jenis'];
-        $harga = $_POST['harga'];
-        $stok = $_POST['stok'];
-        $tinggi = $_POST['tinggi'];
-        $berat = $_POST['berat'];
-        $deskripsi = $_POST['deskripsi'];
-        
-        $gambar = $_FILES['gambar']['name'];
-        $x = explode('.', $gambar);
-        
-        $ekstensi = strtolower(end($x));
-        $gambar_baru = "$nama.$ekstensi";
+if (isset($_POST['kirim'])) {
+  $nama = $_POST['nama'];
+  $jenis = $_POST['jenis'];
+  $harga = $_POST['harga'];
+  $stok = $_POST['stok'];
+  $tinggi = $_POST['tinggi'];
+  $berat = $_POST['berat'];
+  $deskripsi = $_POST['deskripsi'];
 
-        $tmp = $_FILES['gambar']['tmp_name'];
+  $gambar = $_FILES['gambar']['name'];
+  $x = explode('.', $gambar);
 
-        if(move_uploaded_file($tmp, "gambar/".$gambar_baru))
-        {
-            $query =    "UPDATE produk SET 
+  $ekstensi = strtolower(end($x));
+  $gambar_baru = "$nama.$ekstensi";
+
+  $tmp = $_FILES['gambar']['tmp_name'];
+
+  if (move_uploaded_file($tmp, "gambar/" . $gambar_baru)) {
+    $query =    "UPDATE produk SET 
                             nama='$nama',
                             jenis='$jenis',
                             harga='$harga', 
@@ -53,26 +53,24 @@ if (!isset($_SESSION["login"])) {
                             deskripsi='$deskripsi',
                             gambar='$gambar_baru'
                         WHERE id='$id'";
-            $result = $db->query($query);
-    
-            if($result)
-            {
-                echo "
+    $result = $db->query($query);
+
+    if ($result) {
+      echo "
                     <script>
                         alert('Produk Berhasil Diperbarui');
                         document.location.href = 'index.php';
                     </script>
                 ";
-            }else
-            {
-                echo "
+    } else {
+      echo "
                     <script>
                         alert('Produk Gagal Diperbarui');
                     </script>
                 ";
-            }
-        }
     }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -108,31 +106,45 @@ if (!isset($_SESSION["login"])) {
 
         <div class="add">
 
-          <form action = "" method = "post" enctype = "multipart/form-data">
-            <h1><center>Edit Product</center></h1>
-              <hr>
-                <br>
+          <form action="" method="post" enctype="multipart/form-data">
+            <h1>
+              <center>Edit Product</center>
+            </h1>
+            <hr>
+            <br>
 
-                  <label for = "">NAMA TANAMAN</label><br>
-                  <input type = "text" name = "nama" value=<?=$row['nama']?>><br>
-                  <label for = "">JENIS TANAMAN</label><br>
-                  <input type = "radio" name = "jenis" value="Tanaman Hias"<?=$row['jenis']?>> Tanaman Hias
-                  <input type = "radio" name = "jenis" value="Tanaman Buah"<?=$row['jenis']?>> Tanaman Buah
-                  <input type = "radio" name = "jenis" value="Benih Tanaman"<?=$row['jenis']?>> Benih Tanaman<br>
-                  <label for = "">HARGA</label><br>
-                  <input type = "number" name = "harga" value=<?=$row['harga']?>><br>
-                  <label for = "">STOK</label><br>
-                  <input type = "number" name = "stok" value=<?=$row['stok']?>><br>
-                  <label for = "">TINGGI</label><br>
-                  <input type = "float" name = "tinggi" value=<?=$row['tinggi']?>><br>
-                  <label for = "">BERAT</label><br>
-                  <input type = "float" name = "berat" value=<?=$row['berat']?>><br>
-                  <label for = "">DESKRIPSI TANAMAN</label><br>
-                  <textarea name = "deskripsi" value=<?=$row['deskripsi']?>></textarea><br>
-                  <label for="">GAMBAR MENU</label><br>
-                  <input type = "file" name = "gambar" value=<?=$row['gambar']?>><br>
+            <label for="">NAMA TANAMAN</label><br>
+            <input type="text" name="nama" value="<?= $row["nama"]; ?>"><br>
 
-                <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
+            <label for="">JENIS TANAMAN</label><br>
+            <input type="radio" name="jenis" value="tanaman hias" 
+            <?= $row['jenis'] == "tanaman hias" ? "checked" : "" ?> id="tanama-hias">
+            <label for="tanaman-hias"> Tanaman Hias </label> <br>
+
+            <input type="radio" name="jenis" value="tanaman buah" 
+            <?= $row['jenis'] == "tanaman buah" ? "checked" : "" ?>> 
+            <label for="tanaman-hias"> Tanaman Buah </label> <br>
+
+            <input type="radio" name="jenis" value="benih tanaman" 
+            <?= $row['jenis'] == "benih tanaman" ? "checked" : "" ?>> 
+            <label for="tanaman-hias"> Tanaman Buah </label> <br>
+            
+            <label for="">HARGA</label><br>
+            
+            <input type="number" name="harga" value=<?= $row['harga'] ?>><br>
+            <label for="">STOK</label><br>
+            <input type="number" name="stok" value=<?= $row['stok'] ?>><br>
+            <label for="">TINGGI</label><br>
+            <input type="float" name="tinggi" value=<?= $row['tinggi'] ?>><br>
+            <label for="">BERAT</label><br>
+            <input type="float" name="berat" value=<?= $row['berat'] ?>><br>
+            <label for="">DESKRIPSI TANAMAN</label><br>
+            <textarea name="deskripsi" value=<?= $row['deskripsi'] ?>></textarea><br>
+            <label for="">GAMBAR MENU</label><br>
+            <input type="file" name="gambar" value=<?= $row['gambar'] ?>><br>
+
+            <br>
+            <center><button a class="links" name="kirim" href="">Submit<br></button></center>
           </form>
         </div>
 
@@ -140,11 +152,11 @@ if (!isset($_SESSION["login"])) {
 
     </div>
 
-      </section>
+    </section>
 
-    </div>
+  </div>
 
-    <?php require "footer.php"; ?>
+  <?php require "footer.php"; ?>
 
   </div>
 

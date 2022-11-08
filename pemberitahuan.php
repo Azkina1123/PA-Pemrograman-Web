@@ -49,7 +49,7 @@ $username = $_SESSION["username"];
           </p>
 
           <br>
-          <a href="order.php" class="object btn-transparent"> Pergi ke ORDER </a>
+          <a href="orders.php" class="object btn-transparent"> Pergi ke ORDER </a>
         </section>
 
       </div>

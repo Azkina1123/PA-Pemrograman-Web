@@ -11,9 +11,6 @@
   color: black;
 }
 
-.cart table td {
-  padding: 5px;
-}
 .cart table td:nth-child(1),
 .cart table td:nth-child(3),
 .cart table td:nth-child(4) {
