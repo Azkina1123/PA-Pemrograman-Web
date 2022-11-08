@@ -58,7 +58,7 @@ if (isset($_POST['kirim'])) {
                       tinggi='$tinggi',
                       berat='$berat',
                       deskripsi='$deskripsi',
-                      gambar='$gambar_baru'
+                      gambar='$gambar'
                 WHERE id='$id'";
   $result = $db->query($query);
 
