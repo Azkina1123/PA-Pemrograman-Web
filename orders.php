@@ -103,7 +103,7 @@ if (isset($_POST["submit"])) {
               <td class="detail-pesanan flex">
                 <div class="img" style="background-image: url('img/products/<?= $products["gambar"]; ?>');"></div>
                 <div class="deskripsi">
-                  <a href="" class="link">
+                  <a href="order.php?id=<?= $order["id"]; ?>" class="link">
                     <h3> <?= $products["nama"]; ?>
                       <?= $jumlah_produk > 1 ? "dan " . $jumlah_produk - 1 . " lainnya" : ""; ?>
                     </h3>

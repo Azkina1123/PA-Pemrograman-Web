@@ -118,16 +118,16 @@ if (isset($_POST['kirim'])) {
 
             <label for="">JENIS TANAMAN</label><br>
             <input type="radio" name="jenis" value="tanaman hias" 
-            <?= $row['jenis'] == "tanaman hias" ? "checked" : "" ?> id="tanama-hias">
-            <label for="tanaman-hias"> Tanaman Hias </label> <br>
+            <?= $row['jenis'] == "tanaman hias" ? "checked" : "" ?> id="tanaman-hias">
+            <label for="tanaman-hias"> Tanaman Hias </label>
 
-            <input type="radio" name="jenis" value="tanaman buah" 
+            <input type="radio" name="jenis" value="tanaman buah" id="tanaman-buah" 
             <?= $row['jenis'] == "tanaman buah" ? "checked" : "" ?>> 
-            <label for="tanaman-hias"> Tanaman Buah </label> <br>
+            <label for="tanaman-buah"> Tanaman Buah </label>
 
-            <input type="radio" name="jenis" value="benih tanaman" 
+            <input type="radio" name="jenis" value="benih tanaman" id="benih-tanaman"
             <?= $row['jenis'] == "benih tanaman" ? "checked" : "" ?>> 
-            <label for="tanaman-hias"> Tanaman Buah </label> <br>
+            <label for="benih-tanaman"> Benih Tanaman </label> <br>
             
             <label for="">HARGA</label><br>
             
@@ -138,8 +138,9 @@ if (isset($_POST['kirim'])) {
             <input type="float" name="tinggi" value=<?= $row['tinggi'] ?>><br>
             <label for="">BERAT</label><br>
             <input type="float" name="berat" value=<?= $row['berat'] ?>><br>
+
             <label for="">DESKRIPSI TANAMAN</label><br>
-            <textarea name="deskripsi" value=<?= $row['deskripsi'] ?>></textarea><br>
+            <textarea name="deskripsi" ><?= $row['deskripsi'] ?></textarea><br>
             <label for="">GAMBAR MENU</label><br>
             <input type="file" name="gambar" value=<?= $row['gambar'] ?>><br>
 

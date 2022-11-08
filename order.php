@@ -1,6 +1,19 @@
 <?php
+session_start();
+
+require "config.php";
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+          alert('Harap masuk sebagai user/admin terlebih dahulu!');
+          document.location.href = 'sign-in.php?login=User';
+        </script>";
+}
+
+$id = $_GET["id"];
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,15 +34,13 @@
       <?php include "nav.php"; ?>
     </header>
 
-    <form action="" method="POST">
-      <div class="main-content flex">
+    <div class="main-content flex">
 
-        <section class="wrapper center">
+      <section class="wrapper">
 
-        </section>
+      </section>
 
-      </div>
-    </form>
+    </div>
 
     <?php include "footer.php"; ?>
   </div>
