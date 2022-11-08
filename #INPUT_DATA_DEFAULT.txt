@@ -1,0 +1,6 @@
+INSERT INTO keranjang_user VALUES ('2022-11-01 14:58', 8, 1, 12);
+INSERT INTO keranjang_user VALUES ('2022-11-01 15:58', 8, 3, 2);
+INSERT INTO keranjang_user VALUES ('2022-11-01 15:18', 8, 4, 1);
+INSERT INTO keranjang_user VALUES ('2022-11-01 15:20', 8, 2, 9);
+INSERT INTO keranjang_user VALUES ('2022-11-01 15:32', 8, 5, 3);
+INSERT INTO keranjang_user VALUES ('2022-11-01 16:00', 8, 16, 2);

@@ -205,12 +205,17 @@ function order_product($products) {
   $username = $_SESSION["username"];
   $tanggal = $_POST["tanggal"];
   $total_pembayaran = $_POST["total_pembayaran"];
-  $status = "Sedang Dikemas";
+  $status = "sedang dikemas";
+  $nama = $_POST["nama"];
+  $telepon = $_POST["telepon"];
+  $alamat = $_POST["alamat"];
 
   // tambah pesanan
   $result = $db->query(
     "INSERT INTO pesanan
-     VALUES ('$id_pesanan', '$tanggal', '$username', $total_pembayaran, '$status')"
+     VALUES ('$id_pesanan', '$tanggal', 
+     '$username', $total_pembayaran, 
+     '$status', '$nama', '$telepon', '$alamat')"
   );
 
   if (!$result) {

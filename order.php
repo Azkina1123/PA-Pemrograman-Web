@@ -12,6 +12,11 @@ if (!isset($_SESSION["login"])) {
 
 $id = $_GET["id"];
 
+$result = $db->query(
+  "SELECT * FROM produk_terbeli
+  "
+);
+
 ?>
 
 

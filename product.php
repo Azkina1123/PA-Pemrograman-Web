@@ -51,7 +51,7 @@ if (isset($_POST["beli"])) {
   );
 
   echo "<script>
-          document.location.href = 'pembayaran.php';
+          document.location.href = 'pembayaran.php?beli=true';
         </script>";
 }
 

@@ -79,7 +79,7 @@ if (isset($_GET["beli"])) {
   }
 
   // pergi ke pembayaran
-  header("Location: pembayaran.php");
+  header("Location: pembayaran.php?beli=true");
 }
 
 ?>

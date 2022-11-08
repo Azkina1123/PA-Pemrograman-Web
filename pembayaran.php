@@ -13,14 +13,33 @@ if (!isset($_SESSION["login"])) {
 
 $username = $_SESSION["username"];
 
-// ambil produk
-$result = $db->query(
-  "SELECT id_produk, nama, harga, gambar, jumlah, selected
-  FROM keranjang_user
-  LEFT JOIN produk
-  ON (keranjang_user.id_produk = produk.id)
-  WHERE selected=1 AND username='$username'"
-);
+$beli = true;
+
+// jika beli produk
+if ($_GET["beli"] == "true") {
+  $result = $db->query(
+    "SELECT id_produk, nama, harga, gambar, jumlah, selected
+    FROM keranjang_user
+    LEFT JOIN produk
+    ON (keranjang_user.id_produk = produk.id)
+    WHERE selected=1 AND username='$username'"
+  );
+
+// jika menampilkkan rincian order
+} else {
+  $id_pesanan = $_GET["id"];
+  $beli = false;
+
+  $result = $db->query(
+    "SELECT * 
+    FROM pesanan
+    INNER JOIN produk_terbeli
+    ON (pesanan.id = produk_terbeli.id_pesanan)
+    INNER JOIN produk
+    ON (produk_terbeli.id_produk = produk.id)
+    WHERE id_pesanan = '$id_pesanan'"
+  );
+}
 
 // konversi ke array
 $products = [];
@@ -39,6 +58,16 @@ $akun = mysqli_fetch_array($akun);
 // jika beli
 if (isset($_POST["beli"])) {
   if (order_product($products)) {
+
+    // un
+    foreach ($products as $product) {
+      $id_produk = $product["id_produk"];
+      $result = $db->query(
+        "DELETE FROM keranjang_user
+        WHERE id_produk=$id_produk"
+      );
+    }
+
     header("Location: pemberitahuan.php");
   }
 }
@@ -74,20 +103,26 @@ if (isset($_POST["beli"])) {
 
           <input type="datetime" name="tanggal" value="<?= date("Y-m-d h:i:s"); ?>" hidden>
 
+
           <!-- nama pembeli -->
           <tr>
             <td> <label for="nama"> Nama Penerima </label> </td>
             <td> <center>:</center> </td>
-            <td> <input type="text" name="nama" id="nama" class="form-input" value="<?= $akun["nama"]; ?>" required> </td>
+            <td> <input type="text" name="nama" id="nama" class="form-input" 
+            value="<?= $beli ? $akun["nama"] : $products[0]["nama_penerima"]; ?>" 
+            <?= $beli ? "required" : "readonly" ?>> </td>
           </tr>
 
           <!-- nomor telepon -->
           <tr>
             <td> <label for="telepon"> No. Telepon </label> </td>
             <td> <center>:</center> </td>
-            <td> <input type="text" name="telepon" id="telepon" required
-                class="form-input" value="<?= $akun["telepon"]; ?>" 
-                onkeypress="return numOnly(event)"> </td>
+            <td> 
+              <input type="text" name="telepon" id="telepon" class="form-input" 
+              value="<?= $beli ? $akun["telepon"] : $products[0]["telepon_penerima"] ?>" 
+              <?= $beli ? "required" : "readonly" ?>
+              onkeypress="return numOnly(event)"> 
+            </td>
           </tr>
 
           <!-- alamat pembeli -->
@@ -95,7 +130,7 @@ if (isset($_POST["beli"])) {
             <td> <label for="alamat"> Alamat Penerima </label> </td>
             <td> <center>:</center> </td>
             <td> 
-              <textarea name="alamat" id="alamat" required class="form-input"><?= $akun["alamat"]; ?></textarea>
+              <textarea name="alamat" id="alamat" class="form-input" <?= $beli ? "required": "readonly" ?>><?= $beli ? $akun["alamat"] : $products[0]["alamat_penerima"] ?> </textarea>
             </td>
           </tr>
 
@@ -141,9 +176,24 @@ if (isset($_POST["beli"])) {
 
         <h1> Total Pembayaran </h1>
         <p> Rp <?= $total_pembayaran; ?> </p>
-        <p class="note form-input"> Harap siapkan nominal sebanyak Rp <?= $total_pembayaran ?>  ketika hendak menerima pesanan. </p>
+
+        <!-- jika mode beli, munculkan tombol pembayaran -->
+        <?php if ($beli) { ?>
+        <p class="note form-input">
+          Harap siapkan nominal sebanyak Rp <?= $total_pembayaran ?>  ketika hendak menerima pesanan. 
+        </p>
+        
         <input type="number" name="total_pembayaran" value="<?= $total_pembayaran; ?>" hidden>
         <input type="submit" value="Beli Sekarang" name="beli" class="btn-block">
+        
+        <!-- jika mode lihat, tampilkan status -->
+        <?php } else { ?>
+        <p class="note form-input">
+          Kode pesanan: <b><?= $product["id_pesanan"]; ?> </b> <br>
+          Pesanan ini <?= $product["status_pesanan"]; ?>.
+        </p>
+        <?php } ?>
+
       </section>
     </div>
     </form>

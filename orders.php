@@ -20,7 +20,7 @@ if ($_SESSION["login"] == "user") {
   $orders = $db->query(
     "SELECT * FROM pesanan
     WHERE username='$username'
-    ORDER BY tanggal"
+    ORDER BY tanggal DESC"
   );
 }
 
@@ -29,7 +29,7 @@ if ($_SESSION["login"] == "admin") {
   $login = "admin";
   $orders = $db->query(
     "SELECT * FROM pesanan
-    ORDER BY tanggal"
+    ORDER BY tanggal DESC"
   );
 }
 
@@ -115,7 +115,7 @@ if (isset($_POST["submit"])) {
               <td class="detail-pesanan flex">
                 <div class="img" style="background-image: url('img/products/<?= $products["gambar"]; ?>');"></div>
                 <div class="deskripsi">
-                  <a href="order.php?id=<?= $order["id"]; ?>" class="link">
+                  <a href="pembayaran.php?beli=false&id=<?= $order["id"]; ?>" class="link">
                     <h3> <?= $products["nama"]; ?>
                       <?= $jumlah_produk > 1 ? "dan " . $jumlah_produk - 1 . " lainnya" : ""; ?>
                     </h3>
@@ -126,16 +126,18 @@ if (isset($_POST["submit"])) {
                   </a>
                 </div>
               </td>
+
+              <!-- status pesanan -->
               <td>
-                <?= $login == "user" ? $order["status_pesanan"] : ""; ?>
+                <?= $login == "user" ? ucwords($order["status_pesanan"]) : ""; ?>
                 
                 <?php if ($login == "admin") { ?>
                 <form action="" method="POST" class="option flex">
                   <input type="text" name="id_pesanan" value="<?= $order["id"]; ?>" hidden>
                   
                   <select name="status" id="" class="form-input">
-                    <option value="Sedang Dikemas" <?= $order["status_pesanan"] == "Sedang Dikemas" ? "selected" : "" ?>> Sedang Dikemas </option>
-                    <option value="Telah Dikirim"  <?= $order["status_pesanan"] == "Telah Dikirim" ? "selected" : "" ?>> Telah Dikirim </option>
+                    <option value="sedang dikemas" <?= $order["status_pesanan"] == "sedang dikemas" ? "selected" : "" ?>> Sedang dikemas </option>
+                    <option value="telah dikirim"  <?= $order["status_pesanan"] == "telah dikirim" ? "selected" : "" ?>> Telah dikirim </option>
                   </select>
                   
                   <button type="submit" name="submit" class="btn-block center"> OK </button>

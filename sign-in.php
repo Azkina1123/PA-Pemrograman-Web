@@ -20,7 +20,7 @@ if (isset($_POST["sign_in"])) {
   // login sebagai admin
   if ($login == "Admin") {
 
-    if ($username == "aac" && $password == "123") {
+    if ($username == "admin" && $password == "123") {
       $_SESSION["login"] = "admin";
       $_SESSION["username"] = $username;
 
