@@ -30,6 +30,8 @@ if (isset($_GET["delete"])) {
     "DELETE FROM keranjang_user
     WHERE id_produk='$id'"
   );
+
+  header("Location: cart.php");
 }
 
 // unselect semua produk keranjang

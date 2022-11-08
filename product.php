@@ -41,6 +41,8 @@ $result = $db->query(
 if (isset($_POST["beli"])) {
   $jumlah = $_POST["jumlah"];
 
+  add_to_cart();
+
   // select produk yg dipilih
   $result = $db->query(
     "UPDATE keranjang_user
@@ -136,6 +138,7 @@ if (isset($_POST["beli"])) {
                   );
                   $jumlah = mysqli_fetch_array($jumlah);
                 ?>
+                <!-- jumlah barang ke keranjang -->
                 <input type="number" name="jumlah" class="form-input jumlah object"
                 value="<?= isset($jumlah["jumlah"]) ? $jumlah["jumlah"] : 1 ?>" 
                 onkeyup="updateJumlahBarang(this)" min="1" max="<?= $product["stok"]; ?>">

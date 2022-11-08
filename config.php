@@ -175,7 +175,7 @@ function add_to_cart() {
   if (mysqli_num_rows($keranjang) == 0) {
     $result = $db->query(
       "INSERT INTO keranjang_user
-      VALUES ('$tanggal', '$username', '$id_produk', $jumlah)"
+      VALUES ('$tanggal', '$username', '$id_produk', $jumlah, 0)"
     );
 
   } else {
@@ -194,9 +194,6 @@ function add_to_cart() {
         return false;
   }
       
-  echo "<script>
-          alert('Produk berhasil dimasukkan ke keranjang!');
-        </script>";
   return true;
 
 }
