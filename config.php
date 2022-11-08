@@ -137,20 +137,21 @@ function delete_product() {
   );
   $prev_img = mysqli_fetch_array($prev_img);
   $prev_img = $prev_img[0];
-  unlink("img/product/$prev_img");
   var_dump($prev_img);
 
-  // // hapus data produk dari database
-  // $result = $db->query(
-  //   "DELETE FROM produk WHERE id='$id'"
-  // );
+  unlink("img/products/$prev_img");
 
-  // if (!$result) {
-  //   echo "<script>
-  //           alert('Produk gagal dihapus!');
-  //         </script>";
-  //   return false;
-  // }
+  // hapus data produk dari database
+  $result = $db->query(
+    "DELETE FROM produk WHERE id='$id'"
+  );
+
+  if (!$result) {
+    echo "<script>
+            alert('Produk gagal dihapus!');
+          </script>";
+    return false;
+  }
 
   echo "<script>
             alert('Produk berhasil dihapus.');
