@@ -42,4 +42,3 @@ VALUES (11, "2022-11-08", "Benih Jagung BISI 18 Hibrida", "benih tanaman", 11500
 INSERT INTO produk (id,	tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar)
 VALUES (12, "2022-11-08", "Lili Varighata", "tanaman hias", 2500, 36, 0.2, 0.2, "Tanaman hias ini bisa untuk hiasan di aquarium karena bisa di tanam di air. Cocok untuk tanaman indoor.", "12.jpg");
 
-============= INPUT USER =============
