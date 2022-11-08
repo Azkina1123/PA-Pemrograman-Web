@@ -1,3 +1,8 @@
+.products .product.img-product {
+  background-size: contain;
+  background-color: var(--color2-light);
+}
+
 .products-container ul {
   width: 100%;
   list-style: none;

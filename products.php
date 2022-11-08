@@ -45,8 +45,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
   $sampul = "header-edit.jpg";
   $judul = "EDIT PRODUCT";
   $mode = "edit";
-} else {
-}
+} 
 
 ?>
 
@@ -129,7 +128,8 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
 
                   <?php } ?>
 
-                  <div class="product img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
+                  <div class="product img" 
+                  style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
 
                   <div class="deskripsi">
                     <p> <b> <?= $product["nama"]; ?> </b> </p>

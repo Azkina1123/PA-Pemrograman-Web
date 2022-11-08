@@ -25,7 +25,7 @@ if (isset($_POST['kirim'])) {
   $ids = $db->query("SELECT id FROM produk");
   $id_baru = mysqli_num_rows($ids)+1;
   $gambar = "product-$id_baru.png";
-
+  
   // jika mengupload gambar, pindahkan direktori
   if ($_FILES["gambar"]["error"] !== 4) {
 
@@ -35,11 +35,11 @@ if (isset($_POST['kirim'])) {
     $ekstensi = strtolower(end($x));
 
     // buat nama file
-    $gambar = "$id_baru.$ekstensi"; // agar tidak ada nama file yang sama
+    $gambar = "product-$id_baru.$ekstensi"; // agar tidak ada nama file yang sama
     
     // pindahkan ke direktori img
     $tmp = $_FILES['gambar']['tmp_name'];
-    move_uploaded_file($tmp, "img/products/" . $gambar);
+    move_uploaded_file($tmp, "img/products/".$gambar);
   
   // jika tidak mengupload gambar, set gambar default
   } else {
