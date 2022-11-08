@@ -14,6 +14,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
+  <link rel="stylesheet" href="css/contact.css?v=<?= time(); ?>">
 
   <title> Contact | Green Florist </title>
 </head>
@@ -33,10 +34,10 @@ session_start();
 
       <section class="wrapper">
         <!-- ISI DI SINI -->
-        <h2>Alamat</h2>
-        <p>Jalan. Mawar RT. 04 No. 78 Kec. Tulip Biru Kota Anggrek Plant World </p><br>
+        <h2> <center>  Alamat</center></h2>
+        <p> <center>Jalan. Mawar RT. 04 No. 78 Kec. Tulip Biru Kota Anggrek Plant World</center>  </p><br>
 
-        <h2>Media Sosial</h2>
+        <h2><center>Media Sosial</center></h2>
         <div class="row-contact">
             <div class="contact-col">
                 <div class="card-contact">

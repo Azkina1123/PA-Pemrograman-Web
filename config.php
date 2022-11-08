@@ -15,6 +15,7 @@ function signing_up() {
   global $db;
 
   $username = $_POST["username"];
+  $nama = $_POST["nama"];
   $password = $_POST["password"];
   $konfirmasi = $_POST["konfirmasi"];
   $telepon = $_POST["telepon"];
@@ -68,7 +69,7 @@ function signing_up() {
   // tambahkan akun baru ke database
   $result = $db->query(
     "INSERT INTO users
-     VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar')"
+     VALUES ('$username', '$nama', '$password', '$telepon', '$alamat', '$gambar')"
   );
 
   // jika gagal masuk ke database
@@ -234,7 +235,7 @@ function image_uploaded($value) {
   // jika ukuran file > 200 kb
   if ($size > 200000) {
     echo "<script>
-            alert('Ukuran gambar maksimal 500 KB!');
+            alert('Ukuran gambar maksimal 200 KB!');
          </script>";
     return false;
   }

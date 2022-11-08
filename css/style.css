@@ -392,41 +392,33 @@ input[type="checkbox"] {
 }
 
 /* ================================================ */
-/* -------------------- CONTACT ------------------- */
+/* -------------------- TABLE ------------------- */
 /* ================================================ */
 
-.row-contact{
-  margin-top: 5vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-contact img {
-  width: 110px;
-  border-radius: 5px;
-}
-
-.contact-col{
-  flex-basis: 31vw;
-  margin-bottom: 5vw;
-  padding: 15px 8px;
-}
-
-.card-contact{
-  background-color: #fff;
+.cart table th,
+.order table th {
   padding: 15px;
-  border-radius: 5px;
-  box-shadow: #00000059 0px 5px 15px;
-  transition: 0.7s;
+  background-color: var(--color1);
+  color: var(--white-font);
+}
+.cart table tr:nth-child(even),
+.order table tr:nth-child(even) {
+  background-color: #cddbdd89;
+}
+.cart table tr:nth-child(even):hover,
+.order table tr:nth-child(even):hover {
+  background-color: var(--color2-light);
+}
+.cart table tr:nth-child(odd),
+.order table tr:nth-child(odd) {
+  background-color: #98baac1f;
+}
+.cart table tr:nth-child(odd):hover,
+.order table tr:nth-child(odd):hover {
+  background-color: #98baac6f;
 }
 
-.card-contact:hover{
-  border: 1px solid #0655354e ;
-  background: #0655354e;
-  transition: 0.3s;
-}
+@media screen and (min-width: 240px) and (max-width:1024px) {
 
-h3{
-  margin-top: 15px;
-  margin-bottom: 8px;
+
 }

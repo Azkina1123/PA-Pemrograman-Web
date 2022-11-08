@@ -49,7 +49,7 @@ $orders = $db->query(
 
       <section class="wrapper">
 
-        <table cellspacing="0" border="1">
+        <table cellspacing="0" border="0">
           <tr>
             <th> Tanggal </th>
             <th> Detail Pesanan </th>
@@ -80,8 +80,10 @@ $orders = $db->query(
                     <h3> <?= $products["nama"]; ?>
                       <?= $jumlah_produk > 1 ? "dan " . $jumlah_produk - 1 . " lainnya" : ""; ?>
                     </h3>
+
                     <p> Rp <?= $order["total_pembayaran"]; ?> </p>
                     <p> Kode pesanan: <?= $id_pesanan; ?> </p>
+
                   </a>
                 </div>
               </td>

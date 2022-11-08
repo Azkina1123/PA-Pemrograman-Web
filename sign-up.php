@@ -59,6 +59,13 @@ if (isset($_POST["sign_up"])) {
                 <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off" required> </td>
               </tr>
 
+              <!-- nama lengkap -->
+              <tr>
+                <td> <label for="nama"> Nama Lengkap* </label> </td>
+                <td><center> : </center></td>
+                <td> <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" class="form-input" autocomplete="off" required> </td>
+              </tr>
+
               <!-- password -->
               <tr>
                 <td> <label for="password"> Password* </label> </td>
