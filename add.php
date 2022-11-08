@@ -106,6 +106,9 @@ if (isset($_POST['kirim'])) {
             <hr>
               <br>
                 
+                <label for = "tanggal"> TANGGAL RILIS </label><br>
+                <input type = "date" name = "tanggal" required id="tanggal" value="<?= date("Y-m-d"); ?>" readonly><br>
+                
                 <label for = "nama">NAMA TANAMAN</label><br>
                 <input type = "text" name = "nama" required id="nama"><br>
                 

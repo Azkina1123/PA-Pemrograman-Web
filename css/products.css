@@ -82,7 +82,11 @@
     margin: 10px;
     font-size: 9pt;
   }
-
+  .products .box-square {
+    width: 165px;
+    font-size: 10pt;
+    margin: 5px;
+  }
   .products-container .box-container{
     flex-direction: row;
   }

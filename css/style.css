@@ -123,9 +123,11 @@ table td {
 /* ============================================= */
 
 footer {
-  height: 200px;
+  height: 170px;
   background-color: var(--color1);
   color: var(--white-font);
+  position: relative;
+  bottom: 0;
 }
 
 nav {
