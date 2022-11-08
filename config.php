@@ -51,7 +51,7 @@ function signing_up() {
   if ($_FILES["gambar"]["error"] === 4) {
 
     // pakai gambar default
-    copy("img/plugins/user.png", "img/users/$gambar");
+    copy("img/icons/user.png", "img/users/$gambar");
   
   // jika upload gambar
   } else {
