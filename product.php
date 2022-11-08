@@ -17,9 +17,8 @@ $username = $_SESSION["username"];
 // produk yang ditampilkan
 $result = $db->query(
   "SELECT *
-  FROM produk LEFT JOIN keranjang_user
-  ON (produk.id = keranjang_user.id_produk)
-  WHERE id=$id AND username='$username'"
+  FROM produk
+  WHERE id=$id"
 );
 
 $product = mysqli_fetch_array($result);
@@ -129,8 +128,16 @@ if (isset($_POST["beli"])) {
                 <button class="btn-block object" name="beli"> Beli Sekarang </button>
                 <button type="submit" class="btn-block object" name="keranjang"> Keranjang </button>
 
+                <?php
+                  $id = $product["id"];
+                  $jumlah = $db->query(
+                    "SELECT jumlah FROM keranjang_user
+                    WHERE 'username' = '$username' AND id_produk=$id"
+                  );
+                  $jumlah = mysqli_fetch_array($jumlah);
+                ?>
                 <input type="number" name="jumlah" class="form-input jumlah object"
-                value="<?= isset($product["jumlah"]) ? $product["jumlah"] : 1 ?>" 
+                value="<?= isset($jumlah["jumlah"]) ? $jumlah["jumlah"] : 1 ?>" 
                 onkeyup="updateJumlahBarang(this)" min="1" max="<?= $product["stok"]; ?>">
                 
                 <!-- hidden -->
