@@ -35,27 +35,40 @@ session_start();
       <section class="wrapper">
         <!-- ISI DI SINI -->
         <h2> <center>  Alamat</center></h2>
-        <p> <center>Jalan. Mawar RT. 04 No. 78 Kec. Tulip Biru Kota Anggrek Plant World</center>  </p><br>
+        <p> <center> Jalan. Mawar RT. 04 No. 78 Kec. Tulip Biru Kota Anggrek Plant World</center>  </p><br>
 
         <h2><center>Media Sosial</center></h2>
-        <div class="row-contact">
-            <div class="contact-col">
-                <div class="card-contact">
-                    <img src="img/icons/instagram.png"></a>
-                    <h3>@Green_Feel_Florist</h3>
-                </div>
+        
+        <div class="row-contact flex">
+
+            <!-- instagram -->
+            <div class="contact-col center">
+              <a href="#">
+                <center>
+                  <div class="img" style="background-image: url('img/icons/instagram.png');"></div>
+                  <h3>@Green_Feel_Florist</h3>
+                </center>
+              </a>
             </div>
-            <div class="contact-col">
-                <div class="card-contact">
-                    <img src="img/icons/whatsapp.png"></a>
-                    <h3>0812-3456-7890</h3>
-                </div>
+            
+            <!-- whatsapp -->
+            <div class="contact-col center">
+              <a href="#">
+                <center>
+                  <div class="img" style="background-image: url('img/icons/whatsapp.png');"></div>
+                  <h3>0812-3456-7890</h3>
+                </center>
+              </a>
             </div>
-            <div class="contact-col">
-                <div class="card-contact">
-                    <img src="img/icons/email.png"></a>
-                    <h3>Greenfeelflorist@gmail.com</h3>
-                </div>
+              
+              <!-- email -->
+            <div class="contact-col center">
+              <a href="#">
+                <center>
+                  <div class="img" style="background-image: url('img/icons/email.png');"></div>
+                  <h3>Greenfeelflorist@gmail.com</h3>
+                </center>
+              </a>
             </div>
         </div>
       </section>
