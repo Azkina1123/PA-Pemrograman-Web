@@ -10,12 +10,39 @@ if (!isset($_SESSION["login"])) {
           document.location.href = 'sign-in.php?login=User';
         </script>";
 }
-$username = $_SESSION["username"];
-$orders = $db->query(
-  "SELECT * FROM pesanan
-  WHERE username='$username'
-  ORDER BY tanggal"
-);
+
+$login = "user";
+
+// jika di akun user
+if ($_SESSION["login"] == "user") {
+  $login = "user";
+  $username = $_SESSION["username"];
+  $orders = $db->query(
+    "SELECT * FROM pesanan
+    WHERE username='$username'
+    ORDER BY tanggal"
+  );
+}
+
+// jika di akun admin
+if ($_SESSION["login"] == "admin") {
+  $login = "admin";
+  $orders = $db->query(
+    "SELECT * FROM pesanan
+    ORDER BY tanggal"
+  );
+}
+
+// jika ubah status order
+if (isset($_POST["submit"])) {
+  $status = $_POST["status"];
+  $id_pesanan = $_POST["id_pesanan"];
+  $result = $db->query(
+    "UPDATE pesanan
+    SET status='$status'
+    WHERE id='$id_pesanan'"
+  );
+}
 
 
 ?>
@@ -29,13 +56,13 @@ $orders = $db->query(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
-  <link rel="stylesheet" href="css/order.css?v=<?= time(); ?>">
+  <link rel="stylesheet" href="css/orders.css?v=<?= time(); ?>">
 
   <title> Order | Nama Toko </title>
 </head>
 
 <body>
-  <div class="page-wrapper user order">
+  <div class="page-wrapper user orders">
 
     <header class="img" style="background-image: url('img/header-order.jpg');">
       <?php require "nav.php"; ?>
@@ -87,7 +114,23 @@ $orders = $db->query(
                   </a>
                 </div>
               </td>
-              <td> <?= $order["status"]; ?> </td>
+              <td>
+                <?= $login == "user" ? $order["status"] : ""; ?>
+                
+                <?php if ($login == "admin") { ?>
+                <form action="" method="POST" class="option flex">
+                  <input type="text" name="id_pesanan" value="<?= $order["id"]; ?>" hidden>
+                  
+                  <select name="status" id="" class="form-input">
+                    <option value="Sedang Dikemas" <?= $order["status"] == "Sedang Dikemas" ? "selected" : "" ?>> Sedang Dikemas </option>
+                    <option value="Telah Dikirim"  <?= $order["status"] == "Telah Dikirim" ? "selected" : "" ?>> Telah Dikirim </option>
+                  </select>
+                  
+                  <button type="submit" name="submit" class="btn-block center"> OK </button>
+                </form>
+
+                <?php } ?>
+              </td>
             </tr>
           <?php } ?>
         </table>

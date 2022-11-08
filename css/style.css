@@ -341,7 +341,7 @@ header {
   box-sizing: border-box;
 
   background-color: #e0f6ed;
-  color: var(--page-font);
+  color: var(--color1-dark);
 
   outline: none;
   border-radius: 5px;
@@ -396,25 +396,25 @@ input[type="checkbox"] {
 /* ================================================ */
 
 .cart table th,
-.order table th {
+.orders table th {
   padding: 15px;
   background-color: var(--color1);
   color: var(--white-font);
 }
 .cart table tr:nth-child(even),
-.order table tr:nth-child(even) {
+.orders table tr:nth-child(even) {
   background-color: #cddbdd89;
 }
 .cart table tr:nth-child(even):hover,
-.order table tr:nth-child(even):hover {
+.orders table tr:nth-child(even):hover {
   background-color: var(--color2-light);
 }
 .cart table tr:nth-child(odd),
-.order table tr:nth-child(odd) {
+.orders table tr:nth-child(odd) {
   background-color: #98baac1f;
 }
 .cart table tr:nth-child(odd):hover,
-.order table tr:nth-child(odd):hover {
+.orders table tr:nth-child(odd):hover {
   background-color: #98baac6f;
 }
 

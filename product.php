@@ -16,11 +16,12 @@ $username = $_SESSION["username"];
 
 // produk yang ditampilkan
 $result = $db->query(
-  "SELECT * 
+  "SELECT *
   FROM produk LEFT JOIN keranjang_user
   ON (produk.id = keranjang_user.id_produk)
-  WHERE id=$id && username='$username'"
+  WHERE id=$id AND username='$username'"
 );
+
 $product = mysqli_fetch_array($result);
 
 // masukkan produk ke keranjang
