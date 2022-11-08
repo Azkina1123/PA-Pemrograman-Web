@@ -15,6 +15,37 @@ session_start();
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
 
   <title> About | Green Florist </title>
+
+  <style>
+    .wrapper .img {
+      width: 30%;
+      height: 200px;
+      margin: 0 10px;
+    }
+
+    .wrapper .img:nth-child(1) {
+      background-image: url("img/gallery-2.jpg");
+    }
+    .wrapper .img:nth-child(2) {
+      background-image: url("img/gallery-1.jpg");
+    }
+    .wrapper .img:nth-child(3) {
+      background-image: url("img/gallery-3.jpg");
+    }
+
+    .wrapper h2 + .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media screen and (min-width: 240px) and (max-width:1024px) {
+      .wrapper .img {
+        margin: 0 5px;
+      }
+    }
+ 
+  </style>
 </head>
 
 <body>
@@ -31,11 +62,21 @@ session_start();
     <div class="main-content">
 
       <section class="wrapper center">
-        <!-- ISI DI SINI -->
-        <h2>Green Feel Florist</h2><br>
-        <p> Website ini dibuat untuk memenuhi kebutuhan para pelanggan sehingga dapat mengakses toko kami dari jarak jauh. </p>
-        <p> Di sini kami menawarkan berbagai jenis tanaman yang mampu memenuhi kebutuhan tanaman Anda. </p>
-        <p>Pelanggan dapat melihat semua produk yang tersedia dan membeli tanaman meski dari rumah.</p>
+        <h2>Green Feel Florist</h2>
+
+        <div class="wrapper">
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+        </div>
+
+        <p>
+          Dalam memenuhi keinginan pelanggan untuk tetap dapat mengakses toko, 
+          kami menciptakan <br> website ini sehingga dapat diakses dimanapun dan kapanpun. 
+        </p>
+        <br>
+        <p> Di sini kami menawarkan berbagai jenis tanaman yang mampu memenuhi kebutuhan akan tanaman Anda. </p>
+        <p> Selamat berbelanja di toko kami! </p>
       </section>
 
     </div>

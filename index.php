@@ -80,7 +80,7 @@ if (isset($_SESSION["login"])) {
           <?php foreach ($kategori as $section) : ?>
 
             <div class="object">
-              <a href="<?= isset($_SESSION["login"]) ? "products.php?search=". $section[0] : "sign-in.php" ?>">
+              <a href="products.php?search=<?= $section[0] ?>">
                 <div class="box-rectangle img center" style="background-image: url('img/<?= $section[1]; ?>');">
                   <h3 class="center"> VIEW ALL </h3>
                 </div>
@@ -93,7 +93,7 @@ if (isset($_SESSION["login"])) {
         </div>
 
         <div class="object">
-          <a href="<?= isset($_SESSION["login"]) ? "products.php" : "sign-in.php" ?>" class="link-hover"> SHOW MORE PRODUCTS </a>
+          <a href="products.php" class="link-hover"> SHOW MORE PRODUCTS </a>
         </div>
 
       </section>
