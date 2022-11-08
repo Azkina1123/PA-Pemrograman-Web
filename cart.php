@@ -112,7 +112,8 @@ if (isset($_GET["beli"])) {
 
     <div class="main-content">
 
-      <section class="wrapper">
+      <section class="wrapper list-products">
+        
         <table border="0" cellspacing="0">
           <tr>
             <th colspan="2"> Produk </th>

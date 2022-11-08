@@ -427,6 +427,15 @@ input[type="checkbox"] {
 }
 
 @media screen and (min-width: 240px) and (max-width:1024px) {
-
+  .cart .list-products,
+  .orders .list-orders{
+    width: 400px;
+    overflow: scroll;
+  }
+  
+  .cart table,
+  .orders table {
+    width: 600px;
+  }
 
 }
