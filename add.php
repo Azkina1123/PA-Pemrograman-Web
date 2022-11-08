@@ -20,15 +20,15 @@ if (isset($_POST['kirim'])) {
   $tinggi = $_POST['tinggi'];
   $berat = $_POST['berat'];
   $deskripsi = $_POST['deskripsi'];
-  $gambar = "product.png";
+  
+  // buat id, ganti nama gambar
+  $ids = $db->query("SELECT id FROM produk");
+  $id_baru = mysqli_num_rows($ids)+1;
+  $gambar = "product-$id_baru.png";
 
-  // jika mengupload gambar, ganti nama file
+  // jika mengupload gambar, pindahkan direktori
   if ($_FILES["gambar"]["error"] !== 4) {
 
-    // buat id
-    $ids = $db->query("SELECT id FROM produk");
-    $id_baru = mysqli_num_rows($ids)+1;
-    
     // ambil ekstensi
     $gambar = $_FILES['gambar']['name'];
     $x = explode('.', $gambar);
@@ -39,16 +39,16 @@ if (isset($_POST['kirim'])) {
     
     // pindahkan ke direktori img
     $tmp = $_FILES['gambar']['tmp_name'];
-    move_uploaded_file($tmp, "img/products/" . $gambar_baru);
+    move_uploaded_file($tmp, "img/products/" . $gambar);
   
   // jika tidak mengupload gambar, set gambar default
   } else {
-    copy("img/icons/user.png", "img/products/$gambar");
+    copy("img/icons/product.png", "img/products/$gambar");
   }
 
   // simpan ke database
   $query =  "INSERT INTO produk (id, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar) 
-              VALUES ($id_baru, '$nama', '$jenis', '$harga', '$stok', '$tinggi', '$berat', '$deskripsi', '$gambar')";
+              VALUES ('$id_baru', '$nama', '$jenis', '$harga', '$stok', '$tinggi', '$berat', '$deskripsi', '$gambar')";
   $result = $db->query($query);
 
   // jika berhasil disimpan ke db
@@ -105,31 +105,38 @@ if (isset($_POST['kirim'])) {
           <h1><center>Add Product</center></h1>
             <hr>
               <br>
+                
+                <label for = "nama">NAMA TANAMAN</label><br>
+                <input type = "text" name = "nama" required id="nama"><br>
+                
+                <label for = "jenis">JENIS TANAMAN</label><br>
+                
+                <input type = "radio" name = "jenis" value = "tanaman hias" id="tanaman-hias"> 
+                <label for="tanaman-hias"> Tanaman Hias </label> <br>
 
-                <label for = "">NAMA TANAMAN</label><br>
-                <input type = "text" name = "nama"><br>
-                <label for = "">JENIS TANAMAN</label><br>
-                <input type = "radio" name = "jenis" value = "tanaman hias"> Tanaman Hias
-                <input type = "radio" name = "jenis" value = "tanaman buah"> Tanaman Buah
-                <input type = "radio" name = "jenis" value = "benih tanaman"> Benih Tanaman <br>
+                <input type = "radio" name = "jenis" value = "tanaman buah" id="tanaman-buah">
+                <label for="tanaman-buah"> Tanaman Buah </label> <br>
 
-                <label for = "">HARGA</label><br>
-                <input type = "number" name = "harga"><br>
+                <input type = "radio" name = "jenis" value = "benih tanaman" id="benih-tanaman"> 
+                <label for="benih-tanaman"> Benih Tanaman </label> <br>
 
-                <label for = "">STOK</label><br>
-                <input type = "number" name = "stok"><br>
+                <label for = "harga">HARGA</label><br>
+                <input type = "number" name = "harga" required id="harga"><br>
 
-                <label for = "">TINGGI</label><br>
-                <input type = "float" name = "tinggi"><br>
+                <label for = "stok">STOK</label><br>
+                <input type = "number" name = "stok" min="0" required id="stok"><br>
 
-                <label for = "">BERAT</label><br>
-                <input type = "float" name = "berat"><br>
+                <label for = "tinggi">TINGGI</label><br>
+                <input type = "float" name = "tinggi" required min="0" id="tinggi"><br>
 
-                <label for = "">DESKRIPSI TANAMAN</label><br>
-                <textarea name = "deskripsi"></textarea><br>
+                <label for = "berat">BERAT</label><br>
+                <input type = "float" name = "berat" required min="0" id="berat"><br>
 
-                <label for="">GAMBAR MENU</label><br>
-                <input type="file" name = "gambar"><br><br>
+                <label for = "deskripsi">DESKRIPSI TANAMAN</label><br>
+                <textarea name = "deskripsi" required id="deskripsi"></textarea><br>
+
+                <label for="gambar">GAMBAR MENU</label><br>
+                <input type="file" name = "gambar" id="gambar"><br><br>
 
               <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
 
