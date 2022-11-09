@@ -19,41 +19,45 @@ $profile = $db->query(
 );
 $profile = mysqli_fetch_array($profile);
 
-if (isset($_POST['submit'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  $telepon = $_POST['telepon'];
-  $alamat = $_POST['alamat'];
-
-  $gambar = $_FILES['gambar']['name'];
-  $x = explode('.', $gambar);
-
-  $ekstensi = strtolower(end($x));
-  $gambar_baru = "$username.$ekstensi";
-
-  $tmp = $_FILES['gambar']['tmp_name'];
-
-  if (move_uploaded_file($tmp, "gambar/" . $gambar_baru)) {
-    $query = "INSERT INTO users(username, password, telepon, alamat, gambar) 
-                    VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar_baru')";
-    $result = $db->query($query);
-
-    if ($result) {
-      echo "
-                  <script>
-                      alert('Profile Berhasil Diperbarui');
-                      document.location.href = 'index.php';
-                  </script>
-              ";
-    } else {
-      echo "
-                  <script>
-                      alert('Profile Gagal Diperbarui');
-                  </script>
-              ";
+if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
+  $mode = "edit";
+  if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $telepon = $_POST['telepon'];
+    $alamat = $_POST['alamat'];
+  
+    $gambar = $_FILES['gambar']['name'];
+    $x = explode('.', $gambar);
+  
+    $ekstensi = strtolower(end($x));
+    $gambar_baru = "$username.$ekstensi";
+  
+    $tmp = $_FILES['gambar']['tmp_name'];
+  
+    if (move_uploaded_file($tmp, "gambar/" . $gambar_baru)) {
+      $query = "INSERT INTO users(username, password, telepon, alamat, gambar) 
+                      VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar_baru')";
+      $result = $db->query($query);
+  
+      if ($result) {
+        echo "
+                    <script>
+                        alert('Profile Berhasil Diperbarui');
+                        document.location.href = 'index.php';
+                    </script>
+                ";
+      } else {
+        echo "
+                    <script>
+                        alert('Profile Gagal Diperbarui');
+                    </script>
+                ";
+      }
     }
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -115,12 +119,20 @@ if (isset($_POST['submit'])) {
               <td> <?= $profile["alamat"]; ?> </td> 
             </tr>
 
+            <tr>
+              <td>
+                <a href="?mode=edit">
+                  <button class="btn-block" type="submit"> Edit Profile </button>
+                </a>
+              </td>
+            </tr>
+
           </table>
 
         <?php } else if ($mode == "edit") { ?>
         
         <form action="" method="POST" enctype="multipart/form-data">
-            <table cellspacing="20">
+            <table>
 
               <!-- username -->
               <tr>
