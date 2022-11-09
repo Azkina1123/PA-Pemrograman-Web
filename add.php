@@ -67,6 +67,7 @@ if (isset($_POST['kirim'])) {
       </script>";
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +125,7 @@ if (isset($_POST['kirim'])) {
               <td> <label for = "jenis">JENIS TANAMAN</label> </td>
               <td><center>:</center></td>
               <td>
-                <input type = "radio" name = "jenis" value = "tanaman hias" id="tanaman-hias"> 
+                <input type = "radio" name = "jenis" value = "tanaman hias" id="tanaman-hias" checked> 
                 <label for="tanaman-hias"> Tanaman Hias </label> <br>
 
                 <input type = "radio" name = "jenis" value = "tanaman buah" id="tanaman-buah">
