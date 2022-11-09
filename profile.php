@@ -2,6 +2,7 @@
 
 session_start();
 
+require 'config.php';
 if (!isset($_SESSION["login"])) {
   echo "<script>
           alert('Harap masuk sebagai user terlebih dahulu!');
@@ -9,59 +10,50 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
-?>
+$username = $_SESSION["username"];
+$mode = "read";
 
-<?php
+$profile = $db->query(
+  "SELECT * FROM users
+  WHERE username='$username'"
+);
+$profile = mysqli_fetch_array($profile);
 
-    require 'config.php';
+if (isset($_POST['submit'])) {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $telepon = $_POST['telepon'];
+  $alamat = $_POST['alamat'];
 
-    if(isset($_GET['id'])){
-      $id = $_GET['id'];
+  $gambar = $_FILES['gambar']['name'];
+  $x = explode('.', $gambar);
 
-    $result = mysqli_query($db, 
-        "SELECT * FROM users WHERE id='$id'");
-    $row = mysqli_fetch_array($result);
-    }
+  $ekstensi = strtolower(end($x));
+  $gambar_baru = "$username.$ekstensi";
 
-    if(isset($_POST['submit']))
-    {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $telepon = $_POST['telepon'];
-        $alamat = $_POST['alamat'];
-        
-        $gambar = $_FILES['gambar']['name'];
-        $x = explode('.', $gambar);
-        
-        $ekstensi = strtolower(end($x));
-        $gambar_baru = "$username.$ekstensi";
+  $tmp = $_FILES['gambar']['tmp_name'];
 
-        $tmp = $_FILES['gambar']['tmp_name'];
-
-        if(move_uploaded_file($tmp, "gambar/".$gambar_baru))
-        {
-          $query = "INSERT INTO users(username, password, telepon, alamat, gambar) 
+  if (move_uploaded_file($tmp, "gambar/" . $gambar_baru)) {
+    $query = "INSERT INTO users(username, password, telepon, alamat, gambar) 
                     VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar_baru')";
-          $result = $db->query($query);
+    $result = $db->query($query);
 
-          if($result)
-          {
-              echo "
+    if ($result) {
+      echo "
                   <script>
                       alert('Profile Berhasil Diperbarui');
                       document.location.href = 'index.php';
                   </script>
               ";
-          }else
-          {
-              echo "
+    } else {
+      echo "
                   <script>
                       alert('Profile Gagal Diperbarui');
                   </script>
               ";
-          }
-        }
     }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +65,7 @@ if (!isset($_SESSION["login"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
+  <link rel="stylesheet" href="css/profile.css?v=<?= time(); ?>">
 
   <title> Profile | Green Florist </title>
 </head>
@@ -91,7 +84,41 @@ if (!isset($_SESSION["login"])) {
     <div class="main-content">
 
       <section class="wrapper">
-        <!-- ISI DI SINI -->
+
+        <?php if ($mode == "read") {?>
+
+          <div class="img" 
+          style="background-image: url('img/users/<?= $profile["gambar"]; ?>');"></div>
+
+          <table>
+            <tr>
+              <td> Username </td>
+              <td> <center>:</center> </td>
+              <td> <?= $profile["username"]; ?> </td> 
+            </tr>
+            
+            <tr>
+              <td> Nama Lengkap </td>
+              <td> <center>:</center> </td>
+              <td> <?= $profile["nama"]; ?> </td> 
+            </tr>
+
+            <tr>
+              <td> No. Telepon </td>
+              <td> <center>:</center> </td>
+              <td> <?= $profile["telepon"]; ?> </td> 
+            </tr>
+
+            <tr>
+              <td> Alamat </td>
+              <td> <center>:</center> </td>
+              <td> <?= $profile["alamat"]; ?> </td> 
+            </tr>
+
+          </table>
+
+        <?php } else if ($mode == "edit") { ?>
+        
         <form action="" method="POST" enctype="multipart/form-data">
             <table cellspacing="20">
 
@@ -108,6 +135,7 @@ if (!isset($_SESSION["login"])) {
                 <td><center> : </center></td>
                 <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required> </td>
               </tr>
+
               <!-- konfirmasi password -->
               <tr>
                 <td> <label for="konfirmasi"> Konfirmasi Password* </label> </td>
@@ -145,6 +173,7 @@ if (!isset($_SESSION["login"])) {
             </table>
           </form>
         </section>
+        <?php } ?>
 
     </div>
 

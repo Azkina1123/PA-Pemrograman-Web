@@ -16,8 +16,8 @@
   width: 250px;
 }
 
-.add table {
-  /* background-color: aquamarine; */
+.add textarea {
+  height: 100px;
 }
 
 .add td {

@@ -118,7 +118,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
                   <?php if ($mode == "edit" && $_SESSION["login"] == "admin") { ?>
 
                     <div class="mode flex">
-                      <a href="edit.php?id=<?= $product['id']; ?>">
+                      <a href="add.php?mode=edit&id=<?= $product['id']; ?>">
                         <button class="edit-product-logo img"></button>
                       </a>
                       <a href="delete.php?id=<?= $product['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus <?= $product['nama']; ?>?')">

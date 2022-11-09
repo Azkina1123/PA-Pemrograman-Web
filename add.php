@@ -11,8 +11,22 @@ if (!isset($_SESSION["login"])) {
         </script>";
 }
 
+$mode = "add";
+
+// jika mode edit produk
+if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
+  $mode = "edit";
+  $id = $_GET['id'];
+
+  $result = mysqli_query(
+    $db,
+    "SELECT * FROM produk WHERE id='$id'"
+  );
+  $row = mysqli_fetch_array($result);
+}
+
 // tambahkan produk
-if (isset($_POST['kirim'])) {
+if (isset($_POST['tambah'])) {
   $nama = $_POST['nama'];
   $jenis = $_POST['jenis'];
   $harga = $_POST['harga'];
@@ -68,6 +82,70 @@ if (isset($_POST['kirim'])) {
   }
 }
 
+// edit produk
+if (isset($_POST["edit"])) {
+
+
+  // jika sudah mengedit
+  if (isset($_POST['kirim'])) {
+    $nama = $_POST['nama'];
+    $jenis = $_POST['jenis'];
+    $harga = $_POST['harga'];
+    $stok = $_POST['stok'];
+    $tinggi = $_POST['tinggi'];
+    $berat = $_POST['berat'];
+    $deskripsi = $_POST['deskripsi'];
+    $gambar = $_POST["gambar_lama"];
+
+    // jika mengupload gambar baru
+    if ($_FILES["gambar"]["error"] !== 4) {
+
+      // hapus gambar lama
+      unlink("img/products/$gambar");
+
+      // ambil ekstensi
+      $gambar = $_FILES["gambar"]["name"];
+      $x = explode('.', $gambar);
+      $ekstensi = strtolower(end($x));
+
+      // buat nama file
+      $gambar = "product-$id.$ekstensi";
+
+      // pindahkan ke direktori img/products
+      $tmp = $_FILES['gambar']['tmp_name'];
+      move_uploaded_file($tmp, "img/products/" . $gambar);
+    }
+
+    // update database
+    $query =    "UPDATE produk SET 
+                      nama='$nama',
+                      jenis='$jenis',
+                      harga='$harga', 
+                      stok='$stok', 
+                      tinggi='$tinggi',
+                      berat='$berat',
+                      deskripsi='$deskripsi',
+                      gambar='$gambar'
+                WHERE id='$id'";
+    $result = $db->query($query);
+
+    // jika berhasil update
+    if ($result) {
+      echo "<script>
+              alert('Produk Berhasil Diperbarui');
+              document.location.href = 'products.php?mode=edit';
+          </script>";
+
+      // jika gagal update
+    } else {
+      echo "<script>
+                alert('Produk Gagal Diperbarui');
+            </script>";
+    }
+  }
+  
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -109,71 +187,87 @@ if (isset($_POST['kirim'])) {
           <table>
             <!-- tanggal -->
             <tr>
-              <td><label for = "tanggal"> TANGGAL RILIS </label></td>
+              <td><label for = "tanggal"> TANGGAL RILIS* </label></td>
               <td><center>:</center></td>
-              <td><input type = "date" name = "tanggal" class="form-input" required id="tanggal" value="<?= date("Y-m-d"); ?>" readonly></td>
+              <td><input type = "date" name = "tanggal" class="form-input" required id="tanggal" 
+              value="<?= $mode == "add" ? date("Y-m-d") : $row["tanggal_rilis"]; ?>" readonly></td>
             </tr>
 
             <!-- nama tanaman -->
             <tr>
-              <td><label for = "nama">NAMA TANAMAN</label></td>
+              <td><label for = "nama">NAMA TANAMAN*</label></td>
               <td><center>:</center></td>
-              <td><input type = "text" name = "nama" class="form-input" required id="nama"></td>
+              <td><input type = "text" name = "nama" class="form-input" required id="nama"
+              value="<?= $mode == "add" ? "" : $row["nama"]; ?>"></td>
             </tr>
 
             <tr>
-              <td> <label for = "jenis">JENIS TANAMAN</label> </td>
+              <td> <label for = "jenis">JENIS TANAMAN*</label> </td>
               <td><center>:</center></td>
               <td>
-                <input type = "radio" name = "jenis" value = "tanaman hias" id="tanaman-hias" checked> 
+                <input type = "radio" name = "jenis" value = "tanaman hias" id="tanaman-hias" 
+                <?= $mode == "edit" && ($row['jenis'] == "tanaman hias") ? "checked" : "" ?> 
+                <?= $mode == "add" ? "checked" : "" ?>> 
                 <label for="tanaman-hias"> Tanaman Hias </label> <br>
 
-                <input type = "radio" name = "jenis" value = "tanaman buah" id="tanaman-buah">
+                <input type = "radio" name = "jenis" value = "tanaman buah" id="tanaman-buah"
+                <?=  $mode == "edit" && ($row['jenis'] == "tanaman buah") ? "checked" : "" ?>>
                 <label for="tanaman-buah"> Tanaman Buah </label> <br>
 
-                <input type = "radio" name = "jenis" value = "benih tanaman" id="benih-tanaman"> 
+                <input type = "radio" name = "jenis" value = "benih tanaman" id="benih-tanaman"
+                <?=  $mode == "edit" && ($row['jenis'] == "benih tanaman") ? "checked" : "" ?>> 
                 <label for="benih-tanaman"> Benih Tanaman </label> <br>
               </td>
             </tr>
 
             <tr>
-              <td><label for = "harga">HARGA</label></td>
+              <td><label for = "harga">HARGA*</label></td>
               <td><center>:</center></td>
-              <td><input type = "number" name = "harga" class="form-input" required id="harga"></td>
+              <td><input type = "number" name = "harga" class="form-input" required id="harga"
+              value="<?= $mode == "add" ? "" : $row["harga"]; ?>"></td>
             </tr>
 
             <tr>
-              <td><label for = "stok">STOK</label></td>
+              <td><label for = "stok">STOK*</label></td>
               <td><center>:</center></td>
-              <td><input type = "number" name = "stok" class="form-input" min="0" required id="stok"></td>
+              <td><input type = "number" name = "stok" class="form-input" min="0" required id="stok"
+              value="<?= $mode == "add" ? "" : $row["stok"]; ?>"></td>
             </tr>
 
             <tr>
-              <td><label for = "tinggi">TINGGI</label></td>
+              <td><label for = "tinggi">TINGGI*</label></td>
               <td><center>:</center></td>
-              <td><input type = "float" name = "tinggi" class="form-input" required min="0" id="tinggi"></td>
+              <td><input type = "float" name = "tinggi" class="form-input" required min="0" id="tinggi"
+              value="<?= $mode == "add" ? "" : $row["tinggi"]; ?>"></td>
             </tr>
 
             <tr>
-              <td><label for = "berat">BERAT</label></td>
+              <td><label for = "berat">BERAT*</label></td>
               <td><center>:</center></td>
-              <td><input type = "float" name = "berat" class="form-input" required min="0" id="berat"></td>
+              <td><input type = "float" name = "berat" class="form-input" required min="0" id="berat"
+              value="<?= $mode == "add" ? "" : $row["berat"]; ?>"></td>
             </tr>
 
             <tr>
-              <td><label for = "deskripsi">DESKRIPSI TANAMAN</label></td>
+              <td><label for = "deskripsi">DESKRIPSI TANAMAN*</label></td>
               <td><center>:</center></td>
-              <td><textarea name = "deskripsi" class="form-input" required id="deskripsi"></textarea></td>
+              <td><textarea name = "deskripsi" class="form-input" required id="deskripsi"><?= $mode == "add" ? "" : $row["deskripsi"]; ?></textarea></td>
             </tr>
 
             <tr>
-              <td><label for="gambar">GAMBAR MENU</label></td>
+              <td><label for="gambar">GAMBAR TANAMAN</label></td>
               <td><center>:</center></td>
-              <td><input type="file" name = "gambar" class="form-input" id="gambar"></td>
+              <td>
+                <?php if ($mode == "edit") { ?>
+                  <img src="img/products/<?= $row["gambar"]; ?>" alt="" height="200"> <br>
+                <?php } ?>
+                <input type="file" name = "gambar" class="form-input" id="gambar">
+              </td>
             </tr>
 
             <tr>
-              <td colspan="3"><center><button a class = "links btn-block" name = "kirim" href = "">Submit</button></center></td>
+              <td colspan="3"><center><button a class = "links btn-block" 
+              name = "<?= $mode == "add" ? "tambah" : "edit"; ?>" href = "">Submit</button></center></td>
             </tr>
 
           </table>
