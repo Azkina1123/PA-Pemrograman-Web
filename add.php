@@ -70,7 +70,7 @@ if (isset($_POST['tambah'])) {
     echo "
       <script>
           alert('Produk Berhasil Ditambahkan');
-          document.location.href = 'index.php';
+          document.location.href = 'products.php';
       </script>";
 
     // jika gagal disimpan ke db
