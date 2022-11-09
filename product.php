@@ -125,6 +125,7 @@ if (isset($_POST["beli"])) {
               </tr>              
             </table>
   
+            <?php if ($_SESSION["login"] != "admin") { ?>
             <div class="btn-container flex">
               <form action="" method="POST">
                 <button class="btn-block object" name="beli"> Beli Sekarang </button>
@@ -147,6 +148,7 @@ if (isset($_POST["beli"])) {
                 <input type="text" name="id" value="<?= $id; ?>" hidden>
               </form>
             </div>
+            <?php } ?>
             
           </div>
 
