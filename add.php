@@ -78,12 +78,13 @@ if (isset($_POST['kirim'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
+  <link rel="stylesheet" href="css/add.css?v=<?= time(); ?>">
 
   <title> Add Product | Green Florist </title>
 </head>
 
 <body>
-  <div class="page-wrapper home-page admin">
+  <div class="page-wrapper home-page admin add">
 
     <header class="img" style="background-image: url('img/header-add.jpg');">
 
@@ -100,20 +101,29 @@ if (isset($_POST['kirim'])) {
 
       <section class="wrapper">
 
-        <form action = "" method = "post" enctype = "multipart/form-data">
+        <form action = "" method = "post" enctype = "multipart/form-data" class="center">
 
-          <h1><center>Add Product</center></h1>
-            <hr>
-              <br>
-                
-                <label for = "tanggal"> TANGGAL RILIS </label><br>
-                <input type = "date" name = "tanggal" required id="tanggal" value="<?= date("Y-m-d"); ?>" readonly><br>
-                
-                <label for = "nama">NAMA TANAMAN</label><br>
-                <input type = "text" name = "nama" required id="nama"><br>
-                
-                <label for = "jenis">JENIS TANAMAN</label><br>
-                
+          <h1><center> Tambahkan Produk Baru </center></h1> <hr>
+
+          <table>
+            <!-- tanggal -->
+            <tr>
+              <td><label for = "tanggal"> TANGGAL RILIS </label></td>
+              <td><center>:</center></td>
+              <td><input type = "date" name = "tanggal" class="form-input" required id="tanggal" value="<?= date("Y-m-d"); ?>" readonly></td>
+            </tr>
+
+            <!-- nama tanaman -->
+            <tr>
+              <td><label for = "nama">NAMA TANAMAN</label></td>
+              <td><center>:</center></td>
+              <td><input type = "text" name = "nama" class="form-input" required id="nama"></td>
+            </tr>
+
+            <tr>
+              <td> <label for = "jenis">JENIS TANAMAN</label> </td>
+              <td><center>:</center></td>
+              <td>
                 <input type = "radio" name = "jenis" value = "tanaman hias" id="tanaman-hias"> 
                 <label for="tanaman-hias"> Tanaman Hias </label> <br>
 
@@ -122,26 +132,50 @@ if (isset($_POST['kirim'])) {
 
                 <input type = "radio" name = "jenis" value = "benih tanaman" id="benih-tanaman"> 
                 <label for="benih-tanaman"> Benih Tanaman </label> <br>
+              </td>
+            </tr>
 
-                <label for = "harga">HARGA</label><br>
-                <input type = "number" name = "harga" required id="harga"><br>
+            <tr>
+              <td><label for = "harga">HARGA</label></td>
+              <td><center>:</center></td>
+              <td><input type = "number" name = "harga" class="form-input" required id="harga"></td>
+            </tr>
 
-                <label for = "stok">STOK</label><br>
-                <input type = "number" name = "stok" min="0" required id="stok"><br>
+            <tr>
+              <td><label for = "stok">STOK</label></td>
+              <td><center>:</center></td>
+              <td><input type = "number" name = "stok" class="form-input" min="0" required id="stok"></td>
+            </tr>
 
-                <label for = "tinggi">TINGGI</label><br>
-                <input type = "float" name = "tinggi" required min="0" id="tinggi"><br>
+            <tr>
+              <td><label for = "tinggi">TINGGI</label></td>
+              <td><center>:</center></td>
+              <td><input type = "float" name = "tinggi" class="form-input" required min="0" id="tinggi"></td>
+            </tr>
 
-                <label for = "berat">BERAT</label><br>
-                <input type = "float" name = "berat" required min="0" id="berat"><br>
+            <tr>
+              <td><label for = "berat">BERAT</label></td>
+              <td><center>:</center></td>
+              <td><input type = "float" name = "berat" class="form-input" required min="0" id="berat"></td>
+            </tr>
 
-                <label for = "deskripsi">DESKRIPSI TANAMAN</label><br>
-                <textarea name = "deskripsi" required id="deskripsi"></textarea><br>
+            <tr>
+              <td><label for = "deskripsi">DESKRIPSI TANAMAN</label></td>
+              <td><center>:</center></td>
+              <td><textarea name = "deskripsi" class="form-input" required id="deskripsi"></textarea></td>
+            </tr>
 
-                <label for="gambar">GAMBAR MENU</label><br>
-                <input type="file" name = "gambar" id="gambar"><br><br>
+            <tr>
+              <td><label for="gambar">GAMBAR MENU</label></td>
+              <td><center>:</center></td>
+              <td><input type="file" name = "gambar" class="form-input" id="gambar"></td>
+            </tr>
 
-              <br><center><button a class = "links" name = "kirim" href = "">Submit<br></button></center>
+            <tr>
+              <td colspan="3"><center><button a class = "links btn-block" name = "kirim" href = "">Submit</button></center></td>
+            </tr>
+
+          </table>
 
         </form>
 

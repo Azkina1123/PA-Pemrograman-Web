@@ -42,6 +42,7 @@ session_start();
     @media screen and (min-width: 240px) and (max-width:1024px) {
       .wrapper .img {
         margin: 0 5px;
+        height: 100px;
       }
     }
  
