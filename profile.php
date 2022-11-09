@@ -96,8 +96,8 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
 
           <table>
             <tr>
-              <td> Username </td>
-              <td> <center>:</center> </td>
+              <td width="100"> Username </td>
+              <td width="50"> <center>:</center> </td>
               <td> <?= $profile["username"]; ?> </td> 
             </tr>
             
@@ -120,7 +120,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
             </tr>
 
             <tr>
-              <td>
+              <td colspan="3">
                 <a href="?mode=edit">
                   <button class="btn-block" type="submit"> Edit Profile </button>
                 </a>
