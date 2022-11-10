@@ -28,8 +28,13 @@
   .profile section.wrapper .img {
     width: 100%;
   }
-
-
+  .profile .form-edit {
+    width: 160px;
+  }
+  .profile td {
+    padding: 5px;
+  }
+  
 
 
 }

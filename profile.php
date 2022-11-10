@@ -13,17 +13,16 @@ if (!isset($_SESSION["login"])) {
 $username = $_SESSION["username"];
 $mode = "read";
 
-$profile = $db->query(
-  "SELECT * FROM users
-  WHERE username='$username'"
-);
-$profile = mysqli_fetch_array($profile);
+$profile = $db->query("SELECT * FROM users WHERE username='$username'");
+$row = mysqli_fetch_array($profile);
 
 if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
   $mode = "edit";
   if (isset($_POST['submit'])) {
     $username = $_POST['username'];
+    $nama = $_POST['nama'];
     $password = $_POST['password'];
+    $konfirmasi = $_POST['konfirmasi'];
     $telepon = $_POST['telepon'];
     $alamat = $_POST['alamat'];
   
@@ -34,27 +33,53 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
     $gambar_baru = "$username.$ekstensi";
   
     $tmp = $_FILES['gambar']['tmp_name'];
+    move_uploaded_file($tmp, "img/users/" . $gambar_baru);
   
-    if (move_uploaded_file($tmp, "gambar/" . $gambar_baru)) {
-      $query = "INSERT INTO users(username, password, telepon, alamat, gambar) 
-                      VALUES ('$username', '$password', '$telepon', '$alamat', '$gambar_baru')";
-      $result = $db->query($query);
-  
-      if ($result) {
-        echo "
-                    <script>
-                        alert('Profile Berhasil Diperbarui');
-                        document.location.href = 'index.php';
-                    </script>
-                ";
-      } else {
-        echo "
-                    <script>
-                        alert('Profile Gagal Diperbarui');
-                    </script>
-                ";
-      }
+    $query = "UPDATE users 
+              SET nama='$nama',
+                  psw='$password',
+                  telepon='$telepon',
+                  alamat='$alamat',
+                  gambar='$gambar'
+              WHERE username = '$username'";
+    $profile = $db->query($query);
+
+    if ($password != $konfirmasi) {
+      echo "<script>
+              alert('Konfirmasi password salah!');
+            </script>";
+      return false;
     }
+  
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    if ($profile) {
+      echo "
+        <script>
+            alert('Profile Berhasil Diperbarui');
+            document.location.href = 'index.php';
+        </script>
+        ";
+    } else {
+      echo "
+        <script>
+            alert('Profile Gagal Diperbarui');
+        </script>
+        ";
+    }
+  }
+}
+
+if(isset($_POST['hapus'])){
+$profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
+    
+  if($profile){
+    echo"
+      <script>
+      alert('Akun Telah Dihapus. Terimakasih atas partisipasinya;)');
+      document.location.href = 'logout.php';
+      </script>
+    ";
   }
 }
 
@@ -91,61 +116,68 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
 
         <?php if ($mode == "read") {?>
 
-          <div class="img" 
-          style="background-image: url('img/users/<?= $profile["gambar"]; ?>');"></div>
+        <div class="img" 
+          style="background-image: url('img/users/<?= $row["gambar"]; ?>');">
+        </div>
 
           <table>
             <tr>
-              <td width="100"> Username </td>
-              <td width="50"> <center>:</center> </td>
-              <td> <?= $profile["username"]; ?> </td> 
+              <td> Username </td>
+              <td> <center>:</center> </td>
+              <td> <?= $row["username"]; ?> </td> 
             </tr>
             
             <tr>
               <td> Nama Lengkap </td>
               <td> <center>:</center> </td>
-              <td> <?= $profile["nama"]; ?> </td> 
+              <td> <?= $row["nama"]; ?> </td> 
             </tr>
 
             <tr>
               <td> No. Telepon </td>
               <td> <center>:</center> </td>
-              <td> <?= $profile["telepon"]; ?> </td> 
+              <td> <?= $row["telepon"]; ?> </td> 
             </tr>
 
             <tr>
               <td> Alamat </td>
               <td> <center>:</center> </td>
-              <td> <?= $profile["alamat"]; ?> </td> 
+              <td> <?= $row["alamat"]; ?> </td> 
             </tr>
 
             <tr>
-              <td colspan="3">
+              <td>
                 <a href="?mode=edit">
                   <button class="btn-block" type="submit"> Edit Profile </button>
                 </a>
               </td>
             </tr>
-
           </table>
 
         <?php } else if ($mode == "edit") { ?>
         
-        <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-edit">
+          <form action="" method="POST" enctype="multipart/form-data">
             <table>
-
               <!-- username -->
               <tr>
                 <td> <label for="username"> Username* </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off" required> </td>
+                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off" required value=<?=$row['username']?>> </td>
+              </tr>
+
+              <!-- nama lengkap -->
+              <tr>
+                <td> <label for="nama"> Nama Lengkap* </label> </td>
+                <td><center> : </center></td>
+                <td> <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" class="form-input" autocomplete="off" required value="<?=$row['nama']?>"> </td>
               </tr>
 
               <!-- password -->
               <tr>
                 <td> <label for="password"> Password* </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required> </td>
+                <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required value="<?=$row['psw']?>"> </td>
               </tr>
 
               <!-- konfirmasi password -->
@@ -159,14 +191,14 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
               <tr>
                 <td> <label for="telepon"> No. Telepon* </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="text" name="telepon" id="telepon" placeholder="No. Telepon" class="form-input" autocomplete="off" required onkeypress="return numOnly(event)" maxlength="15"> </td>
+                <td> <input type="text" name="telepon" id="telepon" placeholder="No. Telepon" class="form-input" autocomplete="off" required onkeypress="return numOnly(event)" maxlength="15" value="<?=$row['telepon']?>"> </td>
               </tr>
               
               <!-- alamat -->
               <tr>
                 <td> <label for="alamat"> Alamat* </label> </td>
                 <td><center> : </center></td>
-                <td> <textarea name="alamat" id="alamat" cols="25" rows="5" placeholder="Alamat" class="form-input" autocomplete="off" required maxlength="100"></textarea> </td>
+                <td> <textarea name="alamat" id="alamat" cols="25" rows="5" placeholder="Alamat" class="form-input" autocomplete="off" required maxlength="100"><?=$row['alamat']?></textarea> </td>
               </tr>
 
               <!-- gambar -->
@@ -174,19 +206,20 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
                 <td> <label for="gambar"> Foto Profil </label> </td>
                 <td><center> : </center></td>
                 <td> <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input" value="img/plugins/user.png"> </td>
+                <input type="text" name="gambar_lama" value="<?=$row['gambar']?>" hidden>
               </tr>
 
               <!-- submit -->
               <tr>
-                <td colspan="3"> <input type="submit" value="Update Profile" name="sign_up" class="btn-block"> </td>
-                <td colspan="3"> <input type="submit" value="Hapus Profile" name="sign_up" class="btn-block"> </td>
+                <td colspan="3"><input type="submit" value="Update Profile" name="submit" class="btn-block"> </td>
+                <td colspan="3"><input type="submit" value="Hapus Profile" name="hapus" class="btn-block"> </td>
               </tr>
 
             </table>
           </form>
-        </section>
-        <?php } ?>
-
+        </div>
+      </section>
+      <?php } ?>
     </div>
 
     <?php require "footer.php"; ?>
