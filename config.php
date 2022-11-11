@@ -141,6 +141,19 @@ function delete_product() {
 
   unlink("img/products/$prev_img");
 
+  // pilih id pesanan produk terkait
+  $id_pesanan = $db->query(
+    "SELECT id_pesanan FROM produk_terbeli
+    WHERE id_produk = $id"
+  );
+  $id_pesanan = mysqli_fetch_array($id_pesanan)[0];
+
+  // hapus pesanan terkait
+  $hapus_pesanan = $db->query(
+    "DELETE FROM pesanan
+    WHERE id='$id_pesanan'"
+  );
+
   // hapus data produk dari database
   $result = $db->query(
     "DELETE FROM produk WHERE id='$id'"
