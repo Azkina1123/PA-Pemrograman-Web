@@ -13,6 +13,13 @@ if (!isset($_SESSION["login"])) {
 $_SESSION["cart"] = true;
 $username = $_SESSION["username"];
 
+// unselect semua produk keranjang
+$result = $db->query(
+  "UPDATE keranjang_user
+  SET selected=0
+  WHERE username='$username'"
+);
+
 // ambil keranjang yang sesuai dengan akun
 $products = $db->query(
   "SELECT *
@@ -33,14 +40,6 @@ if (isset($_GET["delete"])) {
 
   header("Location: cart.php");
 }
-
-// unselect semua produk keranjang
-$result = $db->query(
-  "UPDATE keranjang_user
-  SET selected=0
-  WHERE username='$username'"
-);
-
 
 // jika tekan beli sekarang
 if (isset($_GET["beli"])) {
@@ -94,6 +93,8 @@ if (isset($_GET["beli"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/cart.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
+
 
   <title> Cart | Green Florist </title>
 </head>
@@ -115,7 +116,7 @@ if (isset($_GET["beli"])) {
     <div class="main-content">
 
       <section class="wrapper list-products">
-        
+
         <table border="0" cellspacing="0">
           <tr>
             <th colspan="2"> Produk </th>

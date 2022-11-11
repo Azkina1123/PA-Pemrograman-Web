@@ -19,12 +19,10 @@ $row = mysqli_fetch_array($profile);
 // mode edit
 if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
   $mode = "edit";
-
 }
 
 // edit profile
 if (isset($_POST['submit'])) {
-  $username = $_POST['username'];
   $nama = $_POST['nama'];
   $password = $_POST['password'];
   $konfirmasi = $_POST['konfirmasi'];
@@ -36,12 +34,20 @@ if (isset($_POST['submit'])) {
   if ($password != $konfirmasi) {
     echo "<script>
               alert('Konfirmasi password salah!');
-              document.location.href = '?mode=edit'
             </script>";
+    goto failed;
   }
 
   // jika mengupload gambar baru
   if ($_FILES["gambar"]["error"] !== 4) {
+
+    if ($_FILES["gambar"]["size"] > 200000) {
+      echo "<script>
+            alert('Ukuran gambar maksimal 200 KB!');
+         </script>";
+      goto failed;
+    }
+
     // hapus gambar lama
     unlink("img/users/$gambar");
 
@@ -74,25 +80,26 @@ if (isset($_POST['submit'])) {
     echo "
         <script>
             alert('Profile Berhasil Diperbarui');
-            document.location.href = 'index.php';
+            document.location.href = 'profile.php';
         </script>
         ";
-  // jika gagal edit
+    // jika gagal edit
   } else {
     echo "
         <script>
             alert('Profile Gagal Diperbarui');
         </script>
         ";
+    goto failed;
   }
 }
 
 // hapus profile
-if (isset($_POST['hapus'])){
+if (isset($_POST['hapus'])) {
   $profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
-    
-  if ($profile){
-    echo"
+
+  if ($profile) {
+    echo "
       <script>
       alert('Akun Telah Dihapus. Terimakasih atas partisipasinya!)');
       document.location.href = 'logout.php';
@@ -100,6 +107,8 @@ if (isset($_POST['hapus'])){
     ";
   }
 }
+
+failed:
 
 ?>
 
@@ -113,6 +122,7 @@ if (isset($_POST['hapus'])){
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/profile.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Profile | Green Florist </title>
 </head>
@@ -130,53 +140,60 @@ if (isset($_POST['hapus'])){
 
     <div class="main-content">
 
-      <section class="wrapper <?= $mode=='read' ? "read" : ""?>" style="">
+      <section class="wrapper <?= $mode == 'read' ? "read" : "" ?>" style="">
 
         <!-- mode baca -->
-        <?php if ($mode == "read") {?>
-        <h1> Profile </h1>
+        <?php if ($mode == "read") { ?>
+          <h1> Profile </h1>
 
-        <div class="img" 
-          style="background-image: url('img/users/<?= $row["gambar"]; ?>');">
-        </div>
+          <div class="img" style="background-image: url('img/users/<?= $row["gambar"]; ?>');">
+          </div>
 
-        <table>
-          <tr>
-            <td> Username </td>
-            <td> <center>:</center> </td>
-            <td> <?= $row["username"]; ?> </td> 
-          </tr>
+          <table>
+            <tr>
+              <td> Username </td>
+              <td>
+                <center>:</center>
+              </td>
+              <td> <?= $row["username"]; ?> </td>
+            </tr>
 
-          <tr>
-            <td> Nama Lengkap </td>
-            <td> <center>:</center> </td>
-            <td> <?= $row["nama"]; ?> </td> 
-          </tr>
+            <tr>
+              <td> Nama Lengkap </td>
+              <td>
+                <center>:</center>
+              </td>
+              <td> <?= $row["nama"]; ?> </td>
+            </tr>
 
-          <tr>
-            <td> No. Telepon </td>
-            <td> <center>:</center> </td>
-            <td> <?= $row["telepon"]; ?> </td> 
-          </tr>
+            <tr>
+              <td> No. Telepon </td>
+              <td>
+                <center>:</center>
+              </td>
+              <td> <?= $row["telepon"]; ?> </td>
+            </tr>
 
-          <tr>
-            <td> Alamat </td>
-            <td> <center>:</center> </td>
-            <td> <?= $row["alamat"]; ?> </td> 
-          </tr>
+            <tr>
+              <td> Alamat </td>
+              <td>
+                <center>:</center>
+              </td>
+              <td> <?= $row["alamat"]; ?> </td>
+            </tr>
 
-          <tr>
-            <td colspan="3">
+            <tr>
+              <td colspan="3">
                 <a href="?mode=edit">
                   <button class="btn-block" type="submit"> Edit Profile </button>
                 </a>
-            </td>
-          </tr>
-        </table>
+              </td>
+            </tr>
+          </table>
 
-        <!-- mode edit -->
+          <!-- mode edit -->
         <?php } else if ($mode == "edit") { ?>
-        
+
           <h1> Edit Profile </h1>
 
           <form action="" method="POST" enctype="multipart/form-data" class="form-edit">
@@ -184,52 +201,68 @@ if (isset($_POST['hapus'])){
               <!-- username -->
               <tr>
                 <td> <label for="username"> Username* </label> </td>
-                <td><center> : </center></td>
-                <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off" required value=<?=$row['username']?>> </td>
+                <td>
+                  <center> : </center>
+                </td>
+                <td> <?= $row["username"]; ?> </td>
               </tr>
 
               <!-- nama lengkap -->
               <tr>
                 <td> <label for="nama"> Nama Lengkap* </label> </td>
-                <td><center> : </center></td>
-                <td> <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" class="form-input" autocomplete="off" required value="<?=$row['nama']?>"> </td>
+                <td>
+                  <center> : </center>
+                </td>
+                <td> <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" class="form-input" autocomplete="off" required value="<?= $row['nama'] ?>"> </td>
               </tr>
 
               <!-- password -->
               <tr>
                 <td> <label for="password"> Password* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required value=""> </td>
               </tr>
 
               <!-- konfirmasi password -->
               <tr>
                 <td> <label for="konfirmasi"> Konfirmasi Password* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="password" name="konfirmasi" id="konfirmasi" placeholder="Konfirmasi Password" class="form-input" autocomplete="off" required> </td>
               </tr>
-              
+
               <!-- telepon -->
               <tr>
                 <td> <label for="telepon"> No. Telepon* </label> </td>
-                <td><center> : </center></td>
-                <td> <input type="text" name="telepon" id="telepon" placeholder="No. Telepon" class="form-input" autocomplete="off" required onkeypress="return numOnly(event)" maxlength="15" value="<?=$row['telepon']?>"> </td>
+                <td>
+                  <center> : </center>
+                </td>
+                <td> <input type="text" name="telepon" id="telepon" placeholder="No. Telepon" class="form-input" autocomplete="off" required onkeypress="return numOnly(event)" maxlength="15" value="<?= $row['telepon'] ?>"> </td>
               </tr>
-              
+
               <!-- alamat -->
               <tr>
                 <td> <label for="alamat"> Alamat* </label> </td>
-                <td><center> : </center></td>
-                <td> <textarea name="alamat" id="alamat" cols="25" rows="5" placeholder="Alamat" class="form-input" autocomplete="off" required maxlength="100"><?=$row['alamat']?></textarea> </td>
+                <td>
+                  <center> : </center>
+                </td>
+                <td> <textarea name="alamat" id="alamat" cols="25" rows="5" placeholder="Alamat" class="form-input" autocomplete="off" required maxlength="100"><?= $row['alamat'] ?></textarea> </td>
               </tr>
 
               <!-- gambar -->
               <tr>
                 <td> <label for="gambar"> Foto Profil </label> </td>
-                <td><center> : </center></td>
-                <td> 
-                  <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input"> 
-                  <input type="text" name="gambar_lama" value="<?=$row['gambar']?>" hidden>
+                <td>
+                  <center> : </center>
+                </td>
+                <td>
+                  <img src="img/users/<?= $row["gambar"]; ?>" alt="" height="100px"> <br>
+                  <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input"> <br>
+                  Max size: 200 KB
+                  <input type="text" name="gambar_lama" value="<?= $row['gambar'] ?>" hidden>
                 </td>
               </tr>
 
@@ -238,16 +271,16 @@ if (isset($_POST['hapus'])){
                 <td colspan="3">
                   <center>
                     <input type="submit" value="Update Profile" name="submit" class="btn-block">
-                    <input type="submit" value="Hapus Profile" name="hapus" class="btn-block"> 
+                    <input type="submit" value="Hapus Profile" name="hapus" class="btn-block" onclick="return confirm('Apakah Anda yakin ingin menghapus akun?')">
                   </center>
-              </td>
+                </td>
               </tr>
 
             </table>
           </form>
 
       </section>
-      <?php } ?>
+    <?php } ?>
     </div>
 
     <?php require "footer.php"; ?>

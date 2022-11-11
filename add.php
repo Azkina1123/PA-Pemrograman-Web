@@ -27,6 +27,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
 
 // tambahkan produk
 if (isset($_POST['tambah'])) {
+  $tanggal = $_POST["tanggal"];
   $nama = $_POST['nama'];
   $jenis = $_POST['jenis'];
   $harga = $_POST['harga'];
@@ -42,6 +43,16 @@ if (isset($_POST['tambah'])) {
 
   // jika mengupload gambar, pindahkan direktori
   if ($_FILES["gambar"]["error"] !== 4) {
+
+    // jika ukuran lebih dari 200 KB
+    if ($_FILES["gambar"]["size"] > 200000) {
+      echo "<script>
+              alert('Ukuran gambar maksimal 200 KB!');
+          </script>";
+
+      goto failed;
+    }
+
 
     // ambil ekstensi
     $gambar = $_FILES['gambar']['name'];
@@ -61,8 +72,8 @@ if (isset($_POST['tambah'])) {
   }
 
   // simpan ke database
-  $query =  "INSERT INTO produk (id, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar) 
-              VALUES ('$id_baru', '$nama', '$jenis', '$harga', '$stok', '$tinggi', '$berat', '$deskripsi', '$gambar')";
+  $query =  "INSERT INTO produk (id, tanggal_rilis, nama, jenis, harga, stok, tinggi, berat, deskripsi, gambar) 
+              VALUES ('$id_baru', '$tanggal', '$nama', '$jenis', '$harga', '$stok', '$tinggi', '$berat', '$deskripsi', '$gambar')";
   $result = $db->query($query);
 
   // jika berhasil disimpan ke db
@@ -79,6 +90,8 @@ if (isset($_POST['tambah'])) {
       <script>
           alert('Produk Gagal Ditambahkan');
       </script>";
+
+    goto failed;
   }
 }
 
@@ -86,36 +99,43 @@ if (isset($_POST['tambah'])) {
 if (isset($_POST["edit"])) {
 
   // jika sudah mengedit
-    $nama = $_POST['nama'];
-    $jenis = $_POST['jenis'];
-    $harga = $_POST['harga'];
-    $stok = $_POST['stok'];
-    $tinggi = $_POST['tinggi'];
-    $berat = $_POST['berat'];
-    $deskripsi = $_POST['deskripsi'];
-    $gambar = $_POST["gambar_lama"];
+  $nama = $_POST['nama'];
+  $jenis = $_POST['jenis'];
+  $harga = $_POST['harga'];
+  $stok = $_POST['stok'];
+  $tinggi = $_POST['tinggi'];
+  $berat = $_POST['berat'];
+  $deskripsi = $_POST['deskripsi'];
+  $gambar = $_POST["gambar_lama"];
 
-    // jika mengupload gambar baru
-    if ($_FILES["gambar"]["error"] !== 4) {
+  // jika mengupload gambar baru
+  if ($_FILES["gambar"]["error"] !== 4) {
 
-      // hapus gambar lama
-      unlink("img/products/$gambar");
-
-      // ambil ekstensi
-      $gambar = $_FILES["gambar"]["name"];
-      $x = explode('.', $gambar);
-      $ekstensi = strtolower(end($x));
-
-      // buat nama file
-      $gambar = "product-$id.$ekstensi";
-
-      // pindahkan ke direktori img/products
-      $tmp = $_FILES['gambar']['tmp_name'];
-      move_uploaded_file($tmp, "img/products/" . $gambar);
+    if ($_FILES["gambar"]["size"] > 200000) {
+      echo "<script>
+              alert('Ukuran gambar maksimal 200 KB!');
+          </script>";
+      goto failed;
     }
 
-    // update database
-    $query =    "UPDATE produk SET 
+    // hapus gambar lama
+    unlink("img/products/$gambar");
+
+    // ambil ekstensi
+    $gambar = $_FILES["gambar"]["name"];
+    $x = explode('.', $gambar);
+    $ekstensi = strtolower(end($x));
+
+    // buat nama file
+    $gambar = "product-$id.$ekstensi";
+
+    // pindahkan ke direktori img/products
+    $tmp = $_FILES['gambar']['tmp_name'];
+    move_uploaded_file($tmp, "img/products/" . $gambar);
+  }
+
+  // update database
+  $query =    "UPDATE produk SET 
                       nama='$nama',
                       jenis='$jenis',
                       harga='$harga', 
@@ -125,23 +145,25 @@ if (isset($_POST["edit"])) {
                       deskripsi='$deskripsi',
                       gambar='$gambar'
                 WHERE id='$id'";
-    $result = $db->query($query);
+  $result = $db->query($query);
 
-    // jika berhasil update
-    if ($result) {
-      echo "<script>
+  // jika berhasil update
+  if ($result) {
+    echo "<script>
               alert('Produk Berhasil Diperbarui');
               document.location.href = 'product.php?id=$id';
           </script>";
 
-      // jika gagal update
-    } else {
-      echo "<script>
+    // jika gagal update
+  } else {
+    echo "<script>
                 alert('Produk Gagal Diperbarui');
             </script>";
-    }
-  
+    goto failed;
+  }
 }
+
+failed:
 
 ?>
 
@@ -155,6 +177,7 @@ if (isset($_POST["edit"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/add.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> <?= $mode == "add" ? "Add Product" : "Edit Product" ?> | Green Florist </title>
 </head>
@@ -200,14 +223,16 @@ if (isset($_POST["edit"])) {
               <td>
                 <center>:</center>
               </td>
-              <td><input type="text" name="nama" class="form-input" required id="nama" value="<?= $mode == "add" ? "" : $row["nama"]; ?>"></td>
+              <td><input type="text" name="nama" class="form-input" required id="nama" value="<?= $mode == "add" ? "" : $row["nama"]; ?>" placeholder="Nama Tanaman"></td>
             </tr>
 
+            <!-- jenis tanaman -->
             <tr>
               <td> <label for="jenis">JENIS TANAMAN*</label> </td>
               <td>
                 <center>:</center>
               </td>
+
               <td>
                 <input type="radio" name="jenis" value="tanaman hias" id="tanaman-hias" <?= $mode == "edit" && ($row['jenis'] == "tanaman hias") ? "checked" : "" ?> <?= $mode == "add" ? "checked" : "" ?>>
                 <label for="tanaman-hias"> Tanaman Hias </label> <br>
@@ -220,46 +245,52 @@ if (isset($_POST["edit"])) {
               </td>
             </tr>
 
+            <!-- harga -->
             <tr>
-              <td><label for="harga">HARGA*</label></td>
+              <td><label for="harga">HARGA (Rp)* </label></td>
               <td>
                 <center>:</center>
               </td>
-              <td><input type="number" name="harga" class="form-input" required id="harga" value="<?= $mode == "add" ? "" : $row["harga"]; ?>"></td>
+              <td><input type="number" name="harga" class="form-input" required id="harga" value="<?= $mode == "add" ? "" : $row["harga"]; ?>" placeholder="Rp Harga"></td>
             </tr>
 
+            <!-- stok -->
             <tr>
               <td><label for="stok">STOK*</label></td>
               <td>
                 <center>:</center>
               </td>
-              <td><input type="number" name="stok" class="form-input" min="0" required id="stok" value="<?= $mode == "add" ? "" : $row["stok"]; ?>"></td>
+              <td><input type="number" name="stok" class="form-input" min="0" required id="stok" value="<?= $mode == "add" ? "" : $row["stok"]; ?>" placeholder="Stok"></td>
             </tr>
 
+            <!-- tinggi -->
             <tr>
-              <td><label for="tinggi">TINGGI*</label></td>
+              <td><label for="tinggi">TINGGI (m)*</label></td>
               <td>
                 <center>:</center>
               </td>
-              <td><input type="float" name="tinggi" class="form-input" required min="0" id="tinggi" value="<?= $mode == "add" ? "" : $row["tinggi"]; ?>"></td>
+              <td><input type="float" name="tinggi" class="form-input" required min="0" id="tinggi" value="<?= $mode == "add" ? "" : $row["tinggi"]; ?>" placeholder="Tinggi m"></td>
             </tr>
 
+            <!-- berat -->
             <tr>
-              <td><label for="berat">BERAT*</label></td>
+              <td><label for="berat">BERAT (kg)*</label></td>
               <td>
                 <center>:</center>
               </td>
-              <td><input type="float" name="berat" class="form-input" required min="0" id="berat" value="<?= $mode == "add" ? "" : $row["berat"]; ?>"></td>
+              <td><input type="float" name="berat" class="form-input" required min="0" id="berat" value="<?= $mode == "add" ? "" : $row["berat"]; ?>" placeholder="Berat kg"></td>
             </tr>
 
+            <!-- deskripsi -->
             <tr>
               <td><label for="deskripsi">DESKRIPSI TANAMAN*</label></td>
               <td>
                 <center>:</center>
               </td>
-              <td><textarea name="deskripsi" class="form-input" required id="deskripsi"><?= $mode == "add" ? "" : $row["deskripsi"]; ?></textarea></td>
+              <td><textarea name="deskripsi" class="form-input" required id="deskripsi" placeholder="Deskripsi" maxlength="100"><?= $mode == "add" ? "" : $row["deskripsi"]; ?></textarea></td>
             </tr>
 
+            <!-- upload gambar -->
             <tr>
               <td><label for="gambar">GAMBAR TANAMAN</label></td>
               <td>
@@ -269,7 +300,8 @@ if (isset($_POST["edit"])) {
                 <?php if ($mode == "edit") { ?>
                   <img src="img/products/<?= $row["gambar"]; ?>" alt="" height="200"> <br>
                 <?php } ?>
-                <input type="file" name="gambar" class="form-input" id="gambar">
+                <input type="file" name="gambar" class="form-input" id="gambar"> <br>
+                Max size: 200 KB
                 <input type="text" name="gambar_lama" value="<?= $row["gambar"]; ?>" hidden>
               </td>
             </tr>

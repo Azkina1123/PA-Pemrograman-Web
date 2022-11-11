@@ -4,16 +4,7 @@ session_start();
 
 require "config.php";
 
-
-
-// jika sudah melakukan login
-if (isset($_SESSION["login"])) {
-
-  // jika mode admin
-
-  // jika mode user
-
-}
+$header = isset($_SESSION["login"]) && ($_SESSION["login"] == "admin") ? "header-index-admin.jpg" : "header-index.jpg";
 
 ?>
 
@@ -27,6 +18,7 @@ if (isset($_SESSION["login"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/index.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Home | Green Florist </title>
 </head>
@@ -34,7 +26,7 @@ if (isset($_SESSION["login"])) {
 <body>
   <div class="page-wrapper home">
 
-    <header class="img" style="background-image: url('img/header-index.jpg');">
+    <header class="img" style="background-image: url('img/<?= $header; ?>');">
 
       <?php require "nav.php"; ?>
 

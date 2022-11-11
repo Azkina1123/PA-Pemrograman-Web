@@ -27,6 +27,7 @@ if (isset($_POST["sign_up"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/sign-in.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Daftar Akun | Nama Toko </title>
 </head>
@@ -55,48 +56,62 @@ if (isset($_POST["sign_up"])) {
               <!-- username -->
               <tr>
                 <td> <label for="username"> Username* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" autocomplete="off" required> </td>
               </tr>
 
               <!-- nama lengkap -->
               <tr>
                 <td> <label for="nama"> Nama Lengkap* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" class="form-input" autocomplete="off" required> </td>
               </tr>
 
               <!-- password -->
               <tr>
                 <td> <label for="password"> Password* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required> </td>
               </tr>
               <!-- konfirmasi password -->
               <tr>
                 <td> <label for="konfirmasi"> Konfirmasi Password* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="password" name="konfirmasi" id="konfirmasi" placeholder="Konfirmasi Password" class="form-input" autocomplete="off" required> </td>
               </tr>
-              
+
               <!-- telepon -->
               <tr>
                 <td> <label for="telepon"> No. Telepon* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="text" name="telepon" id="telepon" placeholder="No. Telepon" class="form-input" autocomplete="off" required onkeypress="return numOnly(event)" maxlength="15"> </td>
               </tr>
-              
+
               <!-- alamat -->
               <tr>
                 <td> <label for="alamat"> Alamat* </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <textarea name="alamat" id="alamat" cols="25" rows="5" placeholder="Alamat" class="form-input" autocomplete="off" required maxlength="100"></textarea> </td>
               </tr>
 
               <!-- gambar -->
               <tr>
                 <td> <label for="gambar"> Foto Profil </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input" value="img/plugins/user.png"> <br> Max size: 200 KB</td>
               </tr>
 
@@ -108,7 +123,7 @@ if (isset($_POST["sign_up"])) {
               <!-- sign in -->
               <tr>
                 <td colspan="3">
-                  <a href="sign-in.php" class="link"> 
+                  <a href="sign-in.php" class="link">
                     <center> Sudah punya akun? <br> Masuk sekarang! </center>
                   </a>
                 </td>

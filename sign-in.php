@@ -28,26 +28,23 @@ if (isset($_POST["sign_in"])) {
               alert('Proses masuk sebagai admin berhasil!');
              document.location.href = 'index.php';
             </script>";
-
     } else {
       echo "<script>
               alert('Username atau password salah!');
             </script>";
-
     }
 
-  // login sebagai user
+    // login sebagai user
   } else {
     // jika berhasil login
     if (signing_in()) {
       $_SESSION["login"] = "user";
       $_SESSION["username"] = $username;
-  
+
       echo "<script>
               document.location.href = 'index.php';
             </script>";
     }
-
   }
 
 
@@ -67,6 +64,7 @@ if (isset($_POST["sign_in"])) {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/sign-in.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Masuk sebagai <?= $login; ?> | Nama Toko </title>
 </head>
@@ -92,11 +90,11 @@ if (isset($_POST["sign_in"])) {
 
           <!-- jika dalam mode login user -->
           <?php if ($login == "User") { ?>
-          <p> <a href="sign-in.php?login=Admin" class="link"> Masuk sebagai Admin </a> </p>
-          
-          <!-- jika dalam mode login admin -->
+            <p> <a href="sign-in.php?login=Admin" class="link"> Masuk sebagai Admin </a> </p>
+
+            <!-- jika dalam mode login admin -->
           <?php } else if ($login == "Admin") { ?>
-          <p> <a href="sign-in.php?login=User" class="link"> Masuk sebagai User </a> </p>
+            <p> <a href="sign-in.php?login=User" class="link"> Masuk sebagai User </a> </p>
           <?php } ?>
 
           <form action="" method="POST">
@@ -105,30 +103,36 @@ if (isset($_POST["sign_in"])) {
               <!-- username -->
               <tr>
                 <td> <label for="username"> Username </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="text" name="username" id="username" placeholder="Username" class="form-input" required> </td>
               </tr>
 
               <!-- password -->
               <tr>
                 <td> <label for="password"> Password </label> </td>
-                <td><center> : </center></td>
+                <td>
+                  <center> : </center>
+                </td>
                 <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" required> </td>
               </tr>
 
               <!-- submit -->
               <tr>
-                <td colspan="3"> 
-                  <input type="submit" value="Masuk" name="sign_in" class="btn-block"> 
+                <td colspan="3">
+                  <input type="submit" value="Masuk" name="sign_in" class="btn-block">
                 </td>
               </tr>
 
               <!-- sign up -->
               <tr>
                 <td colspan="3">
-                  <a href="sign-up.php" class="link"> <center>
-                  Belum punya akun? <br> Daftar sebagai user sekarang!
-                  </center> </a>
+                  <a href="sign-up.php" class="link">
+                    <center>
+                      Belum punya akun? <br> Daftar sebagai user sekarang!
+                    </center>
+                  </a>
                 </td>
               </tr>
             </table>

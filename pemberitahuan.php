@@ -25,6 +25,7 @@ $username = $_SESSION["username"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/pemberitahuan.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Formulir Pembayaran | Green Florist </title>
 </head>
@@ -43,7 +44,7 @@ $username = $_SESSION["username"];
           <div class="img" style="background-image: url('img/icons/success.png');"></div>
           <br>
           <h1 class="object"> Transaksi Berhasil! </h1>
-          <p class="object"> 
+          <p class="object">
             Pesanan Anda akan segera diproses oleh pihak kami. <br>
             Pantau pesanan Anda di halaman ORDER hingga pesanan diterima.
           </p>

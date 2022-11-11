@@ -25,7 +25,7 @@ if ($_GET["beli"] == "true") {
     WHERE selected=1 AND username='$username'"
   );
 
-// jika menampilkkan rincian order
+  // jika menampilkkan rincian order
 } else {
   $id_pesanan = $_GET["id"];
   $beli = false;
@@ -83,6 +83,7 @@ if (isset($_POST["beli"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/pembayaran.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Formulir Pembayaran | Green Florist </title>
 </head>
@@ -95,107 +96,115 @@ if (isset($_POST["beli"])) {
     </header>
 
     <form action="" method="POST">
-    <div class="main-content flex">
-      
-      <section class="wrapper">
+      <div class="main-content flex">
 
-        <table border="0" cellspacing="0">
+        <section class="wrapper">
 
-          <input type="datetime" name="tanggal" value="<?= date("Y-m-d h:i:s"); ?>" hidden>
+          <table border="0" cellspacing="0">
 
+            <input type="datetime" name="tanggal" value="<?= date("Y-m-d h:i:s"); ?>" hidden>
 
-          <!-- nama pembeli -->
-          <tr>
-            <td> <label for="nama"> Nama Penerima </label> </td>
-            <td> <center>:</center> </td>
-            <td> <input type="text" name="nama" id="nama" class="form-input" 
-            value="<?= $beli ? $akun["nama"] : $products[0]["nama_penerima"]; ?>" 
-            <?= $beli ? "required" : "readonly" ?>> </td>
-          </tr>
+            <tr>
+              <td> <label for="username"> Username </label> </td>
+              <td><center>:</center></td>
+              <td> <?= $username; ?> </td>
+            </tr>
 
-          <!-- nomor telepon -->
-          <tr>
-            <td> <label for="telepon"> No. Telepon </label> </td>
-            <td> <center>:</center> </td>
-            <td> 
-              <input type="text" name="telepon" id="telepon" class="form-input" 
-              value="<?= $beli ? $akun["telepon"] : $products[0]["telepon_penerima"] ?>" 
-              <?= $beli ? "required" : "readonly" ?>
-              onkeypress="return numOnly(event)"> 
-            </td>
-          </tr>
+            <!-- nama pembeli -->
+            <tr>
+              <td> <label for="nama"> Nama Penerima </label> </td>
+              <td><center>:</center></td>
+              <td> <input type="text" name="nama" id="nama" class="form-input" value="<?= $beli ? $akun["nama"] : $products[0]["nama_penerima"]; ?>" <?= $beli ? "required" : "readonly" ?>> </td>
+            </tr>
 
-          <!-- alamat pembeli -->
-          <tr>
-            <td> <label for="alamat"> Alamat Penerima </label> </td>
-            <td> <center>:</center> </td>
-            <td> 
-              <textarea name="alamat" id="alamat" class="form-input" <?= $beli ? "required": "readonly" ?>><?= $beli ? $akun["alamat"] : $products[0]["alamat_penerima"] ?> </textarea>
-            </td>
-          </tr>
+            <!-- nomor telepon -->
+            <tr>
+              <td> <label for="telepon"> No. Telepon </label> </td>
+              <td><center>:</center></td>
+              <td>
+                <input type="text" name="telepon" id="telepon" class="form-input" value="<?= $beli ? $akun["telepon"] : $products[0]["telepon_penerima"] ?>" <?= $beli ? "required" : "readonly" ?> onkeypress="return numOnly(event)">
+              </td>
+            </tr>
 
-          <!-- metode pembayaran -->
-          <tr>
-            <td> Metode Pembayaran </td>
-            <td> <center>:</center> </td>
-            <td> 
-              COD (Bayar di tempat)
-            </td>
-          </tr>
+            <!-- alamat pembeli -->
+            <tr>
+              <td> <label for="alamat"> Alamat Penerima </label> </td>
+              <td><center>:</center></td>
+              <td>
+                <textarea name="alamat" id="alamat" class="form-input" <?= $beli ? "required" : "readonly" ?>><?= $beli ? $akun["alamat"] : $products[0]["alamat_penerima"] ?> </textarea>
+              </td>
+            </tr>
 
-          <!-- list produk -->
-          <tr>
-            <td> Produk Dibeli </td>
-            <td> <center>:</center> </td>
-            <td>
-              <?php foreach ($products as $product) { ?>
-              
-              <div class="product flex">
-                <div class="img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
-                <div class="deskripsi">
-                  <h3> <?= $product["nama"]; ?> </h3>
-                  <p> Rp <?= $product["harga"]; ?> x <?= $product["jumlah"]; ?> </p>
-                </div>
-              </div>
+            <!-- metode pembayaran -->
+            <tr>
+              <td> Metode Pembayaran </td>
+              <td><center>:</center></td>
+              <td>
+                COD (Bayar di tempat)
+              </td>
+            </tr>
 
-              <?php } ?> <!-- endwhile -->
-            </td>
-          </tr>
+            <!-- list produk -->
+            <tr>
+              <td> Produk Dibeli </td>
+              <td><center>:</center></td>
+              <td>
+                <?php foreach ($products as $product) { ?>
 
-        </table>
+                  <div class="product flex">
+                    <div class="img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
+                    <div class="deskripsi">
+                      <h3> <?= $product["nama"]; ?> </h3>
+                      <p> Rp <?= $product["harga"]; ?> x <?= $product["jumlah"]; ?> </p>
+                    </div>
+                  </div>
 
-      </section>
+                <?php } ?>
+                <!-- endwhile -->
+              </td>
+            </tr>
 
-      <section class="wrapper">
-        <?php
-        $total_pembayaran = 0;
-        foreach ($products as $product) {
-          $total_pembayaran += $product["jumlah"] * $product["harga"];
-        }
-        ?>
+          </table>
 
-        <h1> Total Pembayaran </h1>
-        <p> Rp <?= $total_pembayaran; ?> </p>
+        </section>
 
-        <!-- jika mode beli, munculkan tombol pembayaran -->
-        <?php if ($beli) { ?>
-        <p class="note form-input">
-          Harap siapkan nominal sebanyak Rp <?= $total_pembayaran ?>  ketika hendak menerima pesanan. 
-        </p>
-        
-        <input type="number" name="total_pembayaran" value="<?= $total_pembayaran; ?>" hidden>
-        <input type="submit" value="Beli Sekarang" name="beli" class="btn-block">
-        
-        <!-- jika mode lihat, tampilkan status -->
-        <?php } else { ?>
-        <p class="note form-input">
-          Kode pesanan: <b><?= $product["id_pesanan"]; ?> </b> <br>
-          Pesanan ini <?= $product["status_pesanan"]; ?>.
-        </p>
-        <?php } ?>
+        <section class="wrapper">
+          <?php
+          // struk pembayaran
+          if ($beli) {
+            $total_pembayaran = 0;
+            foreach ($products as $product) {
+              $total_pembayaran += $product["jumlah"] * $product["harga"];
+            }
 
-      </section>
-    </div>
+            // history order
+          } else {
+            $total_pembayaran = $products[0]["total_pembayaran"];
+          }
+          ?>
+
+          <h1> Total Pembayaran </h1>
+          <p> Rp <?= $total_pembayaran; ?> </p>
+
+          <!-- jika mode beli, munculkan tombol pembayaran -->
+          <?php if ($beli) { ?>
+            <p class="note form-input">
+              Harap siapkan nominal sebanyak Rp <?= $total_pembayaran ?> ketika hendak menerima pesanan.
+            </p>
+
+            <input type="number" name="total_pembayaran" value="<?= $total_pembayaran; ?>" hidden>
+            <input type="submit" value="Beli Sekarang" name="beli" class="btn-block">
+
+            <!-- jika mode lihat, tampilkan status -->
+          <?php } else { ?>
+            <p class="note form-input">
+              Kode pesanan: <b><?= $product["id_pesanan"]; ?> </b> <br>
+              Pesanan ini <?= $product["status_pesanan"]; ?>.
+            </p>
+          <?php } ?>
+
+        </section>
+      </div>
     </form>
 
     <?php include "footer.php"; ?>

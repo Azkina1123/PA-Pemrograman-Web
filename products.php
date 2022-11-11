@@ -45,7 +45,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
   $sampul = "header-edit.jpg";
   $judul = "EDIT PRODUCT";
   $mode = "edit";
-} 
+}
 
 ?>
 
@@ -59,6 +59,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
 
   <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
   <link rel="stylesheet" href="css/products.css?v=<?= time(); ?>">
+  <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
   <title> Product | Green Florist </title>
 </head>
@@ -128,8 +129,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
 
                   <?php } ?>
 
-                  <div class="product img" 
-                  style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
+                  <div class="product img" style="background-image: url('img/products/<?= $product["gambar"]; ?>');"></div>
 
                   <div class="deskripsi">
                     <p> <b> <?= $product["nama"]; ?> </b> </p>
