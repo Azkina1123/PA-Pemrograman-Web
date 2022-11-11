@@ -15,14 +15,17 @@
 }
 
 .profile section.wrapper .img {
-  flex: 0.5;
-  background-color: var(--color2-light);
+  background-color: var(--white-font);
   height: 200px;
+  width: 200px;
   margin-right: 20px;
+  border-radius: 10px;
+  padding: 50px;
+  box-sizing: border-box;
 }
 
 .profile table {
-  flex: 2;
+  width: 40%;
 }
 .profile td:nth-child(1) {
   width: 150px;
@@ -56,9 +59,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 10px;
   }
   .profile section.wrapper.read {
-    height: 700px;
+    height: 600px;
 
   }
   .profile td:nth-child(1) {
@@ -73,7 +77,8 @@
   }
   .profile section.wrapper .img {
     margin-right: 0px;
-    flex: 1;
+    height: 150px;
+    flex: 0.5;
   }
   .profile table {
     width: 300px;
