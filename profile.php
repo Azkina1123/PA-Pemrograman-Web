@@ -16,67 +16,85 @@ $mode = "read";
 $profile = $db->query("SELECT * FROM users WHERE username='$username'");
 $row = mysqli_fetch_array($profile);
 
+// mode edit
 if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
   $mode = "edit";
-  if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $nama = $_POST['nama'];
-    $password = $_POST['password'];
-    $konfirmasi = $_POST['konfirmasi'];
-    $telepon = $_POST['telepon'];
-    $alamat = $_POST['alamat'];
-  
+
+}
+
+// edit profile
+if (isset($_POST['submit'])) {
+  $username = $_POST['username'];
+  $nama = $_POST['nama'];
+  $password = $_POST['password'];
+  $konfirmasi = $_POST['konfirmasi'];
+  $telepon = $_POST['telepon'];
+  $alamat = $_POST['alamat'];
+  $gambar = $_POST["gambar_lama"];
+
+  // jika konfirmasi salah, gagal edit
+  if ($password != $konfirmasi) {
+    echo "<script>
+              alert('Konfirmasi password salah!');
+              document.location.href = '?mode=edit'
+            </script>";
+  }
+
+  // jika mengupload gambar baru
+  if ($_FILES["gambar"]["error"] !== 4) {
+    // hapus gambar lama
+    unlink("img/users/$gambar");
+
+    // ambil ekstensi
     $gambar = $_FILES['gambar']['name'];
     $x = explode('.', $gambar);
-  
     $ekstensi = strtolower(end($x));
-    $gambar_baru = "$username.$ekstensi";
-  
+
+    // buat nama gambar baru
+    $gambar = "$username.$ekstensi";
+
+    // pindahkan ke direktori  img/users
     $tmp = $_FILES['gambar']['tmp_name'];
-    move_uploaded_file($tmp, "img/users/" . $gambar_baru);
-  
-    $query = "UPDATE users 
+    move_uploaded_file($tmp, "img/users/" . $gambar);
+  }
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $query = "UPDATE users 
               SET nama='$nama',
                   psw='$password',
                   telepon='$telepon',
                   alamat='$alamat',
                   gambar='$gambar'
               WHERE username = '$username'";
-    $profile = $db->query($query);
+  $profile = $db->query($query);
 
-    if ($password != $konfirmasi) {
-      echo "<script>
-              alert('Konfirmasi password salah!');
-            </script>";
-      return false;
-    }
-  
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
-    if ($profile) {
-      echo "
+  // jika berhasil edit
+  if ($profile) {
+    echo "
         <script>
             alert('Profile Berhasil Diperbarui');
             document.location.href = 'index.php';
         </script>
         ";
-    } else {
-      echo "
+  // jika gagal edit
+  } else {
+    echo "
         <script>
             alert('Profile Gagal Diperbarui');
         </script>
         ";
-    }
   }
 }
 
-if(isset($_POST['hapus'])){
-$profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
+// hapus profile
+if (isset($_POST['hapus'])){
+  $profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
     
-  if($profile){
+  if ($profile){
     echo"
       <script>
-      alert('Akun Telah Dihapus. Terimakasih atas partisipasinya;)');
+      alert('Akun Telah Dihapus. Terimakasih atas partisipasinya!)');
       document.location.href = 'logout.php';
       </script>
     ";
@@ -112,52 +130,56 @@ $profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
 
     <div class="main-content">
 
-      <section class="wrapper">
+      <section class="wrapper <?= $mode=='read' ? "read" : ""?>" style="">
 
+        <!-- mode baca -->
         <?php if ($mode == "read") {?>
+        <h1> Profile </h1>
 
         <div class="img" 
           style="background-image: url('img/users/<?= $row["gambar"]; ?>');">
         </div>
 
-          <table>
-            <tr>
-              <td> Username </td>
-              <td> <center>:</center> </td>
-              <td> <?= $row["username"]; ?> </td> 
-            </tr>
-            
-            <tr>
-              <td> Nama Lengkap </td>
-              <td> <center>:</center> </td>
-              <td> <?= $row["nama"]; ?> </td> 
-            </tr>
+        <table>
+          <tr>
+            <td> Username </td>
+            <td> <center>:</center> </td>
+            <td> <?= $row["username"]; ?> </td> 
+          </tr>
 
-            <tr>
-              <td> No. Telepon </td>
-              <td> <center>:</center> </td>
-              <td> <?= $row["telepon"]; ?> </td> 
-            </tr>
+          <tr>
+            <td> Nama Lengkap </td>
+            <td> <center>:</center> </td>
+            <td> <?= $row["nama"]; ?> </td> 
+          </tr>
 
-            <tr>
-              <td> Alamat </td>
-              <td> <center>:</center> </td>
-              <td> <?= $row["alamat"]; ?> </td> 
-            </tr>
+          <tr>
+            <td> No. Telepon </td>
+            <td> <center>:</center> </td>
+            <td> <?= $row["telepon"]; ?> </td> 
+          </tr>
 
-            <tr>
-              <td>
+          <tr>
+            <td> Alamat </td>
+            <td> <center>:</center> </td>
+            <td> <?= $row["alamat"]; ?> </td> 
+          </tr>
+
+          <tr>
+            <td colspan="3">
                 <a href="?mode=edit">
                   <button class="btn-block" type="submit"> Edit Profile </button>
                 </a>
-              </td>
-            </tr>
-          </table>
+            </td>
+          </tr>
+        </table>
 
+        <!-- mode edit -->
         <?php } else if ($mode == "edit") { ?>
         
-        <div class="form-edit">
-          <form action="" method="POST" enctype="multipart/form-data">
+          <h1> Edit Profile </h1>
+
+          <form action="" method="POST" enctype="multipart/form-data" class="form-edit">
             <table>
               <!-- username -->
               <tr>
@@ -177,7 +199,7 @@ $profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
               <tr>
                 <td> <label for="password"> Password* </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required value="<?=$row['psw']?>"> </td>
+                <td> <input type="password" name="password" id="password" placeholder="Password" class="form-input" autocomplete="off" required value=""> </td>
               </tr>
 
               <!-- konfirmasi password -->
@@ -205,19 +227,25 @@ $profile = mysqli_query($db, "DELETE FROM users WHERE username = '$username'");
               <tr>
                 <td> <label for="gambar"> Foto Profil </label> </td>
                 <td><center> : </center></td>
-                <td> <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input" value="img/plugins/user.png"> </td>
-                <input type="text" name="gambar_lama" value="<?=$row['gambar']?>" hidden>
+                <td> 
+                  <input type="file" name="gambar" id="gambar" accept="image/*" class="form-input"> 
+                  <input type="text" name="gambar_lama" value="<?=$row['gambar']?>" hidden>
+                </td>
               </tr>
 
               <!-- submit -->
               <tr>
-                <td colspan="3"><input type="submit" value="Update Profile" name="submit" class="btn-block"> </td>
-                <td colspan="3"><input type="submit" value="Hapus Profile" name="hapus" class="btn-block"> </td>
+                <td colspan="3">
+                  <center>
+                    <input type="submit" value="Update Profile" name="submit" class="btn-block">
+                    <input type="submit" value="Hapus Profile" name="hapus" class="btn-block"> 
+                  </center>
+              </td>
               </tr>
 
             </table>
           </form>
-        </div>
+
       </section>
       <?php } ?>
     </div>

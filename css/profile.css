@@ -1,14 +1,22 @@
 .profile section.wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile .form-edit {
   align-items: center;
+}
+
+.profile .main-content h1 {
+  width: 100%;
+  text-align: center;
 }
 
 .profile section.wrapper .img {
   flex: 0.5;
   background-color: var(--color2-light);
-  /* width: 90%; */
   height: 200px;
   margin-right: 20px;
 }
@@ -16,26 +24,72 @@
 .profile table {
   flex: 2;
 }
+.profile td:nth-child(1) {
+  width: 150px;
+}
+.profile td:nth-child(2) {
+  width: 10px;
+}
 
 .profile td {
   padding: 10px;
 }
 
+.profile .form-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile .form-input,
+.profile textarea {
+  width: 210px;
+}
+
+.profile .btn-block {
+  width: 150px;
+  margin: 5px;
+}
+
 @media screen and (min-width: 240px) and (max-width:1024px) {
   .profile section.wrapper {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .profile section.wrapper.read {
+    height: 700px;
+
+  }
+  .profile td:nth-child(1) {
+    width: 100px;
+  }
+  .profile .form-input {
+    width: 150px;
+  }
+  .profile .btn-block {
+    width: 130px;
+    margin: 2px;
   }
   .profile section.wrapper .img {
-    width: 100%;
+    margin-right: 0px;
+    flex: 1;
   }
-  .profile .form-edit {
-    width: 160px;
+  .profile table {
+    width: 300px;
   }
-  .profile td {
-    padding: 5px;
-  }
-  
 
+  .profile tr:last-child a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .profile section.wrapper .img {
+    background-color: var(--color2-light);
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+  }
 }
 
