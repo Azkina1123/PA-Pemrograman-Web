@@ -118,7 +118,10 @@ if (isset($_POST["submit"])) {
                 <div class="deskripsi">
                   <a href="pembayaran.php?beli=false&id=<?= $order["id"]; ?>" class="link">
                     <h3> <?= $products["nama"]; ?>
-                      <?= $jumlah_produk > 1 ? "dan " . $jumlah_produk - 1 . " lainnya" : ""; ?>
+                      <?php 
+                      $sisa = (int)$jumlah_produk - 1;
+                      echo $sisa >= 1 ? "dan " . $sisa . " lainnya" : ""; 
+                      ?>
                     </h3>
 
                     <p> Rp <?= $order["total_pembayaran"]; ?> </p>
