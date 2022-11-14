@@ -37,8 +37,7 @@ if (isset($_POST['tambah'])) {
   $deskripsi = $_POST['deskripsi'];
 
   // buat id, ganti nama gambar
-  $ids = $db->query("SELECT id FROM produk");
-  $id_baru = mysqli_num_rows($ids) + 1;
+  $id_baru = get_id_produk();
   $gambar = "product-$id_baru.png";
 
   // jika mengupload gambar, pindahkan direktori
@@ -269,7 +268,7 @@ failed:
               <td>
                 <center>:</center>
               </td>
-              <td><input type="float" name="tinggi" class="form-input" required min="0" id="tinggi" value="<?= $mode == "add" ? "" : $row["tinggi"]; ?>" placeholder="Tinggi m"></td>
+              <td><input type="number" step="0.01" name="tinggi" class="form-input" required min="0" id="tinggi" value="<?= $mode == "add" ? "" : $row["tinggi"]; ?>" placeholder="Tinggi m"></td>
             </tr>
 
             <!-- berat -->
@@ -278,7 +277,7 @@ failed:
               <td>
                 <center>:</center>
               </td>
-              <td><input type="float" name="berat" class="form-input" required min="0" id="berat" value="<?= $mode == "add" ? "" : $row["berat"]; ?>" placeholder="Berat kg"></td>
+              <td><input type="number" step="0.01" name="berat" class="form-input" required min="0" id="berat" value="<?= $mode == "add" ? "" : $row["berat"]; ?>" placeholder="Berat kg"></td>
             </tr>
 
             <!-- deskripsi -->

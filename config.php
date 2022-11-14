@@ -296,5 +296,21 @@ function get_id_pesanan() {
   return $kode_pesanan;
 }
 
+function get_id_produk() {
+  global $db;
+  $ids = $db->query("SELECT id FROM produk");
+  $index = mysqli_num_rows($ids) - 1;
+  $id_arr = [];
+
+  while ($id = mysqli_fetch_array($ids)) {
+    $id_arr[] = $id;
+  }
+
+  $id_terakhir = $id_arr[$index]["id"];
+  $id_baru = (int)$id_terakhir + 1;
+
+  return $id_baru;
+}
+
 
 ?>
