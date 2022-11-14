@@ -59,12 +59,26 @@ $akun = mysqli_fetch_array($akun);
 if (isset($_POST["beli"])) {
   if (order_product($products)) {
 
-    // un
     foreach ($products as $product) {
+      // hapus dari keranjang
       $id_produk = $product["id_produk"];
       $result = $db->query(
         "DELETE FROM keranjang_user
         WHERE id_produk=$id_produk"
+      );
+
+      // kurangi stok
+      $stok_awal = 0;
+      $stok = $db->query(
+          "SELECT stok FROM produk
+          WHERE id=$id_produk"
+        );
+      $stok_awal = mysqli_fetch_array($stok)[0];
+      $stok_akhir = $stok_awal - $product["jumlah"];
+
+      $update_stok = $db->query(
+        "UPDATE produk
+        SET stok = $stok_akhir"
       );
     }
 
