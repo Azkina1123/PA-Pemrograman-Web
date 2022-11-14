@@ -65,7 +65,7 @@ if (isset($_POST["submit"])) {
   <link rel="stylesheet" href="css/orders.css?v=<?= time(); ?>">
   <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
-  <title> Order | Nama Toko </title>
+  <title> Orders | Nama Toko </title>
 </head>
 
 <body>

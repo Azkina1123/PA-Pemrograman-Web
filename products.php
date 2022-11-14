@@ -61,7 +61,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] == "edit") {
   <link rel="stylesheet" href="css/products.css?v=<?= time(); ?>">
   <link rel="shortcut icon" href="img/icons/icon.png" type="image/x-icon">
 
-  <title> Product | Green Florist </title>
+  <title> Products | Green Florist </title>
 </head>
 
 <body>
