@@ -137,7 +137,6 @@ function delete_product() {
   );
   $prev_img = mysqli_fetch_array($prev_img);
   $prev_img = $prev_img[0];
-  var_dump($prev_img);
 
   unlink("img/products/$prev_img");
 
