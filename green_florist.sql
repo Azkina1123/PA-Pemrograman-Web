@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2022 at 11:08 AM
+-- Generation Time: Nov 14, 2022 at 04:08 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -96,22 +96,22 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `tanggal_rilis`, `nama`, `jenis`, `harga`, `stok`, `tinggi`, `berat`, `deskripsi`, `gambar`) VALUES
-(1, '2022-11-06', 'Bibit Mangga Manalagi', 'tanaman buah', 15000, 32, 1, 8.4, 'Bibit mangga jenis manalagi berkualitas tinggi. Sudah terjamin akan menghasilkan buah mangga manis.', '1.jpg'),
-(2, '2022-11-06', 'Benih Cabe Rawit', 'benih tanaman', 5500, 45, 0, 0.3, 'Benih cabe rawit yang menghasilkan cabe pedas. Memerlukan perawatan yang teratur agar dapat tumbuh d', '2.jpg'),
-(3, '2022-11-06', 'Benih Bayam Unggul Benua', 'benih tanaman', 36000, 21, 0, 0.5, 'Bentuk daun bulat dengan warna hijau muda. Tidak mudah keluar bunga. Dapat dipanen pada umur 25 hari', '3.jpg'),
-(4, '2022-11-07', 'Bibit Tanaman Anggrek', 'tanaman hias', 13500, 11, 0.7, 0.2, 'Bibit anggrek asli dendrobium yang berkualitas. Perawatan cukup mudah.', '4.jpg'),
-(5, '2022-11-07', 'Bibit Tanaman Alpukat', 'tanaman buah', 30000, 27, 1.2, 0.5, 'Bibit merupakan hasil okulasi. Dijamin bibit super unggul.', '5.jpg'),
-(6, '2022-11-07', 'Bibit Tanaman Pisang', 'tanaman buah', 32000, 21, 0.5, 1.5, 'Bibit tanaman pisang raja asli. Cepat tumbuh bila dirawat dengan teratur. Perawatan tidak sulit. Pas', '6.jpg'),
-(7, '2022-11-07', 'Lumut Ambon', 'tanaman hias', 20000, 28, 0.4, 0.2, 'Tanaman hias lumut ambon. Cocok sebagai tanaman indoor maupun outdoor. Tidak perlu perawatan yang ke', '7.jpg'),
-(8, '2022-11-07', 'Flumosa Cluster', 'tanaman hias', 200000, 54, 0.12, 0.8, 'Tanaman cocok di media pot dan memiliki bentuk unik berwarna putih. Sangat cocok di tempat panas.', '8.jpg'),
-(9, '2022-11-08', 'Benih Buah Naga', 'benih tanaman', 15000, 44, 0.4, 0.2, 'Benih tanaman buah naga yang dijamin menghasilkan buah naga berkualitas tinggi.', '9.jpg'),
+(1, '2022-11-06', 'Bibit Mangga Manalagi', 'tanaman buah', 15000, 30, 1, 8.4, 'Bibit mangga jenis manalagi berkualitas tinggi. Sudah terjamin akan menghasilkan buah mangga manis.', '1.jpg'),
+(2, '2022-11-06', 'Benih Cabe Rawit', 'benih tanaman', 5500, 30, 0, 0.3, 'Benih cabe rawit yang menghasilkan cabe pedas. Memerlukan perawatan yang teratur agar dapat tumbuh d', '2.jpg'),
+(3, '2022-11-06', 'Benih Bayam Unggul Benua', 'benih tanaman', 36000, 30, 0, 0.5, 'Bentuk daun bulat dengan warna hijau muda. Tidak mudah keluar bunga. Dapat dipanen pada umur 25 hari', '3.jpg'),
+(4, '2022-11-07', 'Bibit Tanaman Anggrek', 'tanaman hias', 13500, 30, 0.7, 0.2, 'Bibit anggrek asli dendrobium yang berkualitas. Perawatan cukup mudah.', '4.jpg'),
+(5, '2022-11-07', 'Bibit Tanaman Alpukat', 'tanaman buah', 30000, 30, 1.2, 0.5, 'Bibit merupakan hasil okulasi. Dijamin bibit super unggul.', '5.jpg'),
+(6, '2022-11-07', 'Bibit Tanaman Pisang', 'tanaman buah', 32000, 30, 0.5, 1.5, 'Bibit tanaman pisang raja asli. Cepat tumbuh bila dirawat dengan teratur. Perawatan tidak sulit. Pas', '6.jpg'),
+(7, '2022-11-07', 'Lumut Ambon', 'tanaman hias', 20000, 30, 0.4, 0.2, 'Tanaman hias lumut ambon. Cocok sebagai tanaman indoor maupun outdoor. Tidak perlu perawatan yang ke', '7.jpg'),
+(8, '2022-11-07', 'Flumosa Cluster', 'tanaman hias', 200000, 30, 0.12, 0.8, 'Tanaman cocok di media pot dan memiliki bentuk unik berwarna putih. Sangat cocok di tempat panas.', '8.jpg'),
+(9, '2022-11-08', 'Benih Buah Naga', 'benih tanaman', 15000, 30, 0.4, 0.2, 'Benih tanaman buah naga yang dijamin menghasilkan buah naga berkualitas tinggi.', '9.jpg'),
 (10, '2022-11-08', 'Bibit Jambu Kristal', 'tanaman buah', 73900, 30, 0.5, 3, 'Bibit hasil cangkok dan sebagian okulasi. Produksi buah dalam sekali berbuah dapat menghasilkan 15-3', '10.png'),
-(11, '2022-11-08', 'Benih Jagung BISI 18 Hibrida', 'benih tanaman', 115000, 29, 0, 1, 'Benih jagung kemasan BISI 18 Hibrida Cap Kapal Terbang asli. Lebih murah dari toko lainnya.', '11.jpg'),
-(12, '2022-11-08', 'Lili Varighata', 'tanaman hias', 2500, 36, 0.2, 0.2, 'Tanaman hias ini bisa untuk hiasan di aquarium karena bisa di tanam di air. Cocok untuk tanaman indo', '12.jpg'),
-(13, '2022-11-11', 'Ararea', 'tanaman hias', 3000, 37, 0.13, 1.3, 'Tanaman hias ararea dalam keadaan sehat, segar dan aman. Tanaman hias yang dikirim sesuai dengan fot', 'product-13.webp'),
-(14, '2022-11-11', 'Helikornia', 'tanaman hias', 28000, 49, 0.7, 0.5, 'Tanaman hias yang cocok untuk tanaman outdoor rumah Anda.', 'product-14.jpg'),
-(15, '2022-11-11', 'Bibit Buah Markisa', 'tanaman buah', 10500, 43, 0.6, 1.2, 'Tempatkan pada tempat yang teduh/terlindungi dari sinar matahari selama seminggu.', 'product-15.webp'),
-(16, '2022-11-11', 'Benih Selada', 'benih tanaman', 4000, 63, 0, 0.1, 'Dapat tumbuh di dataran rendah maupun dataran tinggi. Bisa ditanam hidroponik maupun di tanah.', 'product-16.png');
+(11, '2022-11-08', 'Benih Jagung BISI 18 Hibrida', 'benih tanaman', 115000, 30, 0, 1, 'Benih jagung kemasan BISI 18 Hibrida Cap Kapal Terbang asli. Lebih murah dari toko lainnya.', '11.jpg'),
+(12, '2022-11-08', 'Lili Varighata', 'tanaman hias', 2500, 30, 0.2, 0.2, 'Tanaman hias ini bisa untuk hiasan di aquarium karena bisa di tanam di air. Cocok untuk tanaman indo', '12.jpg'),
+(13, '2022-11-11', 'Ararea', 'tanaman hias', 3000, 30, 0.13, 1.3, 'Tanaman hias ararea dalam keadaan sehat, segar dan aman. Tanaman hias yang dikirim sesuai dengan fot', 'product-13.webp'),
+(14, '2022-11-11', 'Helikornia', 'tanaman hias', 28000, 30, 0.7, 0.5, 'Tanaman hias yang cocok untuk tanaman outdoor rumah Anda.', 'product-14.jpg'),
+(15, '2022-11-11', 'Bibit Buah Markisa', 'tanaman buah', 10500, 30, 0.6, 1.2, 'Tempatkan pada tempat yang teduh/terlindungi dari sinar matahari selama seminggu.', 'product-15.webp'),
+(16, '2022-11-11', 'Benih Selada', 'benih tanaman', 4000, 30, 0, 0.1, 'Dapat tumbuh di dataran rendah maupun dataran tinggi. Bisa ditanam hidroponik maupun di tanah.', 'product-16.png');
 
 -- --------------------------------------------------------
 
@@ -142,16 +142,6 @@ INSERT INTO `produk_terbeli` (`id_pesanan`, `id_produk`, `jumlah`, `harga`) VALU
 ('AQK9JXP8DN3', 4, 1, 13500),
 ('AQK9JXP8DN3', 7, 2, 20000),
 ('FVU4WHYSNP4', 16, 2, 4000);
-
---
--- Triggers `produk_terbeli`
---
-DELIMITER $$
-CREATE TRIGGER `user_beli` AFTER INSERT ON `produk_terbeli` FOR EACH ROW UPDATE produk SET 
-   produk.stok  = produk.stok - NEW.jumlah
-   WHERE produk.id = NEW.id_produk
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -222,7 +212,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
