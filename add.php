@@ -190,7 +190,7 @@ failed:
       <?php require "nav.php"; ?>
 
       <div class="banner mini center">
-        <h1> <?= $mode == "add" ? "ADD PRODUCT" : "EDIT PRODUK"; ?> </h1>
+        <h1> <?= $mode == "add" ? "ADD PRODUCT" : "EDIT PRODUCT"; ?> </h1>
 
       </div>
 
